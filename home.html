@@ -13,15 +13,50 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #EAB308 100%);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #4a90e2 50%, #87ceeb 75%, #b0e0e6 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
-            gap: 40px;
+            gap: 30px;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Космические звезды */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20% 30%, white, transparent),
+                radial-gradient(2px 2px at 40% 70%, white, transparent),
+                radial-gradient(1px 1px at 90% 40%, white, transparent),
+                radial-gradient(1px 1px at 60% 10%, white, transparent),
+                radial-gradient(2px 2px at 80% 80%, white, transparent),
+                radial-gradient(1px 1px at 30% 90%, white, transparent);
+            background-size: 200px 200px, 300px 300px, 250px 250px, 400px 400px, 350px 350px, 180px 180px;
+            opacity: 0.8;
+            animation: twinkle 4s infinite alternate;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        /* Все элементы должны быть выше звезд */
+        * {
+            position: relative;
+            z-index: 2;
         }
 
         /* Кнопка регистрации в верху */
@@ -49,22 +84,23 @@
         }
 
         .beta-container {
-            background: linear-gradient(135deg, #4a90e2 0%, #f5d918 100%);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.9) 0%, rgba(74, 144, 226, 0.8) 50%, rgba(135, 206, 235, 0.7) 100%);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(74, 144, 226, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             max-width: 400px;
             width: 95%;
             min-width: 280px;
+            margin-bottom: 20px;
         }
 
         .beta-container h2 {
             font-size: 1.6em;
             margin-bottom: 25px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             color: white;
             line-height: 1.3;
         }
@@ -91,6 +127,7 @@
             text-align: center;
             outline: none;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
 
         input[type="text"]::placeholder {
@@ -100,6 +137,7 @@
         input[type="text"]:focus {
             background: rgba(255, 255, 255, 0.3);
             transform: scale(1.02);
+            border: 2px solid rgba(135, 206, 235, 0.8);
         }
 
         button {
@@ -124,9 +162,9 @@
             display: none;
             margin-top: 30px;
             padding: 20px;
-            background: rgba(245, 217, 24, 0.2);
+            background: rgba(135, 206, 235, 0.2);
             border-radius: 15px;
-            border: 2px solid rgba(245, 217, 24, 0.5);
+            border: 2px solid rgba(135, 206, 235, 0.5);
         }
 
         .beta-telegram-link.show {
@@ -140,19 +178,19 @@
         }
 
         .beta-telegram-link a {
-            color: #f5d918;
+            color: #87ceeb;
             text-decoration: none;
             font-size: 1.2em;
             font-weight: bold;
             display: inline-block;
             padding: 10px 20px;
-            background: rgba(245, 217, 24, 0.2);
+            background: rgba(135, 206, 235, 0.2);
             border-radius: 10px;
             transition: all 0.3s ease;
         }
 
         .beta-telegram-link a:hover {
-            background: rgba(245, 217, 24, 0.3);
+            background: rgba(135, 206, 235, 0.3);
             transform: scale(1.05);
         }
 
@@ -203,6 +241,7 @@
                 padding: 25px 15px;
                 width: 98%;
                 margin: 0 auto;
+                margin-bottom: 15px;
             }
 
             .beta-container h2 {
@@ -499,8 +538,9 @@
         CVNZ Регистрация
     </a>
 
+    <!-- Первая плашка -->
     <div class="beta-container">
-        <h2>Хотите Опробовать Бета Тестирование Версии S4 Ultra?</h2>
+        <h2>Cevenz Series 4 Ultra</h2>
         
         <div class="code-section">
             <label for="betaCodeInput">Введите Пароль:</label>
@@ -514,6 +554,25 @@
         <div class="beta-telegram-link" id="betaTelegramLink">
             <p style="margin-bottom: 15px;">Присоединяйтесь к бета-тестированию:</p>
             <a href="https://t.me/+1hciPJFZZ0xmYTZk" target="_blank">Перейти в Telegram группу</a>
+        </div>
+    </div>
+
+    <!-- Вторая плашка -->
+    <div class="beta-container">
+        <h2>Cevenz Nightvision V2</h2>
+        
+        <div class="code-section">
+            <label for="nightvisionCodeInput">Введите Пароль:</label>
+            <input type="text" id="nightvisionCodeInput" placeholder="Введите пароль здесь" maxlength="10">
+            <button onclick="checkNightvisionCode()">Подтвердить</button>
+            
+            <div class="error" id="nightvisionErrorMessage">Неверный пароль! Попробуйте снова.</div>
+            <div class="success" id="nightvisionSuccessMessage">Пароль принят! Добро пожаловать в Nightvision!</div>
+        </div>
+
+        <div class="beta-telegram-link" id="nightvisionTelegramLink">
+            <p style="margin-bottom: 15px;">Присоединяйтесь к Nightvision:</p>
+            <a href="https://t.me/+MNVVamdQGI5mOGM8" target="_blank">Перейти в Telegram группу</a>
         </div>
     </div>
 
@@ -533,7 +592,7 @@
                 // Правильный пароль
                 successMessage.classList.add('show');
                 telegramLink.classList.add('show');
-                input.style.borderColor = '#f5d918';
+                input.style.borderColor = '#87ceeb';
             } else {
                 // Неправильный пароль
                 errorMessage.classList.add('show');
@@ -543,18 +602,55 @@
             }
         }
 
-        // Проверка бета-кода при нажатии Enter
+        function checkNightvisionCode() {
+            const input = document.getElementById('nightvisionCodeInput');
+            const code = input.value.trim();
+            const errorMessage = document.getElementById('nightvisionErrorMessage');
+            const successMessage = document.getElementById('nightvisionSuccessMessage');
+            const telegramLink = document.getElementById('nightvisionTelegramLink');
+
+            // Скрываем предыдущие сообщения
+            errorMessage.classList.remove('show');
+            successMessage.classList.remove('show');
+
+            if (code === '0242') {
+                // Правильный пароль
+                successMessage.classList.add('show');
+                telegramLink.classList.add('show');
+                input.style.borderColor = '#87ceeb';
+            } else {
+                // Неправильный пароль
+                errorMessage.classList.add('show');
+                input.style.borderColor = '#ff6b6b';
+                input.value = '';
+                telegramLink.classList.remove('show');
+            }
+        }
+
+        // Проверка кодов при нажатии Enter
         document.getElementById('betaCodeInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkBetaCode();
             }
         });
 
-        // Сброс стилей при вводе нового бета-кода
+        document.getElementById('nightvisionCodeInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkNightvisionCode();
+            }
+        });
+
+        // Сброс стилей при вводе новых кодов
         document.getElementById('betaCodeInput').addEventListener('input', function() {
             this.style.borderColor = '';
             document.getElementById('betaErrorMessage').classList.remove('show');
             document.getElementById('betaSuccessMessage').classList.remove('show');
+        });
+
+        document.getElementById('nightvisionCodeInput').addEventListener('input', function() {
+            this.style.borderColor = '';
+            document.getElementById('nightvisionErrorMessage').classList.remove('show');
+            document.getElementById('nightvisionSuccessMessage').classList.remove('show');
         });
 
         // Функции для модального окна
