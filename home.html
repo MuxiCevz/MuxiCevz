@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVNZ Official Site</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #EAB308 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 400px;
+            width: 95%;
+            min-width: 280px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .code-section {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 1em;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        input[type="text"]:focus {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .telegram-link {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 136, 204, 0.2);
+            border-radius: 15px;
+            border: 2px solid rgba(0, 136, 204, 0.5);
+        }
+
+        .telegram-link.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .telegram-link a {
+            color: #00d4aa;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(0, 212, 170, 0.2);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .telegram-link a:hover {
+            background: rgba(0, 212, 170, 0.3);
+            transform: scale(1.05);
+        }
+
+        .error {
+            color: #ff6b6b;
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 20%, 40%, 60%, 80% { transform: translateX(0); }
+            10%, 30%, 50%, 70% { transform: translateX(-5px); }
+            15%, 35%, 55%, 75% { transform: translateX(5px); }
+        }
+
+        .success {
+            color: #00d4aa;
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .success.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .beta-container {
+            background: linear-gradient(135deg, #4a90e2 0%, #f5d918 100%);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 400px;
+            width: 95%;
+            min-width: 280px;
+        }
+
+        .beta-container h2 {
+            font-size: 1.6em;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: white;
+            line-height: 1.3;
+        }
+
+        .beta-telegram-link {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(245, 217, 24, 0.2);
+            border-radius: 15px;
+            border: 2px solid rgba(245, 217, 24, 0.5);
+        }
+
+        .beta-telegram-link.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .beta-telegram-link a {
+            color: #f5d918;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(245, 217, 24, 0.2);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .beta-telegram-link a:hover {
+            background: rgba(245, 217, 24, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 480px) {
+            body {
+                gap: 25px;
+                padding: 15px 10px;
+            }
+
+            .container, .beta-container {
+                padding: 25px 15px;
+                width: 98%;
+                margin: 0 auto;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+                letter-spacing: 0.5px;
+            }
+
+            .beta-container h2 {
+                font-size: 1.4em;
+                margin-bottom: 20px;
+            }
+
+            label {
+                font-size: 1.1em;
+                margin-bottom: 12px;
+            }
+
+            input[type="text"] {
+                padding: 10px 12px;
+                font-size: 0.95em;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 0.95em;
+                margin-top: 12px;
+                width: 100%;
+            }
+
+            .telegram-link, .beta-telegram-link {
+                margin-top: 20px;
+                padding: 15px;
+            }
+
+            .telegram-link a, .beta-telegram-link a {
+                font-size: 1.1em;
+                padding: 8px 15px;
+                display: block;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .beta-container h2 {
+                font-size: 1.3em;
+            }
+
+            .container, .beta-container {
+                padding: 20px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CVNZ Версия S3 Classic</h1>
+        
+        <div class="code-section">
+            <label for="codeInput">Введите Код:</label>
+            <input type="text" id="codeInput" placeholder="Введите код здесь" maxlength="10">
+            <button onclick="checkCode()">Подтвердить</button>
+            
+            <div class="error" id="errorMessage">Неверный код! Попробуйте снова.</div>
+            <div class="success" id="successMessage">Код принят! Добро пожаловать!</div>
+        </div>
+
+        <div class="telegram-link" id="telegramLink">
+            <p style="margin-bottom: 15px;">Присоединяйтесь к нашей группе:</p>
+            <a href="https://t.me/+XJvUMdPJHh1mNTdk" target="_blank">Перейти в Telegram группу</a>
+        </div>
+    </div>
+
+    <div class="beta-container">
+        <h2>Хотите Опробовать Бета Тестирование Версии S4 Ultra?</h2>
+        
+        <div class="code-section">
+            <label for="betaCodeInput">Введите Пароль:</label>
+            <input type="text" id="betaCodeInput" placeholder="Введите пароль здесь" maxlength="10">
+            <button onclick="checkBetaCode()">Подтвердить</button>
+            
+            <div class="error" id="betaErrorMessage">Неверный пароль! Попробуйте снова.</div>
+            <div class="success" id="betaSuccessMessage">Пароль принят! Добро пожаловать в бета-тест!</div>
+        </div>
+
+        <div class="beta-telegram-link" id="betaTelegramLink">
+            <p style="margin-bottom: 15px;">Присоединяйтесь к бета-тестированию:</p>
+            <a href="https://t.me/+1hciPJFZZ0xmYTZk" target="_blank">Перейти в Telegram группу</a>
+        </div>
+    </div>
+
+    <script>
+        function checkCode() {
+            const input = document.getElementById('codeInput');
+            const code = input.value.trim();
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            const telegramLink = document.getElementById('telegramLink');
+
+            // Скрываем предыдущие сообщения
+            errorMessage.classList.remove('show');
+            successMessage.classList.remove('show');
+
+            if (code === '0513') {
+                // Правильный код
+                successMessage.classList.add('show');
+                telegramLink.classList.add('show');
+                input.style.borderColor = '#00d4aa';
+            } else {
+                // Неправильный код
+                errorMessage.classList.add('show');
+                input.style.borderColor = '#ff6b6b';
+                input.value = '';
+                telegramLink.classList.remove('show');
+            }
+        }
+
+        // Проверка кода при нажатии Enter
+        document.getElementById('codeInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkCode();
+            }
+        });
+
+        // Сброс стилей при вводе нового кода
+        document.getElementById('codeInput').addEventListener('input', function() {
+            this.style.borderColor = '';
+            document.getElementById('errorMessage').classList.remove('show');
+            document.getElementById('successMessage').classList.remove('show');
+        });
+
+        function checkBetaCode() {
+            const input = document.getElementById('betaCodeInput');
+            const code = input.value.trim();
+            const errorMessage = document.getElementById('betaErrorMessage');
+            const successMessage = document.getElementById('betaSuccessMessage');
+            const telegramLink = document.getElementById('betaTelegramLink');
+
+            // Скрываем предыдущие сообщения
+            errorMessage.classList.remove('show');
+            successMessage.classList.remove('show');
+
+            if (code === '0242') {
+                // Правильный пароль
+                successMessage.classList.add('show');
+                telegramLink.classList.add('show');
+                input.style.borderColor = '#f5d918';
+            } else {
+                // Неправильный пароль
+                errorMessage.classList.add('show');
+                input.style.borderColor = '#ff6b6b';
+                input.value = '';
+                telegramLink.classList.remove('show');
+            }
+        }
+
+        // Проверка бета-кода при нажатии Enter
+        document.getElementById('betaCodeInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkBetaCode();
+            }
+        });
+
+        // Сброс стилей при вводе нового бета-кода
+        document.getElementById('betaCodeInput').addEventListener('input', function() {
+            this.style.borderColor = '';
+            document.getElementById('betaErrorMessage').classList.remove('show');
+            document.getElementById('betaSuccessMessage').classList.remove('show');
+        });
+    </script>
+</body>
+</html>
