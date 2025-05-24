@@ -29,7 +29,7 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
-            padding-top: 80px; /* Добавим отступ сверху, чтобы кнопки не перекрывали контент */
+            padding-top: 80px;
         }
 
         .beta-container {
@@ -64,7 +64,6 @@
             font-weight: bold;
         }
 
-        /* Основной стиль для полей ввода на главном экране */
         input[type="text"], input[type="password"] {
             width: 100%;
             padding: 12px 15px;
@@ -142,10 +141,9 @@
             20%, 40%, 60%, 80% { transform: translateX(5px); }
         }
         
-        /* -- Кнопки управления -- */
         .info-button, .admin-button {
             position: fixed;
-            top: 20px; /* ИЗМЕНЕНО: теперь кнопки наверху */
+            top: 20px;
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -166,7 +164,6 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
-        /* -- Модальные окна -- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.7); display: none; justify-content: center;
@@ -193,11 +190,10 @@
         .modal-content h3 { color: #333; margin-bottom: 20px; font-size: 1.5em; text-align: center; }
         .modal-content p { line-height: 1.6; margin-bottom: 15px; text-align: left; }
         
-        /* ИСПРАВЛЕНО: Стили для полей ввода ВНУТРИ модальных окон, чтобы текст был видимым */
         .modal-content input[type="text"],
         .modal-content input[type="password"] {
             background: #f0f0f0;
-            color: #333; /* Темный текст */
+            color: #333;
             text-align: left;
             padding-left: 15px;
             border: 1px solid #ccc;
@@ -209,7 +205,6 @@
         }
         .modal-content label { color: #333; text-align: left; font-size: 1em; margin-bottom: 8px; }
         
-        /* Стили для панели администратора */
         #adminViewModal .modal-content { max-width: 800px; }
         .application-list { list-style: none; padding: 0; }
         .application-item {
@@ -223,6 +218,43 @@
             color: white; border: none; width: 25px; height: 25px;
             border-radius: 50%; cursor: pointer; font-weight: bold;
         }
+
+        .stats-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 120px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card h4 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            margin-bottom: 20px;
+        }
+
+        .export-btn {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            margin-left: 10px;
+        }
         
         @media (max-width: 480px) {
             .main-container { padding-top: 70px; }
@@ -230,8 +262,8 @@
             .info-button, .admin-button { width: 45px; height: 45px; top: 15px; }
             .info-button { right: 15px; } .admin-button { left: 15px; }
             .modal-content { padding: 20px; margin: 10px; }
+            .stats-container { justify-content: center; }
         }
-
     </style>
 </head>
 <body>
@@ -303,12 +335,34 @@
     <div class="modal-overlay" id="adminViewModal" onclick="closeAllModals(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="close-button" onclick="closeAllModals()">×</button>
-            <h3>Поданные заявки</h3>
+            <h3>📋 Панель Администратора</h3>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h4 id="totalApplications">0</h4>
+                    <p>Всего заявок</p>
+                </div>
+                <div class="stat-card">
+                    <h4 id="todayApplications">0</h4>
+                    <p>Сегодня</p>
+                </div>
+                <div class="stat-card">
+                    <h4 id="weekApplications">0</h4>
+                    <p>За неделю</p>
+                </div>
+            </div>
+
+            <button class="refresh-btn" onclick="showAdminPanel()">🔄 Обновить</button>
+            <button class="export-btn" onclick="exportApplications()">📤 Экспорт</button>
+            
             <ul class="application-list" id="applicationList"></ul>
         </div>
     </div>
 
     <script>
+        // Глобальное хранилище для всех заявок (имитация сервера)
+        const STORAGE_KEY = 'cvnz_global_applications';
+
         // --- Логика бета-теста ---
         function checkBetaCode() {
             const input = document.getElementById('betaCodeInput');
@@ -322,7 +376,6 @@
                 telegramLink.classList.add('show');
             } else {
                 errorMessage.classList.add('show');
-                // Добавляем класс для анимации тряски с небольшой задержкой
                 setTimeout(() => errorMessage.classList.add('shake'), 10);
                 input.value = '';
                 telegramLink.classList.remove('show');
@@ -344,26 +397,52 @@
         }
         document.addEventListener('keydown', e => e.key === 'Escape' && closeAllModals());
         
-        // --- Логика подачи и отображения заявок ---
+        // --- Централизованное хранение заявок ---
+        function saveApplication(application) {
+            const applications = getAllApplications();
+            application.id = Date.now() + Math.random(); // Уникальный ID
+            application.timestamp = new Date().toISOString();
+            application.dateString = new Date().toLocaleString('ru-RU');
+            applications.push(application);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
+            return application;
+        }
+
+        function getAllApplications() {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        }
+
+        function deleteApplicationById(id) {
+            const applications = getAllApplications();
+            const filtered = applications.filter(app => app.id !== id);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+        }
+
+        // --- Подача заявки ---
         function submitApplication(event) {
             event.preventDefault();
-            const application = {
-                id: Date.now(),
-                realName: document.getElementById('realName').value,
-                youtubeName: document.getElementById('youtubeName').value,
-                telegramName: document.getElementById('telegramName').value
-            };
-            const applications = JSON.parse(localStorage.getItem('applications')) || [];
-            applications.push(application);
-            localStorage.setItem('applications', JSON.stringify(applications));
             
+            const application = {
+                realName: document.getElementById('realName').value.trim(),
+                youtubeName: document.getElementById('youtubeName').value.trim(),
+                telegramName: document.getElementById('telegramName').value.trim(),
+                userAgent: navigator.userAgent,
+                ip: 'Unknown' // В реальном проекте можно получить через API
+            };
+
+            // Сохраняем в глобальное хранилище
+            saveApplication(application);
+            
+            // Показываем успешное сообщение
             document.getElementById('applySuccessMessage').classList.add('show');
             document.getElementById('applicationForm').reset();
+            
             setTimeout(() => {
                 closeAllModals();
             }, 2500);
         }
 
+        // --- Админ панель ---
         function checkAdminKey() {
             const keyInput = document.getElementById('adminKeyInput');
             const error = document.getElementById('adminKeyError');
@@ -379,34 +458,114 @@
         }
         
         function showAdminPanel() {
+            const applications = getAllApplications();
             const applicationList = document.getElementById('applicationList');
+            
+            // Обновляем статистику
+            updateStatistics(applications);
+            
+            // Очищаем список
             applicationList.innerHTML = '';
-            const applications = JSON.parse(localStorage.getItem('applications')) || [];
+            
             if (applications.length === 0) {
-                applicationList.innerHTML = '<p>Новых заявок нет.</p>';
+                applicationList.innerHTML = '<p style="text-align: center; color: #666; font-style: italic;">Заявок пока нет</p>';
             } else {
-                applications.forEach(app => {
+                // Сортируем по дате (новые первыми)
+                applications.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                
+                applications.forEach((app, index) => {
                     const listItem = document.createElement('li');
                     listItem.className = 'application-item';
                     listItem.dataset.id = app.id;
+                    
                     listItem.innerHTML = `
-                        <p><strong>Имя:</strong> ${app.realName}</p>
-                        <p><strong>YouTube:</strong> ${app.youtubeName}</p>
-                        <p><strong>Telegram:</strong> ${app.telegramName}</p>
-                        <button class="delete-application-btn" onclick="deleteApplication(${app.id})">×</button>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div style="flex: 1;">
+                                <p><strong>🆔 Заявка #${applications.length - index}</strong></p>
+                                <p><strong>👤 Имя:</strong> ${app.realName}</p>
+                                <p><strong>🎬 YouTube:</strong> ${app.youtubeName}</p>
+                                <p><strong>💬 Telegram:</strong> ${app.telegramName}</p>
+                                <p><strong>📅 Дата:</strong> ${app.dateString}</p>
+                                <p style="font-size: 0.9em; color: #888;"><strong>🌐 Браузер:</strong> ${getBrowserInfo(app.userAgent)}</p>
+                            </div>
+                            <button class="delete-application-btn" onclick="deleteApplication('${app.id}')" title="Удалить заявку">×</button>
+                        </div>
                     `;
                     applicationList.appendChild(listItem);
                 });
             }
+            
             document.getElementById('adminViewModal').classList.add('show');
         }
 
-        function deleteApplication(id) {
-            let applications = JSON.parse(localStorage.getItem('applications')) || [];
-            applications = applications.filter(app => app.id !== id);
-            localStorage.setItem('applications', JSON.stringify(applications));
-            showAdminPanel();
+        function updateStatistics(applications) {
+            const total = applications.length;
+            const today = new Date().toDateString();
+            const todayCount = applications.filter(app => 
+                new Date(app.timestamp).toDateString() === today
+            ).length;
+            
+            const weekAgo = new Date();
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            const weekCount = applications.filter(app => 
+                new Date(app.timestamp) >= weekAgo
+            ).length;
+
+            document.getElementById('totalApplications').textContent = total;
+            document.getElementById('todayApplications').textContent = todayCount;
+            document.getElementById('weekApplications').textContent = weekCount;
         }
+
+        function getBrowserInfo(userAgent) {
+            if (userAgent.includes('Chrome')) return 'Chrome';
+            if (userAgent.includes('Firefox')) return 'Firefox'; 
+            if (userAgent.includes('Safari')) return 'Safari';
+            if (userAgent.includes('Edge')) return 'Edge';
+            return 'Неизвестный';
+        }
+
+        function deleteApplication(id) {
+            if (confirm('Удалить эту заявку?')) {
+                deleteApplicationById(id);
+                showAdminPanel(); // Обновляем отображение
+            }
+        }
+
+        function exportApplications() {
+            const applications = getAllApplications();
+            if (applications.length === 0) {
+                alert('Нет заявок для экспорта');
+                return;
+            }
+
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "№,Имя,YouTube,Telegram,Дата,Браузер\n";
+            
+            applications.forEach((app, index) => {
+                const row = [
+                    index + 1,
+                    `"${app.realName}"`,
+                    `"${app.youtubeName}"`, 
+                    `"${app.telegramName}"`,
+                    `"${app.dateString}"`,
+                    `"${getBrowserInfo(app.userAgent)}"`
+                ].join(',');
+                csvContent += row + "\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `cvnz_applications_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Инициализация при загрузке
+        window.addEventListener('load', function() {
+            console.log('CVNZ Site загружен. Всего заявок:', getAllApplications().length);
+        });
     </script>
 </body>
 </html>
