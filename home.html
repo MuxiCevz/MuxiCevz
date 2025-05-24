@@ -141,9 +141,10 @@
             20%, 40%, 60%, 80% { transform: translateX(5px); }
         }
         
-        .info-button, .admin-button {
+        .info-button {
             position: fixed;
             top: 20px;
+            right: 20px;
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -155,11 +156,13 @@
             z-index: 1000;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            cursor: pointer;
         }
-        .info-button { right: 20px; background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white;}
-        .admin-button { left: 20px; background: linear-gradient(45deg, #6c757d, #343a40); color: white;}
         
-        .info-button:hover, .admin-button:hover {
+        .info-button:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
@@ -205,65 +208,19 @@
         }
         .modal-content label { color: #333; text-align: left; font-size: 1em; margin-bottom: 8px; }
         
-        #adminViewModal .modal-content { max-width: 800px; }
-        .application-list { list-style: none; padding: 0; }
-        .application-item {
-            background: #f9f9f9; border: 1px solid #eee; border-left: 5px solid #3B82F6;
-            padding: 15px; margin-bottom: 15px; border-radius: 8px; position: relative;
-        }
-        .application-item p { margin: 5px 0; color: #555;}
-        .application-item strong { color: #333; }
-        .delete-application-btn {
-            position: absolute; top: 10px; right: 10px; background: #e74c3c;
-            color: white; border: none; width: 25px; height: 25px;
-            border-radius: 50%; cursor: pointer; font-weight: bold;
-        }
-
-        .stats-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            min-width: 120px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .stat-card h4 {
-            font-size: 1.8em;
-            margin-bottom: 5px;
-        }
-
-        .stat-card p {
-            margin: 0;
-            opacity: 0.9;
-        }
-
-        .refresh-btn {
-            background: linear-gradient(45deg, #28a745, #20c997);
-            margin-bottom: 20px;
-        }
-
-        .export-btn {
-            background: linear-gradient(45deg, #007bff, #0056b3);
-            margin-left: 10px;
+        .loading {
+            display: none;
+            color: #3B82F6;
+            font-weight: bold;
         }
         
         @media (max-width: 480px) {
             .main-container { padding-top: 70px; }
             .beta-container { padding: 25px 15px; width: 98%; }
-            .info-button, .admin-button { width: 45px; height: 45px; top: 15px; }
-            .info-button { right: 15px; } .admin-button { left: 15px; }
+            .info-button { width: 45px; height: 45px; top: 15px; right: 15px; }
             .modal-content { padding: 20px; margin: 10px; }
-            .stats-container { justify-content: center; }
         }
+
     </style>
 </head>
 <body>
@@ -287,7 +244,6 @@
     </div>
 
     <button class="info-button" onclick="openInfoModal()">?</button>
-    <button class="admin-button" onclick="openAdminLoginModal()">⚙️</button>
 
     <div class="modal-overlay" id="infoModal" onclick="closeAllModals(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
@@ -315,53 +271,21 @@
                     <input type="text" id="telegramName" required>
                 </div>
                 <button type="submit">Подать заявку</button>
-                <div class="success" id="applySuccessMessage" style="text-align: center; margin-top: 20px;">Ваша заявка успешно отправлена!</div>
+                <div class="loading" id="loadingMessage">Отправка заявки...</div>
+                <div class="success" id="applySuccessMessage" style="text-align: center; margin-top: 20px;">Ваша заявка успешно отправлена на email!</div>
+                <div class="error" id="applyErrorMessage" style="text-align: center; margin-top: 20px;">Ошибка отправки. Попробуйте еще раз.</div>
             </form>
         </div>
     </div>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/3.2.0/email.min.js"></script>
     
-    <div class="modal-overlay" id="adminLoginModal" onclick="closeAllModals(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-button" onclick="closeAllModals()">×</button>
-            <h3>Введите Ключ Доступа</h3>
-            <div class="code-section" style="margin-bottom: 0;">
-                <input type="password" id="adminKeyInput" placeholder="Ваш ключ">
-                <button onclick="checkAdminKey()">Войти</button>
-                <div class="error" id="adminKeyError">Неверный ключ!</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="adminViewModal" onclick="closeAllModals(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-button" onclick="closeAllModals()">×</button>
-            <h3>📋 Панель Администратора</h3>
-            
-            <div class="stats-container">
-                <div class="stat-card">
-                    <h4 id="totalApplications">0</h4>
-                    <p>Всего заявок</p>
-                </div>
-                <div class="stat-card">
-                    <h4 id="todayApplications">0</h4>
-                    <p>Сегодня</p>
-                </div>
-                <div class="stat-card">
-                    <h4 id="weekApplications">0</h4>
-                    <p>За неделю</p>
-                </div>
-            </div>
-
-            <button class="refresh-btn" onclick="showAdminPanel()">🔄 Обновить</button>
-            <button class="export-btn" onclick="exportApplications()">📤 Экспорт</button>
-            
-            <ul class="application-list" id="applicationList"></ul>
-        </div>
-    </div>
-
     <script>
-        // Глобальное хранилище для всех заявок (имитация сервера)
-        const STORAGE_KEY = 'cvnz_global_applications';
+        // Инициализация EmailJS
+        (function(){
+            emailjs.init("YOUR_PUBLIC_KEY"); // Замените на ваш публичный ключ
+        })();
 
         // --- Логика бета-теста ---
         function checkBetaCode() {
@@ -387,185 +311,51 @@
         const modals = document.querySelectorAll('.modal-overlay');
         function openInfoModal() { document.getElementById('infoModal').classList.add('show'); }
         function openApplyModal() { document.getElementById('applyModal').classList.add('show'); }
-        function openAdminLoginModal() { document.getElementById('adminLoginModal').classList.add('show'); }
         
         function closeAllModals(event) {
             if (event && event.target.closest('.modal-content') && !event.target.classList.contains('close-button')) return;
             modals.forEach(modal => modal.classList.remove('show'));
-            document.getElementById('adminKeyError').classList.remove('show');
             document.getElementById('applySuccessMessage').classList.remove('show');
+            document.getElementById('applyErrorMessage').classList.remove('show');
+            document.getElementById('loadingMessage').style.display = 'none';
         }
         document.addEventListener('keydown', e => e.key === 'Escape' && closeAllModals());
         
-        // --- Централизованное хранение заявок ---
-        function saveApplication(application) {
-            const applications = getAllApplications();
-            application.id = Date.now() + Math.random(); // Уникальный ID
-            application.timestamp = new Date().toISOString();
-            application.dateString = new Date().toLocaleString('ru-RU');
-            applications.push(application);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
-            return application;
-        }
-
-        function getAllApplications() {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-        }
-
-        function deleteApplicationById(id) {
-            const applications = getAllApplications();
-            const filtered = applications.filter(app => app.id !== id);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
-        }
-
-        // --- Подача заявки ---
+        // --- Отправка заявки на email ---
         function submitApplication(event) {
             event.preventDefault();
             
-            const application = {
-                realName: document.getElementById('realName').value.trim(),
-                youtubeName: document.getElementById('youtubeName').value.trim(),
-                telegramName: document.getElementById('telegramName').value.trim(),
-                userAgent: navigator.userAgent,
-                ip: 'Unknown' // В реальном проекте можно получить через API
+            const loadingMessage = document.getElementById('loadingMessage');
+            const successMessage = document.getElementById('applySuccessMessage');
+            const errorMessage = document.getElementById('applyErrorMessage');
+            
+            // Скрываем предыдущие сообщения
+            successMessage.classList.remove('show');
+            errorMessage.classList.remove('show');
+            loadingMessage.style.display = 'block';
+            
+            const templateParams = {
+                real_name: document.getElementById('realName').value,
+                youtube_name: document.getElementById('youtubeName').value,
+                telegram_name: document.getElementById('telegramName').value,
+                submission_date: new Date().toLocaleString('ru-RU')
             };
-
-            // Сохраняем в глобальное хранилище
-            saveApplication(application);
             
-            // Показываем успешное сообщение
-            document.getElementById('applySuccessMessage').classList.add('show');
-            document.getElementById('applicationForm').reset();
-            
-            setTimeout(() => {
-                closeAllModals();
-            }, 2500);
-        }
-
-        // --- Админ панель ---
-        function checkAdminKey() {
-            const keyInput = document.getElementById('adminKeyInput');
-            const error = document.getElementById('adminKeyError');
-            if (keyInput.value === '0927.0473') {
-                error.classList.remove('show');
-                keyInput.value = '';
-                closeAllModals();
-                showAdminPanel();
-            } else {
-                error.classList.add('show');
-                keyInput.value = '';
-            }
-        }
-        
-        function showAdminPanel() {
-            const applications = getAllApplications();
-            const applicationList = document.getElementById('applicationList');
-            
-            // Обновляем статистику
-            updateStatistics(applications);
-            
-            // Очищаем список
-            applicationList.innerHTML = '';
-            
-            if (applications.length === 0) {
-                applicationList.innerHTML = '<p style="text-align: center; color: #666; font-style: italic;">Заявок пока нет</p>';
-            } else {
-                // Сортируем по дате (новые первыми)
-                applications.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-                
-                applications.forEach((app, index) => {
-                    const listItem = document.createElement('li');
-                    listItem.className = 'application-item';
-                    listItem.dataset.id = app.id;
-                    
-                    listItem.innerHTML = `
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                            <div style="flex: 1;">
-                                <p><strong>🆔 Заявка #${applications.length - index}</strong></p>
-                                <p><strong>👤 Имя:</strong> ${app.realName}</p>
-                                <p><strong>🎬 YouTube:</strong> ${app.youtubeName}</p>
-                                <p><strong>💬 Telegram:</strong> ${app.telegramName}</p>
-                                <p><strong>📅 Дата:</strong> ${app.dateString}</p>
-                                <p style="font-size: 0.9em; color: #888;"><strong>🌐 Браузер:</strong> ${getBrowserInfo(app.userAgent)}</p>
-                            </div>
-                            <button class="delete-application-btn" onclick="deleteApplication('${app.id}')" title="Удалить заявку">×</button>
-                        </div>
-                    `;
-                    applicationList.appendChild(listItem);
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    loadingMessage.style.display = 'none';
+                    successMessage.classList.add('show');
+                    document.getElementById('applicationForm').reset();
+                    setTimeout(() => {
+                        closeAllModals();
+                    }, 3000);
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    loadingMessage.style.display = 'none';
+                    errorMessage.classList.add('show');
                 });
-            }
-            
-            document.getElementById('adminViewModal').classList.add('show');
         }
-
-        function updateStatistics(applications) {
-            const total = applications.length;
-            const today = new Date().toDateString();
-            const todayCount = applications.filter(app => 
-                new Date(app.timestamp).toDateString() === today
-            ).length;
-            
-            const weekAgo = new Date();
-            weekAgo.setDate(weekAgo.getDate() - 7);
-            const weekCount = applications.filter(app => 
-                new Date(app.timestamp) >= weekAgo
-            ).length;
-
-            document.getElementById('totalApplications').textContent = total;
-            document.getElementById('todayApplications').textContent = todayCount;
-            document.getElementById('weekApplications').textContent = weekCount;
-        }
-
-        function getBrowserInfo(userAgent) {
-            if (userAgent.includes('Chrome')) return 'Chrome';
-            if (userAgent.includes('Firefox')) return 'Firefox'; 
-            if (userAgent.includes('Safari')) return 'Safari';
-            if (userAgent.includes('Edge')) return 'Edge';
-            return 'Неизвестный';
-        }
-
-        function deleteApplication(id) {
-            if (confirm('Удалить эту заявку?')) {
-                deleteApplicationById(id);
-                showAdminPanel(); // Обновляем отображение
-            }
-        }
-
-        function exportApplications() {
-            const applications = getAllApplications();
-            if (applications.length === 0) {
-                alert('Нет заявок для экспорта');
-                return;
-            }
-
-            let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "№,Имя,YouTube,Telegram,Дата,Браузер\n";
-            
-            applications.forEach((app, index) => {
-                const row = [
-                    index + 1,
-                    `"${app.realName}"`,
-                    `"${app.youtubeName}"`, 
-                    `"${app.telegramName}"`,
-                    `"${app.dateString}"`,
-                    `"${getBrowserInfo(app.userAgent)}"`
-                ].join(',');
-                csvContent += row + "\n";
-            });
-
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `cvnz_applications_${new Date().toISOString().split('T')[0]}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        // Инициализация при загрузке
-        window.addEventListener('load', function() {
-            console.log('CVNZ Site загружен. Всего заявок:', getAllApplications().length);
-        });
     </script>
 </body>
 </html>
