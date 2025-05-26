@@ -14,7 +14,8 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a2a6c 0%, #2a5298 50%, #4a90e2 100%); /* Slightly deeper blue gradient */
+            /* New vibrant gradient background: purple, blue, orange, yellow */
+            background: linear-gradient(135deg, #7b0099 0%, #004d99 33%, #ff8c00 66%, #ffd700 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -37,15 +38,15 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(1.5px 1.5px at 20% 30%, white, transparent),
-                radial-gradient(1.8px 1.8px at 40% 70%, white, transparent),
-                radial-gradient(1px 1px at 90% 40%, white, transparent),
-                radial-gradient(1.2px 1.2px at 60% 10%, white, transparent),
-                radial-gradient(1.6px 1.6px at 80% 80%, white, transparent),
-                radial-gradient(1px 1px at 30% 90%, white, transparent);
-            background-size: 250px 250px, 350px 350px, 300px 300px, 450px 450px, 400px 400px, 200px 200px; /* Slightly larger stars */
+                radial-gradient(1.5px 1.5px at 20% 30%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(1.8px 1.8px at 40% 70%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(1px 1px at 90% 40%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(1.2px 1.2px at 60% 10%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(1.6px 1.6px at 80% 80%, rgba(255, 255, 255, 0.8), transparent),
+                radial-gradient(1px 1px at 30% 90%, rgba(255, 255, 255, 0.8), transparent);
+            background-size: 250px 250px, 350px 350px, 300px 300px, 450px 450px, 400px 400px, 200px 200px;
             opacity: 0.7;
-            animation: twinkle 5s infinite alternate ease-in-out, star-drift 60s linear infinite; /* Smoother twinkle, subtle drift */
+            animation: twinkle 5s infinite alternate ease-in-out, star-drift 60s linear infinite;
             pointer-events: none;
             z-index: 1;
         }
@@ -58,7 +59,7 @@
 
         @keyframes star-drift {
             0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; } /* Drifting diagonally */
+            100% { background-position: 100% 100%; }
         }
 
         /* All elements above stars */
@@ -67,133 +68,164 @@
             z-index: 2;
         }
 
-        /* Registration Button */
-        .registration-button {
-            background: linear-gradient(45deg, #00d4aa, #00a085);
+        /* Main Menu Button */
+        .main-menu-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(45deg, #00d4aa, #00a085); /* Green gradient */
             color: white;
             border: none;
-            padding: 18px 35px; /* Larger padding */
-            font-size: 1.3em; /* Slightly larger font */
+            padding: 18px 30px;
+            font-size: 1.3em;
             font-weight: bold;
-            border-radius: 18px; /* Softer corners */
+            border-radius: 18px;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.4s ease-in-out; /* Smoother transition */
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.4); /* More pronounced shadow */
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.4);
             text-align: center;
-            margin-bottom: 30px; /* More space */
-            letter-spacing: 0.5px; /* Slightly spaced letters */
+            letter-spacing: 0.5px;
+            z-index: 1000; /* Ensure it's above other content */
+        }
+
+        .main-menu-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(0, 212, 170, 0.5);
+            background: linear-gradient(45deg, #00a085, #008a6f);
+        }
+
+        /* Registration Button (remains separate) */
+        .registration-button {
+            background: linear-gradient(45deg, #00e676, #00c853); /* Brighter green */
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 10px 30px rgba(0, 230, 118, 0.4);
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
         }
 
         .registration-button:hover {
-            transform: translateY(-5px); /* More noticeable lift */
-            box-shadow: 0 15px 45px rgba(0, 212, 170, 0.5); /* Stronger shadow */
-            background: linear-gradient(45deg, #00a085, #008a6f); /* Darker hover state */
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(0, 230, 118, 0.5);
+            background: linear-gradient(45deg, #00c853, #00b04c);
         }
 
         /* Beta Containers */
         .beta-container {
-            background: linear-gradient(135deg, rgba(30, 60, 114, 0.95) 0%, rgba(74, 144, 226, 0.85) 50%, rgba(135, 206, 235, 0.75) 100%); /* Slightly less transparent */
+            background: linear-gradient(135deg, rgba(20, 25, 50, 0.9) 0%, rgba(30, 40, 70, 0.8) 100%); /* Dark, transparent blue-black */
             backdrop-filter: blur(15px);
-            border-radius: 25px; /* Softer corners */
-            padding: 35px 25px; /* More padding */
+            border-radius: 25px;
+            padding: 35px 25px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(74, 144, 226, 0.4); /* Stronger shadows */
-            border: 1px solid rgba(255, 255, 255, 0.4); /* Slightly more opaque border */
-            max-width: 450px; /* Slightly wider */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(74, 144, 226, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Soft white border */
+            max-width: 450px;
             width: 95%;
             min-width: 280px;
-            margin-bottom: 25px; /* Consistent margin */
+            margin-bottom: 25px;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
         .beta-container:hover {
-            transform: translateY(-3px); /* Subtle lift on hover */
+            transform: translateY(-3px);
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(74, 144, 226, 0.5);
         }
 
         .beta-container h2 {
-            font-size: 1.8em; /* Larger heading */
-            margin-bottom: 30px; /* More space */
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6); /* Deeper shadow */
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
             color: white;
             line-height: 1.3;
             letter-spacing: 0.5px;
         }
 
         .code-section {
-            margin-bottom: 35px; /* More space */
+            margin-bottom: 35px;
         }
 
-        label {
-            display: block;
-            font-size: 1.3em; /* Larger label */
-            margin-bottom: 18px; /* More space */
+        /* Adjust label to use flexbox for horizontal alignment with tooltip */
+        .code-section label {
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Vertically center items */
+            justify-content: center; /* Center horizontally if space allows */
+            font-size: 1.3em;
+            margin-bottom: 18px;
             font-weight: bold;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 15px 20px; /* More padding */
-            font-size: 1.1em; /* Larger font */
+            padding: 15px 20px;
+            font-size: 1.1em;
             border: none;
-            border-radius: 12px; /* Softer corners */
-            background: rgba(255, 255, 255, 0.25); /* More visible background */
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.15); /* More transparent */
             color: white;
             text-align: center;
             outline: none;
-            transition: all 0.4s ease-in-out; /* Smoother transition */
+            transition: all 0.4s ease-in-out;
             border: 2px solid transparent;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle inner shadow */
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         input[type="text"]::placeholder {
-            color: rgba(255, 255, 255, 0.6); /* Slightly more visible placeholder */
+            color: rgba(255, 255, 255, 0.6);
         }
 
         input[type="text"]:focus {
-            background: rgba(255, 255, 255, 0.35); /* Brighter on focus */
-            transform: scale(1.01); /* Subtle scale */
-            border: 2px solid rgba(135, 206, 235, 0.9); /* More prominent border */
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 15px rgba(135, 206, 235, 0.5); /* Outer glow on focus */
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.01);
+            border: 2px solid rgba(255, 255, 255, 0.7); /* White border on focus */
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.4); /* White glow on focus */
         }
 
-        button {
-            background: linear-gradient(45deg, #ff5f5f, #e54c1f); /* Stronger red gradient */
+        .beta-container button { /* Specific to buttons inside beta-container */
+            background: linear-gradient(45deg, #ff9800, #fb8c00); /* Orange button */
             color: white;
             border: none;
-            padding: 14px 30px; /* More padding */
-            font-size: 1.1em; /* Larger font */
-            border-radius: 12px; /* Softer corners */
+            padding: 14px 30px;
+            font-size: 1.1em;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.4s ease-in-out; /* Smoother transition */
-            margin-top: 20px; /* More space */
+            transition: all 0.4s ease-in-out;
+            margin-top: 20px;
             font-weight: bold;
             letter-spacing: 0.5px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        button:hover {
-            transform: translateY(-3px); /* More noticeable lift */
+        .beta-container button:hover {
+            transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(45deg, #e54c1f, #cc3e14); /* Darker hover state */
+            background: linear-gradient(45deg, #fb8c00, #f57c00);
         }
 
         .beta-telegram-link {
             display: none;
-            margin-top: 35px; /* More space */
-            padding: 25px; /* More padding */
-            background: rgba(135, 206, 235, 0.15); /* More subtle background */
-            border-radius: 18px; /* Softer corners */
-            border: 2px solid rgba(135, 206, 235, 0.6); /* More prominent border */
-            box-shadow: inset 0 0 15px rgba(135, 206, 235, 0.2); /* Inner glow */
+            margin-top: 35px;
+            padding: 25px;
+            background: rgba(255, 235, 59, 0.15); /* Yellow transparent */
+            border-radius: 18px;
+            border: 2px solid rgba(255, 235, 59, 0.6);
+            box-shadow: inset 0 0 15px rgba(255, 235, 59, 0.2);
         }
 
         .beta-telegram-link.show {
             display: block;
-            animation: fadeInScale 0.6s ease-out forwards; /* New animation */
+            animation: fadeInScale 0.6s ease-out forwards;
         }
 
         @keyframes fadeInScale {
@@ -208,27 +240,27 @@
         }
 
         .beta-telegram-link a {
-            color: #87ceeb;
+            color: #ffeb3b; /* Yellow link text */
             text-decoration: none;
-            font-size: 1.3em; /* Larger link text */
+            font-size: 1.3em;
             font-weight: bold;
             display: inline-block;
-            padding: 12px 25px; /* More padding */
-            background: rgba(135, 206, 235, 0.25); /* Brighter background */
-            border-radius: 12px; /* Softer corners */
-            transition: all 0.4s ease-in-out; /* Smoother transition */
+            padding: 12px 25px;
+            background: rgba(255, 235, 59, 0.25);
+            border-radius: 12px;
+            transition: all 0.4s ease-in-out;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .beta-telegram-link a:hover {
-            background: rgba(135, 206, 235, 0.4); /* Darker hover */
-            transform: scale(1.07); /* More pronounced scale */
+            background: rgba(255, 235, 59, 0.4);
+            transform: scale(1.07);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
         .error {
-            color: #ff4c4c; /* Brighter red for error */
-            margin-top: 20px; /* More space */
+            color: #ff1744; /* Brighter red error */
+            margin-top: 20px;
             font-weight: bold;
             display: none;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -236,7 +268,7 @@
 
         .error.show {
             display: block;
-            animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both; /* Bouncier shake */
+            animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
         }
 
         @keyframes shake {
@@ -247,8 +279,8 @@
         }
 
         .success {
-            color: #00e0b7; /* Brighter green for success */
-            margin-top: 20px; /* More space */
+            color: #00e676; /* Brighter green success */
+            margin-top: 20px;
             font-weight: bold;
             display: none;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -256,81 +288,24 @@
 
         .success.show {
             display: block;
-            animation: fadeInScale 0.6s ease-out forwards; /* Reusing fadeInScale */
+            animation: fadeInScale 0.6s ease-out forwards;
         }
 
-        /* Bottom Buttons */
-        .bottom-buttons {
-            position: fixed;
-            bottom: 25px; /* Slightly higher */
-            right: 25px; /* Slightly more inward */
-            display: flex;
-            flex-direction: column;
-            gap: 12px; /* More space between buttons */
-            z-index: 1000;
-        }
-
-        .info-button, .workers-button {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
-            border: none;
-            padding: 14px 22px; /* Larger padding */
-            border-radius: 28px; /* More pill-shaped */
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.4); /* Stronger shadow */
-            transition: all 0.4s ease-in-out; /* Smoother transition */
-            font-size: 0.95em;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            letter-spacing: 0.3px;
-        }
-
-        .info-button:hover, .workers-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(45deg, #ee5a24, #d44719); /* Darker hover */
-        }
-
-        .creator-button {
-            background: linear-gradient(45deg, #9b59b6, #8e44ad);
-            color: white;
-            border: none;
-            padding: 14px 22px; /* Larger padding */
-            border-radius: 28px; /* More pill-shaped */
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.4);
-            transition: all 0.4s ease-in-out;
-            font-size: 0.95em;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            letter-spacing: 0.3px;
-        }
-
-        .creator-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(45deg, #8e44ad, #7d3c98);
-        }
-
-        /* Modal Overlay */
+        /* Modal Overlay (for info/workers) */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8); /* Darker overlay */
-            backdrop-filter: blur(15px); /* Frosted glass effect */
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
             padding: 20px;
-            opacity: 0; /* Start hidden for smooth fade-in */
+            opacity: 0;
             transition: opacity 0.3s ease-out;
         }
 
@@ -339,20 +314,20 @@
             opacity: 1;
         }
 
-        /* Modal Content */
+        /* Modal Content (for info/workers) */
         .modal-content {
-            background: rgba(255, 255, 255, 0.97); /* Almost opaque white */
+            background: rgba(255, 255, 255, 0.95);
             color: #333;
-            border-radius: 20px; /* Softer corners */
-            padding: 35px; /* More padding */
-            max-width: 650px; /* Slightly wider */
+            border-radius: 20px;
+            padding: 35px;
+            max-width: 650px;
             width: 95%;
-            max-height: 90vh; /* Allow more height */
+            max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6); /* Stronger shadow */
-            transform: scale(0.9); /* Start smaller for animation */
-            opacity: 0; /* Start hidden for animation */
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            transform: scale(0.9);
+            opacity: 0;
             transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease-out; /* Bouncy entry */
         }
 
@@ -361,113 +336,276 @@
             opacity: 1;
         }
 
-        .close-button {
-            position: absolute;
-            top: 18px; /* Slightly more inward */
-            right: 18px; /* Slightly more inward */
-            background: #ff4c4c; /* Brighter red */
+        /* ----- New Menu Sidebar Styles ----- */
+
+        /* Overlay for the menu sidebar */
+        .menu-sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            display: none; /* Hidden by default */
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+            z-index: 2000; /* Same as other modals */
+        }
+
+        .menu-sidebar-overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Actual sidebar content */
+        .menu-sidebar {
+            position: fixed;
+            top: 0;
+            right: -320px; /* Start off-screen */
+            width: 300px; /* Width of the sidebar */
+            height: 100%;
+            background: linear-gradient(180deg, rgba(20, 25, 50, 0.95), rgba(30, 40, 70, 0.95)); /* Dark transparent background */
+            backdrop-filter: blur(20px); /* Stronger blur for the sidebar */
+            padding: 30px;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5); /* Shadow to make it stand out */
+            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy slide-in transition */
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Space between buttons */
+            align-items: flex-start; /* Align items to the left */
+            z-index: 2001; /* Above its own overlay */
+            color: white; /* Text color for sidebar content */
+        }
+
+        .menu-sidebar.show {
+            right: 0; /* Slide in */
+        }
+
+        .menu-sidebar h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+            color: white;
+            width: 100%; /* Full width for heading */
+            text-align: center;
+        }
+
+        /* Styles for buttons inside the sidebar */
+        .menu-sidebar .sidebar-button { /* General style for buttons in sidebar */
+            display: block; /* Make them block elements */
+            width: 100%; /* Full width */
+            padding: 14px 22px;
+            border-radius: 15px; /* Slightly less pill-shaped */
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-decoration: none;
+            text-align: center;
+            letter-spacing: 0.3px;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.4);
             color: white;
             border: none;
-            width: 35px; /* Larger button */
-            height: 35px; /* Larger button */
-            border-radius: 50%;
+        }
+
+        .menu-sidebar .sidebar-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .menu-sidebar .info-button {
+            background: linear-gradient(45deg, #ff4081, #e91e63); /* Vibrant pink/red */
+        }
+        .menu-sidebar .info-button:hover {
+            background: linear-gradient(45deg, #e91e63, #c2185b);
+        }
+
+        .menu-sidebar .workers-button {
+            background: linear-gradient(45deg, #3498db, #2980b9); /* Blue */
+        }
+        .menu-sidebar .workers-button:hover {
+            background: linear-gradient(45deg, #2980b9, #2c3e50);
+        }
+
+        .menu-sidebar .creator-button {
+            background: linear-gradient(45deg, #7b1fa2, #6a1b9a); /* Darker purple */
+        }
+        .menu-sidebar .creator-button:hover {
+            background: linear-gradient(45deg, #6a1b9a, #4a148c);
+        }
+
+
+        /* Beautiful Red Circular Close Button (Unified Style) */
+        .close-button {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: linear-gradient(45deg, #ff1744, #d50000); /* Pure red gradient */
+            color: white;
+            border: none;
+            width: 40px; /* Slightly larger button */
+            height: 40px;
+            border-radius: 50%; /* Perfect circle */
             cursor: pointer;
-            font-size: 18px; /* Larger font */
+            font-size: 24px; /* Larger '✖' */
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease-in-out;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Shadow for the '✖' */
+            z-index: 2002; /* Ensure it's above everything else in the modal/sidebar */
         }
 
         .close-button:hover {
-            background: #e53f3f; /* Darker hover */
+            background: linear-gradient(45deg, #d50000, #b71c1c); /* Darker red on hover */
             transform: scale(1.15); /* More pronounced scale */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255, 23, 68, 0.7); /* Red glow on hover */
         }
 
-        .modal-content h3 {
-            color: #2c3e50; /* Darker blue-grey */
-            margin-bottom: 25px; /* More space */
-            font-size: 1.8em; /* Larger heading */
+
+        /* Modal content styles (re-using for clarity) */
+        .modal-content h3 { /* Re-applying styles for headings within modals */
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 1.8em;
             text-align: center;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
-
         .modal-content h4 {
-            color: #34495e; /* Slightly lighter than h3 */
+            color: #34495e;
             margin-top: 25px;
             margin-bottom: 15px;
             font-size: 1.4em;
             text-align: left;
         }
-
         .modal-content p {
-            line-height: 1.7; /* Better readability */
-            margin-bottom: 18px; /* More space */
+            line-height: 1.7;
+            margin-bottom: 18px;
             text-align: left;
             font-size: 0.95em;
             color: #444;
         }
-
         .modal-content strong {
             color: #2c3e50;
         }
-
         .zones-section, .roles-section, .tokens-section, .workers-section {
-            margin: 25px 0; /* More space */
-            padding: 20px; /* More padding */
-            background: rgba(52, 152, 219, 0.08); /* More subtle background */
-            border-radius: 15px; /* Softer corners */
-            border-left: 5px solid #3498db; /* Thicker border */
-            box-shadow: inset 0 0 10px rgba(52, 152, 219, 0.1); /* Subtle inner shadow */
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(52, 152, 219, 0.08);
+            border-radius: 15px;
+            border-left: 5px solid #3498db;
+            box-shadow: inset 0 0 10px rgba(52, 152, 219, 0.1);
         }
-
         .zone-item, .role-item, .worker-item {
-            margin: 12px 0; /* More space */
+            margin: 12px 0;
             padding: 10px 0;
-            border-bottom: 1px dashed rgba(0, 0, 0, 0.1); /* Subtle separator */
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
         }
         .zone-item:last-child, .role-item:last-child, .worker-item:last-child {
-            border-bottom: none; /* No separator on last item */
+            border-bottom: none;
         }
-
         .allowed {
             color: #27ae60;
             font-weight: bold;
         }
-
         .forbidden {
             color: #e74c3c;
             font-weight: bold;
         }
-
         .worker-item p {
             margin-bottom: 5px;
             font-size: 1.1em;
             font-weight: bold;
             color: #2c3e50;
         }
-
         .worker-item a {
             display: inline-block;
             background: linear-gradient(45deg, #3498db, #2980b9);
             color: white;
-            padding: 10px 20px; /* More padding */
-            border-radius: 10px; /* Softer corners */
+            padding: 10px 20px;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: bold;
-            margin-top: 8px; /* More space */
-            transition: all 0.4s ease-in-out; /* Smoother transition */
+            margin-top: 8px;
+            transition: all 0.4s ease-in-out;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
         }
-
         .worker-item a:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
             background: linear-gradient(45deg, #2980b9, #3498db);
         }
+
+        /* --- Tooltip styles --- */
+        .tooltip-container {
+            position: relative;
+            display: inline-block; /* Allows text and icon to be on the same line */
+            margin-left: 10px; /* Space between label text and icon */
+            cursor: help; /* Change cursor to indicate information */
+            flex-shrink: 0; /* Prevent icon from shrinking when label text is long */
+            user-select: none; /* Prevent selection of icon text */
+        }
+
+        .info-icon {
+            font-size: 0.8em; /* Smaller than label text */
+            color: rgba(255, 255, 255, 0.7); /* Lighter color */
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            width: 1.2em;
+            height: 1.2em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1; /* Adjust line height for perfect centering of the unicode char */
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .tooltip-container:hover .info-icon {
+            color: white;
+            border-color: white;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            width: 250px; /* Max width for tooltip content */
+            background-color: rgba(0, 0, 0, 0.85); /* Darker background */
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px 15px;
+            position: absolute;
+            z-index: 3000; /* High z-index to be on top of everything */
+            bottom: 125%; /* Position above the icon */
+            left: 50%;
+            transform: translateX(-50%);
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            font-size: 0.9em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            white-space: normal; /* Allow text to wrap within the width */
+            text-shadow: none; /* Remove text shadow from tooltip text */
+            line-height: 1.4;
+        }
+
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%; /* At the bottom of the tooltip */
+            left: 50%;
+            margin-left: -5px; /* Half of the arrow width */
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent; /* Arrow pointing down */
+        }
+
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* --- End Tooltip styles --- */
 
 
         /* Mobile Adaptation */
@@ -475,6 +613,13 @@
             body {
                 gap: 20px;
                 padding: 15px 10px;
+            }
+
+            .main-menu-button {
+                padding: 15px 25px;
+                font-size: 1.1em;
+                bottom: 15px;
+                right: 15px;
             }
 
             .registration-button {
@@ -496,9 +641,17 @@
                 margin-bottom: 25px;
             }
 
-            label {
+            .code-section label {
                 font-size: 1.1em;
                 margin-bottom: 15px;
+                flex-direction: column; /* Stack label text and icon vertically on small screens */
+                align-items: center;
+                text-align: center;
+            }
+
+            .code-section label .tooltip-container {
+                margin-left: 0; /* Remove left margin when stacked */
+                margin-top: 5px; /* Add top margin between label text and icon */
             }
 
             input[type="text"] {
@@ -507,7 +660,7 @@
                 border-radius: 10px;
             }
 
-            button {
+            .beta-container button {
                 padding: 12px 25px;
                 font-size: 1em;
                 margin-top: 15px;
@@ -534,23 +687,11 @@
                 border-radius: 10px;
             }
 
-            .bottom-buttons {
-                bottom: 15px;
-                right: 15px;
-                gap: 10px;
-            }
-
-            .info-button, .workers-button, .creator-button {
-                padding: 12px 18px;
-                font-size: 0.85em;
-                border-radius: 25px;
-            }
-
             .modal-content {
                 padding: 25px;
                 margin: 10px;
                 border-radius: 15px;
-                max-height: 95vh; /* Adjust for smaller screens */
+                max-height: 95vh;
             }
 
             .modal-content h3 {
@@ -570,11 +711,11 @@
             }
 
             .close-button {
-                width: 30px;
-                height: 30px;
-                font-size: 16px;
-                top: 12px;
-                right: 12px;
+                width: 35px;
+                height: 35px;
+                font-size: 20px;
+                top: 15px;
+                right: 15px;
             }
 
             .zones-section, .roles-section, .tokens-section, .workers-section {
@@ -582,6 +723,13 @@
                 margin: 20px 0;
                 border-radius: 10px;
                 border-left: 4px solid #3498db;
+            }
+
+            /* Sidebar on mobile */
+            .menu-sidebar {
+                width: 250px; /* Smaller width on mobile */
+                padding: 20px;
+                right: -270px; /* Adjust for new width */
             }
         }
 
@@ -598,19 +746,30 @@
                 padding: 10px 20px;
                 font-size: 1em;
             }
+            .tooltip-text {
+                width: 200px; /* Adjust tooltip width for very small screens */
+                padding: 8px 10px;
+                font-size: 0.8em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="bottom-buttons">
-        <button class="info-button" onclick="openModal('info')">О Нашей Группе</button>
-        <button class="workers-button" onclick="openModal('workers')">Работники</button>
-        <a href="https://www.youtube.com/@GummyZen" target="_blank" class="creator-button">Создатель</a>
+    <button class="main-menu-button" onclick="openMenu()">Меню</button>
+
+    <div class="menu-sidebar-overlay" id="mainMenuOverlay" onclick="closeMenu(event)">
+        <div class="menu-sidebar" id="menuSidebar" onclick="event.stopPropagation()">
+            <button class="close-button" onclick="closeMenu(null)">✖</button>
+            <h3>Навигация</h3>
+            <a href="#" class="sidebar-button info-button" onclick="openModal('info'); closeMenu()">О Нашей Группе</a>
+            <a href="#" class="sidebar-button workers-button" onclick="openModal('workers'); closeMenu()">Работники</a>
+            <a href="https://www.youtube.com/@GummyZen" target="_blank" class="sidebar-button creator-button" onclick="closeMenu()">Создатель</a>
+        </div>
     </div>
 
     <div class="modal-overlay" id="infoModalOverlay" onclick="closeModal(event, 'info')">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-button" onclick="closeModal(null, 'info')">×</button>
+            <button class="close-button" onclick="closeModal(null, 'info')">✖</button>
             <h3>О Нашей Группе</h3>
             
             <p><strong>Cevenz</strong> — это пространство для русскоязычных участников комьюнити Gummibär. Мы здесь, чтобы находить своих, поддерживать друг друга и развивать общее сообщество. Cevenz — не просто чат, а единое ядро, где ценится уважение, порядок и участие.</p>
@@ -706,7 +865,7 @@
 
     <div class="modal-overlay" id="workersModalOverlay" onclick="closeModal(event, 'workers')">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-button" onclick="closeModal(null, 'workers')">×</button>
+            <button class="close-button" onclick="closeModal(null, 'workers')">✖</button>
             <h3>Работники Cevenz</h3>
             
             <div class="workers-section">
@@ -739,7 +898,12 @@
         <h2>Cevenz Series 4 Ultra</h2>
         
         <div class="code-section">
-            <label for="betaCodeInput">Введите Пароль:</label>
+            <label for="betaCodeInput">Введите Пароль:
+                <span class="tooltip-container">
+                    <span class="info-icon">&#x24D8;</span>
+                    <span class="tooltip-text">Этот пароль открывает доступ к эксклюзивной бета-группе Cevenz Series 4 Ultra!</span>
+                </span>
+            </label>
             <input type="text" id="betaCodeInput" placeholder="Введите пароль здесь" maxlength="10">
             <button onclick="checkBetaCode()">Подтвердить</button>
             
@@ -757,7 +921,12 @@
         <h2>Cevenz Nightvision V2</h2>
         
         <div class="code-section">
-            <label for="nightvisionCodeInput">Введите Пароль:</label>
+            <label for="nightvisionCodeInput">Введите Пароль:
+                <span class="tooltip-container">
+                    <span class="info-icon">&#x24D8;</span>
+                    <span class="tooltip-text">Введите пароль для активации Nightvision режима и получения доступа!</span>
+                </span>
+            </label>
             <input type="text" id="nightvisionCodeInput" placeholder="Введите пароль здесь" maxlength="10">
             <button onclick="checkNightvisionCode()">Подтвердить</button>
             
@@ -772,6 +941,14 @@
     </div>
 
     <script>
+        // Global function to check if any overlay is active
+        function isAnyOverlayOpen() {
+            return document.getElementById('infoModalOverlay').classList.contains('show') ||
+                   document.getElementById('workersModalOverlay').classList.contains('show') ||
+                   document.getElementById('mainMenuOverlay').classList.contains('show');
+        }
+
+        // Functions for input checks
         function checkBetaCode() {
             const input = document.getElementById('betaCodeInput');
             const code = input.value.trim();
@@ -835,24 +1012,27 @@
             this.style.borderColor = '';
             document.getElementById('betaErrorMessage').classList.remove('show');
             document.getElementById('betaSuccessMessage').classList.remove('show');
-            document.getElementById('betaTelegramLink').classList.remove('show'); // Hide link if typing again
+            document.getElementById('betaTelegramLink').classList.remove('show');
         });
 
         document.getElementById('nightvisionCodeInput').addEventListener('input', function() {
             this.style.borderColor = '';
             document.getElementById('nightvisionErrorMessage').classList.remove('show');
             document.getElementById('nightvisionSuccessMessage').classList.remove('show');
-            document.getElementById('nightvisionTelegramLink').classList.remove('show'); // Hide link if typing again
+            document.getElementById('nightvisionTelegramLink').classList.remove('show');
         });
 
-        // Modal functions
+        // Modal functions (for info/workers)
         function openModal(modalType) {
+            // Close main menu sidebar if open
+            closeMenu(); 
+
             if (modalType === 'info') {
                 document.getElementById('infoModalOverlay').classList.add('show');
-                document.getElementById('workersModalOverlay').classList.remove('show'); // Close other modal
+                document.getElementById('workersModalOverlay').classList.remove('show'); // Ensure other modal is closed
             } else if (modalType === 'workers') {
                 document.getElementById('workersModalOverlay').classList.add('show');
-                document.getElementById('infoModalOverlay').classList.remove('show'); // Close other modal
+                document.getElementById('infoModalOverlay').classList.remove('show'); // Ensure other modal is closed
             }
             document.body.style.overflow = 'hidden'; // Prevent background scroll
         }
@@ -869,18 +1049,44 @@
                 document.getElementById('workersModalOverlay').classList.remove('show');
             }
             
-            // Check if both modals are closed before enabling body scroll
-            if (!document.getElementById('infoModalOverlay').classList.contains('show') && 
-                !document.getElementById('workersModalOverlay').classList.contains('show')) {
-                document.body.style.overflow = 'auto'; 
+            // Only unlock scroll if no other overlay (modal or menu) is open
+            if (!isAnyOverlayOpen()) {
+                document.body.style.overflow = 'auto';
             }
         }
 
-        // Close modals on Escape key
+        // Functions for Menu sidebar
+        function openMenu() {
+            // Close other modals if open
+            closeModal(null, 'info');
+            closeModal(null, 'workers');
+
+            document.getElementById('mainMenuOverlay').classList.add('show');
+            document.getElementById('menuSidebar').classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+
+        function closeMenu(event) {
+            // Only close if clicking on the overlay itself or the close button
+            if (event && event.target !== event.currentTarget && !event.target.classList.contains('close-button')) {
+                return;
+            }
+
+            document.getElementById('mainMenuOverlay').classList.remove('show');
+            document.getElementById('menuSidebar').classList.remove('show');
+
+            // Only unlock scroll if no other overlay (modal or menu) is open
+            if (!isAnyOverlayOpen()) {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modals/menu on Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                closeModal(null, 'info'); // Try closing info modal
-                closeModal(null, 'workers'); // Try closing workers modal
+                closeModal(null, 'info');
+                closeModal(null, 'workers');
+                closeMenu();
             }
         });
     </script>
