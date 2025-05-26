@@ -257,10 +257,6 @@
 
             <div class="group-card">
                 <h3>Cevenz Nightvision 2</h3>
-                <div class="key-input-field">
-                    <label for="keyInputNightvision">Введите Ключ</label>
-                    <input type="text" id="keyInputNightvision" placeholder="XXXX">
-                </div>
                 <div class="key-status" id="keyStatusNightvision"></div>
                 <button class="enter-group-btn" id="enterGroupNightvision">Вход В Группу</button>
             </div>
@@ -277,38 +273,58 @@
         const keyStatusUltra = document.getElementById('keyStatusUltra');
         const enterGroupUltra = document.getElementById('enterGroupUltra');
 
-        const keyInputNightvision = document.getElementById('keyInputNightvision');
         const keyStatusNightvision = document.getElementById('keyStatusNightvision');
         const enterGroupNightvision = document.getElementById('enterGroupNightvision');
 
         // Секретный ключ
         const CORRECT_KEY = '0242'; 
 
-        // Функция для обработки ввода ключа
-        function handleKeyInput(inputElement, statusElement, buttonElement, link) {
-            inputElement.addEventListener('input', () => {
-                const enteredKey = inputElement.value.trim();
-                if (enteredKey === CORRECT_KEY) {
-                    statusElement.textContent = 'Ключ Подтверждён!';
-                    statusElement.classList.add('success');
-                    statusElement.classList.remove('error');
-                    buttonElement.style.display = 'block';
-                } else {
-                    statusElement.textContent = 'Неверный ключ';
-                    statusElement.classList.remove('success');
-                    statusElement.classList.add('error');
-                    buttonElement.style.display = 'none';
-                }
-            });
+        // Функция для обработки ввода ключа Ultra 4
+        keyInputUltra.addEventListener('input', () => {
+            const enteredKey = keyInputUltra.value.trim();
+            if (enteredKey === CORRECT_KEY) {
+                // Активируем Ultra 4
+                keyStatusUltra.textContent = 'Ключ Подтверждён!';
+                keyStatusUltra.classList.add('success');
+                keyStatusUltra.classList.remove('error');
+                enterGroupUltra.style.display = 'block';
+                
+                // Активируем Nightvision 2
+                keyStatusNightvision.textContent = 'Доступ разрешён!';
+                keyStatusNightvision.classList.add('success');
+                keyStatusNightvision.classList.remove('error');
+                enterGroupNightvision.style.display = 'block';
+            } else if (enteredKey.length > 0) {
+                // Показываем ошибку только если что-то введено
+                keyStatusUltra.textContent = 'Неверный ключ';
+                keyStatusUltra.classList.remove('success');
+                keyStatusUltra.classList.add('error');
+                enterGroupUltra.style.display = 'none';
+                
+                // Скрываем доступ к Nightvision 2
+                keyStatusNightvision.textContent = '';
+                keyStatusNightvision.classList.remove('success', 'error');
+                enterGroupNightvision.style.display = 'none';
+            } else {
+                // Очищаем все статусы если поле пустое
+                keyStatusUltra.textContent = '';
+                keyStatusUltra.classList.remove('success', 'error');
+                enterGroupUltra.style.display = 'none';
+                
+                keyStatusNightvision.textContent = '';
+                keyStatusNightvision.classList.remove('success', 'error');
+                enterGroupNightvision.style.display = 'none';
+            }
+        });
 
-            buttonElement.addEventListener('click', () => {
-                window.open(link, '_blank');
-            });
-        }
+        // Обработчики кнопок входа
+        enterGroupUltra.addEventListener('click', () => {
+            window.open('https://t.me/+1hciPJFZZ0xmYTZk', '_blank');
+        });
 
-        // Применяем функцию к каждой карточке
-        handleKeyInput(keyInputUltra, keyStatusUltra, enterGroupUltra, 'https://t.me/+1hciPJFZZ0xmYTZk');
-        handleKeyInput(keyInputNightvision, keyStatusNightvision, enterGroupNightvision, 'https://t.me/+MNVVamdQGI5mOGM8');
+        enterGroupNightvision.addEventListener('click', () => {
+            window.open('https://t.me/+MNVVamdQGI5mOGM8', '_blank');
+        });
     </script>
 </body>
 </html>
