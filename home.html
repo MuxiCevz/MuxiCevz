@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CVNZ Official Site</title>
     <style>
+        /* General Reset & Box Sizing */
         * {
             margin: 0;
             padding: 0;
@@ -13,7 +14,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #4a90e2 50%, #87ceeb 75%, #b0e0e6 100%);
+            background: linear-gradient(135deg, #1a2a6c 0%, #2a5298 50%, #4a90e2 100%); /* Slightly deeper blue gradient */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -24,9 +25,10 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
+            overflow-y: auto; /* Allow scrolling on body */
         }
 
-        /* Космические звезды */
+        /* Cosmic Stars Background */
         body::before {
             content: '';
             position: absolute;
@@ -35,203 +37,236 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(2px 2px at 20% 30%, white, transparent),
-                radial-gradient(2px 2px at 40% 70%, white, transparent),
+                radial-gradient(1.5px 1.5px at 20% 30%, white, transparent),
+                radial-gradient(1.8px 1.8px at 40% 70%, white, transparent),
                 radial-gradient(1px 1px at 90% 40%, white, transparent),
-                radial-gradient(1px 1px at 60% 10%, white, transparent),
-                radial-gradient(2px 2px at 80% 80%, white, transparent),
+                radial-gradient(1.2px 1.2px at 60% 10%, white, transparent),
+                radial-gradient(1.6px 1.6px at 80% 80%, white, transparent),
                 radial-gradient(1px 1px at 30% 90%, white, transparent);
-            background-size: 200px 200px, 300px 300px, 250px 250px, 400px 400px, 350px 350px, 180px 180px;
-            opacity: 0.8;
-            animation: twinkle 4s infinite alternate;
+            background-size: 250px 250px, 350px 350px, 300px 300px, 450px 450px, 400px 400px, 200px 200px; /* Slightly larger stars */
+            opacity: 0.7;
+            animation: twinkle 5s infinite alternate ease-in-out, star-drift 60s linear infinite; /* Smoother twinkle, subtle drift */
             pointer-events: none;
             z-index: 1;
         }
 
         @keyframes twinkle {
-            0% { opacity: 0.6; }
-            100% { opacity: 1; }
+            0% { opacity: 0.5; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.5; transform: scale(0.95); }
         }
 
-        /* Все элементы должны быть выше звезд */
+        @keyframes star-drift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; } /* Drifting diagonally */
+        }
+
+        /* All elements above stars */
         * {
             position: relative;
             z-index: 2;
         }
 
-        /* Кнопка регистрации в верху */
+        /* Registration Button */
         .registration-button {
             background: linear-gradient(45deg, #00d4aa, #00a085);
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 1.2em;
+            padding: 18px 35px; /* Larger padding */
+            font-size: 1.3em; /* Slightly larger font */
             font-weight: bold;
-            border-radius: 15px;
+            border-radius: 18px; /* Softer corners */
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.3);
+            transition: all 0.4s ease-in-out; /* Smoother transition */
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.4); /* More pronounced shadow */
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px; /* More space */
+            letter-spacing: 0.5px; /* Slightly spaced letters */
         }
 
         .registration-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 212, 170, 0.4);
-            background: linear-gradient(45deg, #00a085, #008a6f);
+            transform: translateY(-5px); /* More noticeable lift */
+            box-shadow: 0 15px 45px rgba(0, 212, 170, 0.5); /* Stronger shadow */
+            background: linear-gradient(45deg, #00a085, #008a6f); /* Darker hover state */
         }
 
+        /* Beta Containers */
         .beta-container {
-            background: linear-gradient(135deg, rgba(30, 60, 114, 0.9) 0%, rgba(74, 144, 226, 0.8) 50%, rgba(135, 206, 235, 0.7) 100%);
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.95) 0%, rgba(74, 144, 226, 0.85) 50%, rgba(135, 206, 235, 0.75) 100%); /* Slightly less transparent */
             backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 30px 20px;
+            border-radius: 25px; /* Softer corners */
+            padding: 35px 25px; /* More padding */
             text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(74, 144, 226, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            max-width: 400px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(74, 144, 226, 0.4); /* Stronger shadows */
+            border: 1px solid rgba(255, 255, 255, 0.4); /* Slightly more opaque border */
+            max-width: 450px; /* Slightly wider */
             width: 95%;
             min-width: 280px;
-            margin-bottom: 20px;
+            margin-bottom: 25px; /* Consistent margin */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .beta-container:hover {
+            transform: translateY(-3px); /* Subtle lift on hover */
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(74, 144, 226, 0.5);
         }
 
         .beta-container h2 {
-            font-size: 1.6em;
-            margin-bottom: 25px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 1.8em; /* Larger heading */
+            margin-bottom: 30px; /* More space */
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6); /* Deeper shadow */
             color: white;
             line-height: 1.3;
+            letter-spacing: 0.5px;
         }
 
         .code-section {
-            margin-bottom: 30px;
+            margin-bottom: 35px; /* More space */
         }
 
         label {
             display: block;
-            font-size: 1.2em;
-            margin-bottom: 15px;
+            font-size: 1.3em; /* Larger label */
+            margin-bottom: 18px; /* More space */
             font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 12px 15px;
-            font-size: 1em;
+            padding: 15px 20px; /* More padding */
+            font-size: 1.1em; /* Larger font */
             border: none;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px; /* Softer corners */
+            background: rgba(255, 255, 255, 0.25); /* More visible background */
             color: white;
             text-align: center;
             outline: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease-in-out; /* Smoother transition */
             border: 2px solid transparent;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle inner shadow */
         }
 
         input[type="text"]::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.6); /* Slightly more visible placeholder */
         }
 
         input[type="text"]:focus {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.02);
-            border: 2px solid rgba(135, 206, 235, 0.8);
+            background: rgba(255, 255, 255, 0.35); /* Brighter on focus */
+            transform: scale(1.01); /* Subtle scale */
+            border: 2px solid rgba(135, 206, 235, 0.9); /* More prominent border */
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 15px rgba(135, 206, 235, 0.5); /* Outer glow on focus */
         }
 
         button {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            background: linear-gradient(45deg, #ff5f5f, #e54c1f); /* Stronger red gradient */
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 1em;
-            border-radius: 10px;
+            padding: 14px 30px; /* More padding */
+            font-size: 1.1em; /* Larger font */
+            border-radius: 12px; /* Softer corners */
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 15px;
+            transition: all 0.4s ease-in-out; /* Smoother transition */
+            margin-top: 20px; /* More space */
             font-weight: bold;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px); /* More noticeable lift */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, #e54c1f, #cc3e14); /* Darker hover state */
         }
 
         .beta-telegram-link {
             display: none;
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(135, 206, 235, 0.2);
-            border-radius: 15px;
-            border: 2px solid rgba(135, 206, 235, 0.5);
+            margin-top: 35px; /* More space */
+            padding: 25px; /* More padding */
+            background: rgba(135, 206, 235, 0.15); /* More subtle background */
+            border-radius: 18px; /* Softer corners */
+            border: 2px solid rgba(135, 206, 235, 0.6); /* More prominent border */
+            box-shadow: inset 0 0 15px rgba(135, 206, 235, 0.2); /* Inner glow */
         }
 
         .beta-telegram-link.show {
             display: block;
-            animation: fadeIn 0.5s ease-in;
+            animation: fadeInScale 0.6s ease-out forwards; /* New animation */
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .beta-telegram-link p {
+            font-size: 1.1em;
+            margin-bottom: 18px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .beta-telegram-link a {
             color: #87ceeb;
             text-decoration: none;
-            font-size: 1.2em;
+            font-size: 1.3em; /* Larger link text */
             font-weight: bold;
             display: inline-block;
-            padding: 10px 20px;
-            background: rgba(135, 206, 235, 0.2);
-            border-radius: 10px;
-            transition: all 0.3s ease;
+            padding: 12px 25px; /* More padding */
+            background: rgba(135, 206, 235, 0.25); /* Brighter background */
+            border-radius: 12px; /* Softer corners */
+            transition: all 0.4s ease-in-out; /* Smoother transition */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .beta-telegram-link a:hover {
-            background: rgba(135, 206, 235, 0.3);
-            transform: scale(1.05);
+            background: rgba(135, 206, 235, 0.4); /* Darker hover */
+            transform: scale(1.07); /* More pronounced scale */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
         .error {
-            color: #ff6b6b;
-            margin-top: 15px;
+            color: #ff4c4c; /* Brighter red for error */
+            margin-top: 20px; /* More space */
             font-weight: bold;
             display: none;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .error.show {
             display: block;
-            animation: shake 0.5s ease-in-out;
+            animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both; /* Bouncier shake */
         }
 
         @keyframes shake {
-            0%, 20%, 40%, 60%, 80% { transform: translateX(0); }
-            10%, 30%, 50%, 70% { transform: translateX(-5px); }
-            15%, 35%, 55%, 75% { transform: translateX(5px); }
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
         }
 
         .success {
-            color: #00d4aa;
-            margin-top: 15px;
+            color: #00e0b7; /* Brighter green for success */
+            margin-top: 20px; /* More space */
             font-weight: bold;
             display: none;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .success.show {
             display: block;
-            animation: fadeIn 0.5s ease-in;
+            animation: fadeInScale 0.6s ease-out forwards; /* Reusing fadeInScale */
         }
 
-        /* Кнопки внизу */
+        /* Bottom Buttons */
         .bottom-buttons {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 25px; /* Slightly higher */
+            right: 25px; /* Slightly more inward */
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px; /* More space between buttons */
             z-index: 1000;
         }
 
@@ -239,114 +274,141 @@
             background: linear-gradient(45deg, #ff6b6b, #ee5a24);
             color: white;
             border: none;
-            padding: 12px 18px;
-            border-radius: 25px;
+            padding: 14px 22px; /* Larger padding */
+            border-radius: 28px; /* More pill-shaped */
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            font-size: 0.9em;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            transition: all 0.4s ease-in-out; /* Smoother transition */
+            font-size: 0.95em;
             text-decoration: none;
             display: inline-block;
             text-align: center;
+            letter-spacing: 0.3px;
         }
 
         .info-button:hover, .workers-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #ee5a24, #d44719); /* Darker hover */
         }
 
         .creator-button {
             background: linear-gradient(45deg, #9b59b6, #8e44ad);
             color: white;
             border: none;
-            padding: 12px 18px;
-            border-radius: 25px;
+            padding: 14px 22px; /* Larger padding */
+            border-radius: 28px; /* More pill-shaped */
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            font-size: 0.9em;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease-in-out;
+            font-size: 0.95em;
             text-decoration: none;
             display: inline-block;
             text-align: center;
+            letter-spacing: 0.3px;
         }
 
         .creator-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             background: linear-gradient(45deg, #8e44ad, #7d3c98);
         }
 
-        /* Модальное окно */
+        /* Modal Overlay */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8); /* Darker overlay */
+            backdrop-filter: blur(15px); /* Frosted glass effect */
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
             padding: 20px;
+            opacity: 0; /* Start hidden for smooth fade-in */
+            transition: opacity 0.3s ease-out;
         }
 
         .modal-overlay.show {
             display: flex;
-            animation: fadeIn 0.3s ease-in;
+            opacity: 1;
         }
 
+        /* Modal Content */
         .modal-content {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.97); /* Almost opaque white */
             color: #333;
-            border-radius: 15px;
-            padding: 30px;
-            max-width: 600px;
+            border-radius: 20px; /* Softer corners */
+            padding: 35px; /* More padding */
+            max-width: 650px; /* Slightly wider */
             width: 95%;
-            max-height: 80vh;
+            max-height: 90vh; /* Allow more height */
             overflow-y: auto;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6); /* Stronger shadow */
+            transform: scale(0.9); /* Start smaller for animation */
+            opacity: 0; /* Start hidden for animation */
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease-out; /* Bouncy entry */
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
         }
 
         .close-button {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #ff6b6b;
+            top: 18px; /* Slightly more inward */
+            right: 18px; /* Slightly more inward */
+            background: #ff4c4c; /* Brighter red */
             color: white;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 35px; /* Larger button */
+            height: 35px; /* Larger button */
             border-radius: 50%;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px; /* Larger font */
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .close-button:hover {
-            background: #ff5252;
-            transform: scale(1.1);
+            background: #e53f3f; /* Darker hover */
+            transform: scale(1.15); /* More pronounced scale */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
 
         .modal-content h3 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.5em;
+            color: #2c3e50; /* Darker blue-grey */
+            margin-bottom: 25px; /* More space */
+            font-size: 1.8em; /* Larger heading */
             text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content h4 {
+            color: #34495e; /* Slightly lighter than h3 */
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            text-align: left;
         }
 
         .modal-content p {
-            line-height: 1.6;
-            margin-bottom: 15px;
+            line-height: 1.7; /* Better readability */
+            margin-bottom: 18px; /* More space */
             text-align: left;
+            font-size: 0.95em;
+            color: #444;
         }
 
         .modal-content strong {
@@ -354,115 +416,172 @@
         }
 
         .zones-section, .roles-section, .tokens-section, .workers-section {
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(52, 152, 219, 0.1);
-            border-radius: 10px;
-            border-left: 4px solid #3498db;
+            margin: 25px 0; /* More space */
+            padding: 20px; /* More padding */
+            background: rgba(52, 152, 219, 0.08); /* More subtle background */
+            border-radius: 15px; /* Softer corners */
+            border-left: 5px solid #3498db; /* Thicker border */
+            box-shadow: inset 0 0 10px rgba(52, 152, 219, 0.1); /* Subtle inner shadow */
         }
 
         .zone-item, .role-item, .worker-item {
-            margin: 10px 0;
-            padding: 8px 0;
+            margin: 12px 0; /* More space */
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.1); /* Subtle separator */
+        }
+        .zone-item:last-child, .role-item:last-child, .worker-item:last-child {
+            border-bottom: none; /* No separator on last item */
         }
 
         .allowed {
             color: #27ae60;
+            font-weight: bold;
         }
 
         .forbidden {
             color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .worker-item p {
+            margin-bottom: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #2c3e50;
         }
 
         .worker-item a {
             display: inline-block;
             background: linear-gradient(45deg, #3498db, #2980b9);
             color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 10px 20px; /* More padding */
+            border-radius: 10px; /* Softer corners */
             text-decoration: none;
             font-weight: bold;
-            margin-top: 5px;
-            transition: all 0.3s ease;
+            margin-top: 8px; /* More space */
+            transition: all 0.4s ease-in-out; /* Smoother transition */
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
         }
 
         .worker-item a:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
             background: linear-gradient(45deg, #2980b9, #3498db);
         }
 
-        /* Мобильная адаптация */
+
+        /* Mobile Adaptation */
         @media (max-width: 480px) {
             body {
-                gap: 25px;
+                gap: 20px;
                 padding: 15px 10px;
             }
 
             .registration-button {
-                padding: 12px 25px;
+                padding: 15px 30px;
                 font-size: 1.1em;
-                margin-bottom: 15px;
+                margin-bottom: 20px;
             }
 
             .beta-container {
-                padding: 25px 15px;
+                padding: 30px 20px;
                 width: 98%;
                 margin: 0 auto;
-                margin-bottom: 15px;
+                margin-bottom: 20px;
+                border-radius: 20px;
             }
 
             .beta-container h2 {
-                font-size: 1.4em;
-                margin-bottom: 20px;
+                font-size: 1.5em;
+                margin-bottom: 25px;
             }
 
             label {
                 font-size: 1.1em;
-                margin-bottom: 12px;
+                margin-bottom: 15px;
             }
 
             input[type="text"] {
-                padding: 10px 12px;
-                font-size: 0.95em;
+                padding: 12px 15px;
+                font-size: 1em;
+                border-radius: 10px;
             }
 
             button {
-                padding: 10px 20px;
-                font-size: 0.95em;
-                margin-top: 12px;
+                padding: 12px 25px;
+                font-size: 1em;
+                margin-top: 15px;
                 width: 100%;
+                border-radius: 10px;
             }
 
             .beta-telegram-link {
-                margin-top: 20px;
-                padding: 15px;
+                margin-top: 25px;
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            .beta-telegram-link p {
+                font-size: 1em;
+                margin-bottom: 15px;
             }
 
             .beta-telegram-link a {
-                font-size: 1.1em;
-                padding: 8px 15px;
+                font-size: 1.2em;
+                padding: 10px 20px;
                 display: block;
                 margin-top: 10px;
+                border-radius: 10px;
             }
 
             .bottom-buttons {
                 bottom: 15px;
                 right: 15px;
+                gap: 10px;
             }
 
             .info-button, .workers-button, .creator-button {
-                padding: 10px 15px;
-                font-size: 0.8em;
+                padding: 12px 18px;
+                font-size: 0.85em;
+                border-radius: 25px;
             }
 
             .modal-content {
-                padding: 20px;
+                padding: 25px;
                 margin: 10px;
+                border-radius: 15px;
+                max-height: 95vh; /* Adjust for smaller screens */
             }
 
             .modal-content h3 {
-                font-size: 1.3em;
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+
+            .modal-content h4 {
+                font-size: 1.2em;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+
+            .modal-content p {
+                font-size: 0.9em;
+                margin-bottom: 15px;
+            }
+
+            .close-button {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+                top: 12px;
+                right: 12px;
+            }
+
+            .zones-section, .roles-section, .tokens-section, .workers-section {
+                padding: 15px;
+                margin: 20px 0;
+                border-radius: 10px;
+                border-left: 4px solid #3498db;
             }
         }
 
@@ -660,21 +779,19 @@
             const successMessage = document.getElementById('betaSuccessMessage');
             const telegramLink = document.getElementById('betaTelegramLink');
 
-            // Скрываем предыдущие сообщения
             errorMessage.classList.remove('show');
             successMessage.classList.remove('show');
+            input.style.borderColor = ''; // Reset border color
+            telegramLink.classList.remove('show'); // Hide link initially
 
             if (code === '0242') {
-                // Правильный пароль
                 successMessage.classList.add('show');
                 telegramLink.classList.add('show');
-                input.style.borderColor = '#87ceeb';
+                input.style.borderColor = '#87ceeb'; // Highlight success
             } else {
-                // Неправильный пароль
                 errorMessage.classList.add('show');
-                input.style.borderColor = '#ff6b6b';
-                input.value = '';
-                telegramLink.classList.remove('show');
+                input.style.borderColor = '#ff6b6b'; // Highlight error
+                input.value = ''; // Clear input on error
             }
         }
 
@@ -685,25 +802,23 @@
             const successMessage = document.getElementById('nightvisionSuccessMessage');
             const telegramLink = document.getElementById('nightvisionTelegramLink');
 
-            // Скрываем предыдущие сообщения
             errorMessage.classList.remove('show');
             successMessage.classList.remove('show');
+            input.style.borderColor = ''; // Reset border color
+            telegramLink.classList.remove('show'); // Hide link initially
 
             if (code === '0242') {
-                // Правильный пароль
                 successMessage.classList.add('show');
                 telegramLink.classList.add('show');
-                input.style.borderColor = '#87ceeb';
+                input.style.borderColor = '#87ceeb'; // Highlight success
             } else {
-                // Неправильный пароль
                 errorMessage.classList.add('show');
-                input.style.borderColor = '#ff6b6b';
-                input.value = '';
-                telegramLink.classList.remove('show');
+                input.style.borderColor = '#ff6b6b'; // Highlight error
+                input.value = ''; // Clear input on error
             }
         }
 
-        // Проверка кодов при нажатии Enter
+        // Event listeners for Enter key and input changes
         document.getElementById('betaCodeInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkBetaCode();
@@ -716,46 +831,56 @@
             }
         });
 
-        // Сброс стилей при вводе новых кодов
         document.getElementById('betaCodeInput').addEventListener('input', function() {
             this.style.borderColor = '';
             document.getElementById('betaErrorMessage').classList.remove('show');
             document.getElementById('betaSuccessMessage').classList.remove('show');
+            document.getElementById('betaTelegramLink').classList.remove('show'); // Hide link if typing again
         });
 
         document.getElementById('nightvisionCodeInput').addEventListener('input', function() {
             this.style.borderColor = '';
             document.getElementById('nightvisionErrorMessage').classList.remove('show');
             document.getElementById('nightvisionSuccessMessage').classList.remove('show');
+            document.getElementById('nightvisionTelegramLink').classList.remove('show'); // Hide link if typing again
         });
 
-        // Функции для модальных окон
+        // Modal functions
         function openModal(modalType) {
             if (modalType === 'info') {
                 document.getElementById('infoModalOverlay').classList.add('show');
-                document.getElementById('workersModalOverlay').classList.remove('show'); // Ensure other modal is closed
+                document.getElementById('workersModalOverlay').classList.remove('show'); // Close other modal
             } else if (modalType === 'workers') {
                 document.getElementById('workersModalOverlay').classList.add('show');
-                document.getElementById('infoModalOverlay').classList.remove('show'); // Ensure other modal is closed
+                document.getElementById('infoModalOverlay').classList.remove('show'); // Close other modal
             }
-            document.body.style.overflow = 'hidden'; // Блокируем прокрутку фона
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
         }
 
         function closeModal(event, modalType) {
-            if (event && event.target !== event.currentTarget) return; // Закрываем только при клике на оверлей или кнопку
+            // Only close if clicking on the overlay itself or the close button
+            if (event && event.target !== event.currentTarget && !event.target.classList.contains('close-button')) {
+                return;
+            }
+
             if (modalType === 'info') {
                 document.getElementById('infoModalOverlay').classList.remove('show');
             } else if (modalType === 'workers') {
                 document.getElementById('workersModalOverlay').classList.remove('show');
             }
-            document.body.style.overflow = 'auto'; // Возвращаем прокрутку
+            
+            // Check if both modals are closed before enabling body scroll
+            if (!document.getElementById('infoModalOverlay').classList.contains('show') && 
+                !document.getElementById('workersModalOverlay').classList.contains('show')) {
+                document.body.style.overflow = 'auto'; 
+            }
         }
 
-        // Закрытие модальных окон при нажатии Escape
+        // Close modals on Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                closeModal(null, 'info'); // Try to close info modal
-                closeModal(null, 'workers'); // Try to close workers modal
+                closeModal(null, 'info'); // Try closing info modal
+                closeModal(null, 'workers'); // Try closing workers modal
             }
         });
     </script>
