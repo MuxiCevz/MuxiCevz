@@ -14,7 +14,6 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            /* New vibrant gradient background: purple, blue, orange, yellow */
             background: linear-gradient(135deg, #7b0099 0%, #004d99 33%, #ff8c00 66%, #ffd700 100%);
             min-height: 100vh;
             display: flex;
@@ -26,7 +25,7 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
-            overflow-y: auto; /* Allow scrolling on body */
+            overflow-y: auto;
         }
 
         /* Cosmic Stars Background */
@@ -62,18 +61,16 @@
             100% { background-position: 100% 100%; }
         }
 
-        /* All elements above stars */
         * {
             position: relative;
             z-index: 2;
         }
 
-        /* Main Menu Button */
         .main-menu-button {
             position: fixed;
             bottom: 25px;
             right: 25px;
-            background: linear-gradient(45deg, #00d4aa, #00a085); /* Green gradient */
+            background: linear-gradient(45deg, #00d4aa, #00a085);
             color: white;
             border: none;
             padding: 18px 30px;
@@ -87,7 +84,7 @@
             box-shadow: 0 10px 30px rgba(0, 212, 170, 0.4);
             text-align: center;
             letter-spacing: 0.5px;
-            z-index: 1000; /* Ensure it's above other content */
+            z-index: 1000;
         }
 
         .main-menu-button:hover {
@@ -96,9 +93,8 @@
             background: linear-gradient(45deg, #00a085, #008a6f);
         }
 
-        /* Registration Button (remains separate) */
         .registration-button {
-            background: linear-gradient(45deg, #00e676, #00c853); /* Brighter green */
+            background: linear-gradient(45deg, #00e676, #00c853);
             color: white;
             border: none;
             padding: 18px 35px;
@@ -121,15 +117,14 @@
             background: linear-gradient(45deg, #00c853, #00b04c);
         }
 
-        /* Beta Containers */
         .beta-container {
-            background: linear-gradient(135deg, rgba(20, 25, 50, 0.9) 0%, rgba(30, 40, 70, 0.8) 100%); /* Dark, transparent blue-black */
+            background: linear-gradient(135deg, rgba(20, 25, 50, 0.9) 0%, rgba(30, 40, 70, 0.8) 100%);
             backdrop-filter: blur(15px);
             border-radius: 25px;
             padding: 35px 25px;
             text-align: center;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(74, 144, 226, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Soft white border */
+            border: 1px solid rgba(255, 255, 255, 0.2);
             max-width: 450px;
             width: 95%;
             min-width: 280px;
@@ -155,11 +150,10 @@
             margin-bottom: 35px;
         }
 
-        /* Adjust label to use flexbox for horizontal alignment with tooltip */
         .code-section label {
-            display: flex; /* Use flexbox for alignment */
-            align-items: center; /* Vertically center items */
-            justify-content: center; /* Center horizontally if space allows */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.3em;
             margin-bottom: 18px;
             font-weight: bold;
@@ -172,7 +166,7 @@
             font-size: 1.1em;
             border: none;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.15); /* More transparent */
+            background: rgba(255, 255, 255, 0.15);
             color: white;
             text-align: center;
             outline: none;
@@ -188,12 +182,12 @@
         input[type="text"]:focus {
             background: rgba(255, 255, 255, 0.25);
             transform: scale(1.01);
-            border: 2px solid rgba(255, 255, 255, 0.7); /* White border on focus */
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.4); /* White glow on focus */
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.4);
         }
 
-        .beta-container button { /* Specific to buttons inside beta-container */
-            background: linear-gradient(45deg, #ff9800, #fb8c00); /* Orange button */
+        .beta-container button {
+            background: linear-gradient(45deg, #ff9800, #fb8c00);
             color: white;
             border: none;
             padding: 14px 30px;
@@ -217,7 +211,7 @@
             display: none;
             margin-top: 35px;
             padding: 25px;
-            background: rgba(255, 235, 59, 0.15); /* Yellow transparent */
+            background: rgba(255, 235, 59, 0.15);
             border-radius: 18px;
             border: 2px solid rgba(255, 235, 59, 0.6);
             box-shadow: inset 0 0 15px rgba(255, 235, 59, 0.2);
@@ -240,7 +234,7 @@
         }
 
         .beta-telegram-link a {
-            color: #ffeb3b; /* Yellow link text */
+            color: #ffeb3b;
             text-decoration: none;
             font-size: 1.3em;
             font-weight: bold;
@@ -259,7 +253,7 @@
         }
 
         .error {
-            color: #ff1744; /* Brighter red error */
+            color: #ff1744;
             margin-top: 20px;
             font-weight: bold;
             display: none;
@@ -279,7 +273,7 @@
         }
 
         .success {
-            color: #00e676; /* Brighter green success */
+            color: #00e676;
             margin-top: 20px;
             font-weight: bold;
             display: none;
@@ -291,7 +285,6 @@
             animation: fadeInScale 0.6s ease-out forwards;
         }
 
-        /* Modal Overlay (for info/workers) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -314,7 +307,6 @@
             opacity: 1;
         }
 
-        /* Modal Content (for info/workers) */
         .modal-content {
             background: rgba(255, 255, 255, 0.95);
             color: #333;
@@ -328,7 +320,7 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
             transform: scale(0.9);
             opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease-out; /* Bouncy entry */
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease-out;
         }
 
         .modal-overlay.show .modal-content {
@@ -336,9 +328,8 @@
             opacity: 1;
         }
 
-        /* ----- New Menu Sidebar Styles ----- */
+        /* Menu Sidebar Styles */
 
-        /* Overlay for the menu sidebar */
         .menu-sidebar-overlay {
             position: fixed;
             top: 0;
@@ -347,10 +338,10 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(15px);
-            display: none; /* Hidden by default */
+            display: none;
             opacity: 0;
             transition: opacity 0.3s ease-out;
-            z-index: 2000; /* Same as other modals */
+            z-index: 2000;
         }
 
         .menu-sidebar-overlay.show {
@@ -358,28 +349,27 @@
             opacity: 1;
         }
 
-        /* Actual sidebar content */
         .menu-sidebar {
             position: fixed;
             top: 0;
-            right: -320px; /* Start off-screen */
-            width: 300px; /* Width of the sidebar */
+            right: -320px;
+            width: 300px;
             height: 100%;
-            background: linear-gradient(180deg, rgba(20, 25, 50, 0.95), rgba(30, 40, 70, 0.95)); /* Dark transparent background */
-            backdrop-filter: blur(20px); /* Stronger blur for the sidebar */
+            background: linear-gradient(180deg, rgba(20, 25, 50, 0.95), rgba(30, 40, 70, 0.95));
+            backdrop-filter: blur(20px);
             padding: 30px;
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5); /* Shadow to make it stand out */
-            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy slide-in transition */
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             display: flex;
             flex-direction: column;
-            gap: 20px; /* Space between buttons */
-            align-items: flex-start; /* Align items to the left */
-            z-index: 2001; /* Above its own overlay */
-            color: white; /* Text color for sidebar content */
+            gap: 20px;
+            align-items: flex-start;
+            z-index: 2001;
+            color: white;
         }
 
         .menu-sidebar.show {
-            right: 0; /* Slide in */
+            right: 0;
         }
 
         .menu-sidebar h3 {
@@ -387,16 +377,15 @@
             margin-bottom: 20px;
             text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
             color: white;
-            width: 100%; /* Full width for heading */
+            width: 100%;
             text-align: center;
         }
 
-        /* Styles for buttons inside the sidebar */
-        .menu-sidebar .sidebar-button { /* General style for buttons in sidebar */
-            display: block; /* Make them block elements */
-            width: 100%; /* Full width */
+        .menu-sidebar .sidebar-button {
+            display: block;
+            width: 100%;
             padding: 14px 22px;
-            border-radius: 15px; /* Slightly less pill-shaped */
+            border-radius: 15px;
             cursor: pointer;
             font-weight: bold;
             font-size: 1.1em;
@@ -415,59 +404,55 @@
         }
 
         .menu-sidebar .info-button {
-            background: linear-gradient(45deg, #ff4081, #e91e63); /* Vibrant pink/red */
+            background: linear-gradient(45deg, #ff4081, #e91e63);
         }
         .menu-sidebar .info-button:hover {
             background: linear-gradient(45deg, #e91e63, #c2185b);
         }
 
         .menu-sidebar .workers-button {
-            background: linear-gradient(45deg, #3498db, #2980b9); /* Blue */
+            background: linear-gradient(45deg, #3498db, #2980b9);
         }
         .menu-sidebar .workers-button:hover {
             background: linear-gradient(45deg, #2980b9, #2c3e50);
         }
 
         .menu-sidebar .creator-button {
-            background: linear-gradient(45deg, #7b1fa2, #6a1b9a); /* Darker purple */
+            background: linear-gradient(45deg, #7b1fa2, #6a1b9a);
         }
         .menu-sidebar .creator-button:hover {
             background: linear-gradient(45deg, #6a1b9a, #4a148c);
         }
 
-
-        /* Beautiful Red Circular Close Button (Unified Style) */
         .close-button {
             position: absolute;
             top: 18px;
             right: 18px;
-            background: linear-gradient(45deg, #ff1744, #d50000); /* Pure red gradient */
+            background: linear-gradient(45deg, #ff1744, #d50000);
             color: white;
             border: none;
-            width: 40px; /* Slightly larger button */
+            width: 40px;
             height: 40px;
-            border-radius: 50%; /* Perfect circle */
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 24px; /* Larger '✖' */
+            font-size: 24px;
             font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease-in-out;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Shadow for the '✖' */
-            z-index: 2002; /* Ensure it's above everything else in the modal/sidebar */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            z-index: 2002;
         }
 
         .close-button:hover {
-            background: linear-gradient(45deg, #d50000, #b71c1c); /* Darker red on hover */
-            transform: scale(1.15); /* More pronounced scale */
-            box-shadow: 0 0 20px rgba(255, 23, 68, 0.7); /* Red glow on hover */
+            background: linear-gradient(45deg, #d50000, #b71c1c);
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(255, 23, 68, 0.7);
         }
 
-
-        /* Modal content styles (re-using for clarity) */
-        .modal-content h3 { /* Re-applying styles for headings within modals */
+        .modal-content h3 {
             color: #2c3e50;
             margin-bottom: 25px;
             font-size: 1.8em;
@@ -539,19 +524,19 @@
             background: linear-gradient(45deg, #2980b9, #3498db);
         }
 
-        /* --- Tooltip styles --- */
+        /* Tooltip styles */
         .tooltip-container {
             position: relative;
-            display: inline-block; /* Allows text and icon to be on the same line */
-            margin-left: 10px; /* Space between label text and icon */
-            cursor: help; /* Change cursor to indicate information */
-            flex-shrink: 0; /* Prevent icon from shrinking when label text is long */
-            user-select: none; /* Prevent selection of icon text */
+            display: inline-block;
+            margin-left: 10px;
+            cursor: help;
+            flex-shrink: 0;
+            user-select: none;
         }
 
         .info-icon {
-            font-size: 0.8em; /* Smaller than label text */
-            color: rgba(255, 255, 255, 0.7); /* Lighter color */
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             width: 1.2em;
@@ -559,7 +544,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            line-height: 1; /* Adjust line height for perfect centering of the unicode char */
+            line-height: 1;
             transition: color 0.3s ease, border-color 0.3s ease;
         }
 
@@ -571,42 +556,40 @@
         .tooltip-text {
             visibility: hidden;
             opacity: 0;
-            width: 250px; /* Max width for tooltip content */
-            background-color: rgba(0, 0, 0, 0.85); /* Darker background */
+            width: 250px;
+            background-color: rgba(0, 0, 0, 0.85);
             color: #fff;
             text-align: center;
             border-radius: 6px;
             padding: 10px 15px;
             position: absolute;
-            z-index: 3000; /* High z-index to be on top of everything */
-            bottom: 125%; /* Position above the icon */
+            z-index: 3000;
+            bottom: 125%;
             left: 50%;
             transform: translateX(-50%);
             transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
             font-size: 0.9em;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            white-space: normal; /* Allow text to wrap within the width */
-            text-shadow: none; /* Remove text shadow from tooltip text */
+            white-space: normal;
+            text-shadow: none;
             line-height: 1.4;
         }
 
         .tooltip-text::after {
             content: "";
             position: absolute;
-            top: 100%; /* At the bottom of the tooltip */
+            top: 100%;
             left: 50%;
-            margin-left: -5px; /* Half of the arrow width */
+            margin-left: -5px;
             border-width: 5px;
             border-style: solid;
-            border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent; /* Arrow pointing down */
+            border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
         }
 
         .tooltip-container:hover .tooltip-text {
             visibility: visible;
             opacity: 1;
         }
-        /* --- End Tooltip styles --- */
-
 
         /* Mobile Adaptation */
         @media (max-width: 480px) {
@@ -644,14 +627,14 @@
             .code-section label {
                 font-size: 1.1em;
                 margin-bottom: 15px;
-                flex-direction: column; /* Stack label text and icon vertically on small screens */
+                flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
 
             .code-section label .tooltip-container {
-                margin-left: 0; /* Remove left margin when stacked */
-                margin-top: 5px; /* Add top margin between label text and icon */
+                margin-left: 0;
+                margin-top: 5px;
             }
 
             input[type="text"] {
@@ -725,11 +708,10 @@
                 border-left: 4px solid #3498db;
             }
 
-            /* Sidebar on mobile */
             .menu-sidebar {
-                width: 250px; /* Smaller width on mobile */
+                width: 250px;
                 padding: 20px;
-                right: -270px; /* Adjust for new width */
+                right: -270px;
             }
         }
 
@@ -747,7 +729,7 @@
                 font-size: 1em;
             }
             .tooltip-text {
-                width: 200px; /* Adjust tooltip width for very small screens */
+                width: 200px;
                 padding: 8px 10px;
                 font-size: 0.8em;
             }
@@ -755,21 +737,21 @@
     </style>
 </head>
 <body>
-    <button class="main-menu-button" onclick="openMenu()">Меню</button>
+    <button type="button" class="main-menu-button" onclick="openMenu()">Меню</button>
 
     <div class="menu-sidebar-overlay" id="mainMenuOverlay" onclick="closeMenu(event)">
         <div class="menu-sidebar" id="menuSidebar" onclick="event.stopPropagation()">
-            <button class="close-button" onclick="closeMenu(null)">✖</button>
+            <button type="button" class="close-button" onclick="closeMenu(null)">✖</button>
             <h3>Навигация</h3>
             <a href="#" class="sidebar-button info-button" onclick="openModal('info'); closeMenu()">О Нашей Группе</a>
             <a href="#" class="sidebar-button workers-button" onclick="openModal('workers'); closeMenu()">Работники</a>
-            <a href="https://www.youtube.com/@GummyZen" target="_blank" class="sidebar-button creator-button" onclick="closeMenu()">Создатель</a>
+            <a href="https://www.youtube.com/@YourCreatorChannel" target="_blank" class="sidebar-button creator-button" onclick="closeMenu()">Создатель</a>
         </div>
     </div>
 
     <div class="modal-overlay" id="infoModalOverlay" onclick="closeModal(event, 'info')">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-button" onclick="closeModal(null, 'info')">✖</button>
+            <button type="button" class="close-button" onclick="closeModal(null, 'info')">✖</button>
             <h3>О Нашей Группе</h3>
             
             <p><strong>Cevenz</strong> — это пространство для русскоязычных участников комьюнити Gummibär. Мы здесь, чтобы находить своих, поддерживать друг друга и развивать общее сообщество. Cevenz — не просто чат, а единое ядро, где ценится уважение, порядок и участие.</p>
@@ -865,18 +847,18 @@
 
     <div class="modal-overlay" id="workersModalOverlay" onclick="closeModal(event, 'workers')">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-button" onclick="closeModal(null, 'workers')">✖</button>
+            <button type="button" class="close-button" onclick="closeModal(null, 'workers')">✖</button>
             <h3>Работники Cevenz</h3>
             
             <div class="workers-section">
                 <h4><strong>Админы:</strong></h4>
                 <div class="worker-item">
                     <p>Vladimir Gummy</p>
-                    <a href="https://youtube.com/@v.g.2.0.2.5?si=vlVsQYdiARrxlSGS" target="_blank">Профиль</a>
+                    <a href="https://www.youtube.com/@VladimirGummyChannel" target="_blank">Профиль</a>
                 </div>
                 <div class="worker-item">
                     <p>Gummy Crazy</p>
-                    <a href="https://youtube.com/@realgummycrazy?si=0705fKtF6DtJLCCN" target="_blank">Профиль</a>
+                    <a href="https://www.youtube.com/@GummyCrazyChannel" target="_blank">Профиль</a>
                 </div>
             </div>
 
@@ -884,7 +866,7 @@
                 <h4><strong>Модераторы:</strong></h4>
                 <div class="worker-item">
                     <p>Gummy Lion</p>
-                    <a href="https://youtube.com/@gummylion?si=tVyWza4zex8-gDil" target="_blank">Профиль</a>
+                    <a href="https://www.youtube.com/@GummyLionChannel" target="_blank">Профиль</a>
                 </div>
             </div>
         </div>
@@ -900,19 +882,19 @@
         <div class="code-section">
             <label for="betaCodeInput">Введите Пароль:
                 <span class="tooltip-container">
-                    <span class="info-icon">&#x24D8;</span>
+                    <span class="info-icon">ⓘ</span>
                     <span class="tooltip-text">Этот пароль открывает доступ к эксклюзивной бета-группе Cevenz Series 4 Ultra!</span>
                 </span>
             </label>
             <input type="text" id="betaCodeInput" placeholder="Введите пароль здесь" maxlength="10">
-            <button onclick="checkBetaCode()">Подтвердить</button>
+            <button type="button" onclick="checkBetaCode()">Подтвердить</button>
             
             <div class="error" id="betaErrorMessage">Неверный пароль! Попробуйте снова.</div>
             <div class="success" id="betaSuccessMessage">Пароль принят! Добро пожаловать в бета-тест!</div>
         </div>
 
         <div class="beta-telegram-link" id="betaTelegramLink">
-            <p style="margin-bottom: 15px;">Присоединяйтесь к бета-тестированию:</p>
+            <p>Присоединяйтесь к бета-тестированию:</p>
             <a href="https://t.me/+1hciPJFZZ0xmYTZk" target="_blank">Перейти в Telegram группу</a>
         </div>
     </div>
@@ -923,32 +905,30 @@
         <div class="code-section">
             <label for="nightvisionCodeInput">Введите Пароль:
                 <span class="tooltip-container">
-                    <span class="info-icon">&#x24D8;</span>
+                    <span class="info-icon">ⓘ</span>
                     <span class="tooltip-text">Введите пароль для активации Nightvision режима и получения доступа!</span>
                 </span>
             </label>
             <input type="text" id="nightvisionCodeInput" placeholder="Введите пароль здесь" maxlength="10">
-            <button onclick="checkNightvisionCode()">Подтвердить</button>
+            <button type="button" onclick="checkNightvisionCode()">Подтвердить</button>
             
             <div class="error" id="nightvisionErrorMessage">Неверный пароль! Попробуйте снова.</div>
             <div class="success" id="nightvisionSuccessMessage">Пароль принят! Добро пожаловать в Nightvision!</div>
         </div>
 
         <div class="beta-telegram-link" id="nightvisionTelegramLink">
-            <p style="margin-bottom: 15px;">Присоединяйтесь к Nightvision:</p>
+            <p>Присоединяйтесь к Nightvision:</p>
             <a href="https://t.me/+MNVVamdQGI5mOGM8" target="_blank">Перейти в Telegram группу</a>
         </div>
     </div>
 
     <script>
-        // Global function to check if any overlay is active
         function isAnyOverlayOpen() {
             return document.getElementById('infoModalOverlay').classList.contains('show') ||
                    document.getElementById('workersModalOverlay').classList.contains('show') ||
                    document.getElementById('mainMenuOverlay').classList.contains('show');
         }
 
-        // Functions for input checks
         function checkBetaCode() {
             const input = document.getElementById('betaCodeInput');
             const code = input.value.trim();
@@ -958,17 +938,17 @@
 
             errorMessage.classList.remove('show');
             successMessage.classList.remove('show');
-            input.style.borderColor = ''; // Reset border color
-            telegramLink.classList.remove('show'); // Hide link initially
+            input.style.borderColor = '';
+            telegramLink.classList.remove('show');
 
             if (code === '0242') {
                 successMessage.classList.add('show');
                 telegramLink.classList.add('show');
-                input.style.borderColor = '#87ceeb'; // Highlight success
+                input.style.borderColor = '#87ceeb';
             } else {
                 errorMessage.classList.add('show');
-                input.style.borderColor = '#ff6b6b'; // Highlight error
-                input.value = ''; // Clear input on error
+                input.style.borderColor = '#ff6b6b';
+                input.value = '';
             }
         }
 
@@ -981,21 +961,20 @@
 
             errorMessage.classList.remove('show');
             successMessage.classList.remove('show');
-            input.style.borderColor = ''; // Reset border color
-            telegramLink.classList.remove('show'); // Hide link initially
+            input.style.borderColor = '';
+            telegramLink.classList.remove('show');
 
             if (code === '0242') {
                 successMessage.classList.add('show');
                 telegramLink.classList.add('show');
-                input.style.borderColor = '#87ceeb'; // Highlight success
+                input.style.borderColor = '#87ceeb';
             } else {
                 errorMessage.classList.add('show');
-                input.style.borderColor = '#ff6b6b'; // Highlight error
-                input.value = ''; // Clear input on error
+                input.style.borderColor = '#ff6b6b';
+                input.value = '';
             }
         }
 
-        // Event listeners for Enter key and input changes
         document.getElementById('betaCodeInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 checkBetaCode();
@@ -1022,23 +1001,20 @@
             document.getElementById('nightvisionTelegramLink').classList.remove('show');
         });
 
-        // Modal functions (for info/workers)
         function openModal(modalType) {
-            // Close main menu sidebar if open
             closeMenu(); 
 
             if (modalType === 'info') {
                 document.getElementById('infoModalOverlay').classList.add('show');
-                document.getElementById('workersModalOverlay').classList.remove('show'); // Ensure other modal is closed
+                document.getElementById('workersModalOverlay').classList.remove('show');
             } else if (modalType === 'workers') {
                 document.getElementById('workersModalOverlay').classList.add('show');
-                document.getElementById('infoModalOverlay').classList.remove('show'); // Ensure other modal is closed
+                document.getElementById('infoModalOverlay').classList.remove('show');
             }
-            document.body.style.overflow = 'hidden'; // Prevent background scroll
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal(event, modalType) {
-            // Only close if clicking on the overlay itself or the close button
             if (event && event.target !== event.currentTarget && !event.target.classList.contains('close-button')) {
                 return;
             }
@@ -1049,25 +1025,21 @@
                 document.getElementById('workersModalOverlay').classList.remove('show');
             }
             
-            // Only unlock scroll if no other overlay (modal or menu) is open
             if (!isAnyOverlayOpen()) {
                 document.body.style.overflow = 'auto';
             }
         }
 
-        // Functions for Menu sidebar
         function openMenu() {
-            // Close other modals if open
             closeModal(null, 'info');
             closeModal(null, 'workers');
 
             document.getElementById('mainMenuOverlay').classList.add('show');
             document.getElementById('menuSidebar').classList.add('show');
-            document.body.style.overflow = 'hidden'; // Prevent background scroll
+            document.body.style.overflow = 'hidden';
         }
 
         function closeMenu(event) {
-            // Only close if clicking on the overlay itself or the close button
             if (event && event.target !== event.currentTarget && !event.target.classList.contains('close-button')) {
                 return;
             }
@@ -1075,13 +1047,11 @@
             document.getElementById('mainMenuOverlay').classList.remove('show');
             document.getElementById('menuSidebar').classList.remove('show');
 
-            // Only unlock scroll if no other overlay (modal or menu) is open
             if (!isAnyOverlayOpen()) {
                 document.body.style.overflow = 'auto';
             }
         }
 
-        // Close modals/menu on Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal(null, 'info');
