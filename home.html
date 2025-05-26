@@ -3,176 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CVNZ Official Site</title>
+    <title>CVNZ - Сайт Закрыт</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* General Reset & Box Sizing */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --main-bg-start: #2c3e50;
+            --main-bg-end: #34495e;
+            --primary-button-bg: linear-gradient(135deg, #8e44ad, #9b59b6);
+            --primary-button-shadow: 0 8px 15px rgba(155, 89, 182, 0.4);
+            --secondary-button-bg: linear-gradient(135deg, #2ecc71, #27ae60);
+            --secondary-button-shadow: 0 8px 15px rgba(46, 204, 113, 0.4);
+            --container-bg: rgba(255, 255, 255, 0.1);
+            --container-border: 1px solid rgba(255, 255, 255, 0.2);
+            --text-color: #ecf0f1;
+            --header-color: #ffffff;
+            --input-bg: rgba(255, 255, 255, 0.15);
+            --input-border: 1px solid rgba(255, 255, 255, 0.3);
+            --error-color: #e74c3c;
+            --success-color: #27ae60;
+            --link-color: #3498db;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #7b0099 0%, #004d99 33%, #ff8c00 66%, #ffd700 100%);
-            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            color: white;
-            gap: 30px;
-            padding: 20px;
+            justify-content: flex-start;
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, var(--main-bg-start), var(--main-bg-end));
+            color: var(--text-color);
+            line-height: 1.6;
             position: relative;
-            overflow-x: hidden;
-            overflow-y: auto;
+            box-sizing: border-box;
+            gap: 30px;
+            overflow: hidden; /* Скрываем прокрутку основного контента */
         }
 
-        /* Cosmic Stars Background */
-        body::before {
-            content: '';
-            position: absolute;
+        h1, h2, h3, h4 {
+            color: var(--header-color);
+            margin-top: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #5dade2;
+        }
+
+        /* --- OVERLAY С СООБЩЕНИЕМ О ЗАКРЫТИИ САЙТА --- */
+        .site-closed-overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background:
-                radial-gradient(1.5px 1.5px at 20% 30%, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(1.8px 1.8px at 40% 70%, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(1px 1px at 90% 40%, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(1.2px 1.2px at 60% 10%, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(1.6px 1.6px at 80% 80%, rgba(255, 255, 255, 0.8), transparent),
-                radial-gradient(1px 1px at 30% 90%, rgba(255, 255, 255, 0.8), transparent);
-            background-size: 250px 250px, 350px 350px, 300px 300px, 450px 450px, 400px 400px, 200px 200px;
-            opacity: 0.7;
-            animation: twinkle 5s infinite alternate ease-in-out, star-drift 60s linear infinite;
-            pointer-events: none;
-            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.95); /* Почти черный, полупрозрачный фон */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000; /* Самый высокий z-index */
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        @keyframes twinkle {
-            0% { opacity: 0.5; transform: scale(0.95); }
-            50% { opacity: 1; transform: scale(1.05); }
-            100% { opacity: 0.5; transform: scale(0.95); }
+        .site-closed-overlay h1 {
+            font-size: 3em;
+            color: #e74c3c; /* Яркий красный для внимания */
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(231, 76, 60, 0.7);
+            animation: pulse 1.5s infinite alternate; /* Анимация для заголовка */
         }
 
-        @keyframes star-drift {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
+        .site-closed-overlay p {
+            font-size: 1.5em;
+            color: #ecf0f1;
+            max-width: 600px;
+            line-height: 1.4;
+            margin-bottom: 30px;
         }
 
-        * {
-            position: relative;
-            z-index: 2;
+        .site-closed-overlay .small-text {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.7);
         }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        @media (max-width: 768px) {
+            .site-closed-overlay h1 {
+                font-size: 2.2em;
+            }
+            .site-closed-overlay p {
+                font-size: 1.2em;
+            }
+            .site-closed-overlay .small-text {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-closed-overlay h1 {
+                font-size: 1.8em;
+            }
+            .site-closed-overlay p {
+                font-size: 1em;
+            }
+        }
+        /* --- КОНЕЦ OVERLAY --- */
+
 
         .main-menu-button {
             position: fixed;
             bottom: 25px;
             right: 25px;
-            background: linear-gradient(45deg, #00d4aa, #00a085);
+            background: var(--primary-button-bg);
             color: white;
             border: none;
             padding: 18px 30px;
-            font-size: 1.3em;
-            font-weight: bold;
-            border-radius: 18px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
             cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.4s ease-in-out;
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.4);
-            text-align: center;
-            letter-spacing: 0.5px;
-            z-index: 1000;
+            box-shadow: var(--primary-button-shadow);
+            transition: all 0.3s ease;
+            z-index: 2000;
         }
 
         .main-menu-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 45px rgba(0, 212, 170, 0.5);
-            background: linear-gradient(45deg, #00a085, #008a6f);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(155, 89, 182, 0.6);
         }
 
         .registration-button {
-            background: linear-gradient(45deg, #00e676, #00c853);
-            color: white;
-            border: none;
-            padding: 18px 35px;
-            font-size: 1.3em;
-            font-weight: bold;
-            border-radius: 18px;
-            cursor: pointer;
-            text-decoration: none;
             display: inline-block;
-            transition: all 0.4s ease-in-out;
-            box-shadow: 0 10px 30px rgba(0, 230, 118, 0.4);
-            text-align: center;
+            background: var(--secondary-button-bg);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            box-shadow: var(--secondary-button-shadow);
+            transition: all 0.3s ease;
             margin-bottom: 30px;
-            letter-spacing: 0.5px;
+            text-align: center;
         }
 
         .registration-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 45px rgba(0, 230, 118, 0.5);
-            background: linear-gradient(45deg, #00c853, #00b04c);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(46, 204, 113, 0.6);
         }
 
         .beta-container {
-            background: linear-gradient(135deg, rgba(20, 25, 50, 0.9) 0%, rgba(30, 40, 70, 0.8) 100%);
-            backdrop-filter: blur(15px);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border: var(--container-border);
             border-radius: 25px;
-            padding: 35px 25px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(74, 144, 226, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            width: 90%;
             max-width: 450px;
-            width: 95%;
-            min-width: 280px;
-            margin-bottom: 25px;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-
-        .beta-container:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(74, 144, 226, 0.5);
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .beta-container h2 {
             font-size: 1.8em;
             margin-bottom: 30px;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-            color: white;
-            line-height: 1.3;
-            letter-spacing: 0.5px;
+            color: var(--header-color);
         }
 
         .code-section {
-            margin-bottom: 35px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
         }
 
         .code-section label {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            font-weight: 500;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3em;
-            margin-bottom: 18px;
-            font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            flex-wrap: wrap;
         }
 
         input[type="text"] {
-            width: 100%;
+            width: calc(100% - 40px);
             padding: 15px 20px;
-            font-size: 1.1em;
-            border: none;
+            margin-bottom: 15px;
+            border: var(--input-border);
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            text-align: center;
+            background: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1.1em;
             outline: none;
-            transition: all 0.4s ease-in-out;
-            border: 2px solid transparent;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         input[type="text"]::placeholder {
@@ -180,192 +233,234 @@
         }
 
         input[type="text"]:focus {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.01);
-            border: 2px solid rgba(255, 255, 255, 0.7);
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 255, 255, 0.4);
+            border-color: var(--link-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
         }
 
         .beta-container button {
-            background: linear-gradient(45deg, #ff9800, #fb8c00);
+            background: var(--primary-button-bg);
             color: white;
             border: none;
-            padding: 14px 30px;
-            font-size: 1.1em;
+            padding: 15px 30px;
             border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.4s ease-in-out;
-            margin-top: 20px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--primary-button-shadow);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 250px;
         }
 
         .beta-container button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(45deg, #fb8c00, #f57c00);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px rgba(155, 89, 182, 0.5);
+        }
+
+        .beta-container button:disabled {
+            background: #7f8c8d;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error, .success {
+            margin-top: 15px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease, height 0.3s ease, padding 0.3s ease, margin-top 0.3s ease;
+        }
+
+        .error.show, .success.show {
+            opacity: 1;
+            height: auto;
+            padding: 10px 15px;
+            margin-top: 15px;
+        }
+
+        .error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--error-color);
+            border: 1px solid var(--error-color);
+        }
+
+        .success {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
         }
 
         .beta-telegram-link {
-            display: none;
-            margin-top: 35px;
+            width: 100%;
+            margin-top: 30px;
             padding: 25px;
-            background: rgba(255, 235, 59, 0.15);
+            background-color: rgba(255, 255, 255, 0.05);
             border-radius: 18px;
-            border: 2px solid rgba(255, 235, 59, 0.6);
-            box-shadow: inset 0 0 15px rgba(255, 235, 59, 0.2);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: opacity 0.4s ease, height 0.4s ease, padding 0.4s ease, margin-top 0.4s ease;
         }
 
         .beta-telegram-link.show {
-            display: block;
-            animation: fadeInScale 0.6s ease-out forwards;
-        }
-
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: translateY(20px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            opacity: 1;
+            height: auto;
+            padding: 25px;
+            margin-top: 30px;
         }
 
         .beta-telegram-link p {
             font-size: 1.1em;
-            margin-bottom: 18px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .beta-telegram-link a {
-            color: #ffeb3b;
-            text-decoration: none;
-            font-size: 1.3em;
-            font-weight: bold;
             display: inline-block;
+            background: linear-gradient(45deg, #0088cc, #00aaff);
+            color: white;
             padding: 12px 25px;
-            background: rgba(255, 235, 59, 0.25);
-            border-radius: 12px;
-            transition: all 0.4s ease-in-out;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0, 136, 204, 0.4);
         }
 
         .beta-telegram-link a:hover {
-            background: rgba(255, 235, 59, 0.4);
-            transform: scale(1.07);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 136, 204, 0.6);
         }
 
-        .error {
-            color: #ff1744;
-            margin-top: 20px;
-            font-weight: bold;
-            display: none; /* Изначально скрыто */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .error.show {
-            display: block; /* Показывается только с классом .show */
-            animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
-        }
-
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
-        }
-
-        .success {
-            color: #00e676;
-            margin-top: 20px;
-            font-weight: bold;
-            display: none; /* Изначально скрыто */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .success.show {
-            display: block; /* Показывается только с классом .show */
-            animation: fadeInScale 0.6s ease-out forwards;
-        }
-
+        /* Modal Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
-            display: none;
-            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
             align-items: center;
+            justify-content: center;
             z-index: 2000;
-            padding: 20px;
             opacity: 0;
-            transition: opacity 0.3s ease-out;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            overflow-y: auto;
+            padding: 20px 0;
+            box-sizing: border-box;
         }
 
         .modal-overlay.show {
-            display: flex;
             opacity: 1;
+            visibility: visible;
         }
 
         .modal-content {
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
+            background: linear-gradient(145deg, #34495e, #2c3e50);
             border-radius: 20px;
             padding: 35px;
-            max-width: 650px;
-            width: 95%;
-            max-height: 90vh;
-            overflow-y: auto;
             position: relative;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-            transform: scale(0.9);
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            transform: translateY(20px);
             opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.3s ease-out;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            color: var(--text-color);
+            max-height: 85vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .modal-overlay.show .modal-content {
-            transform: scale(1);
+            transform: translateY(0);
             opacity: 1;
         }
 
-        /* Menu Sidebar Styles */
+        .modal-content h3 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            color: var(--header-color);
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
 
+        .modal-content h4 {
+            font-size: 1.4em;
+            color: #ecf0f1;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2001;
+        }
+
+        .close-button:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: rotate(90deg);
+        }
+
+        /* Sidebar Menu Styles */
         .menu-sidebar-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
-            display: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2500;
             opacity: 0;
-            transition: opacity 0.3s ease-out;
-            z-index: 2000;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
         .menu-sidebar-overlay.show {
-            display: block;
             opacity: 1;
+            visibility: visible;
         }
 
         .menu-sidebar {
             position: fixed;
             top: 0;
-            right: -320px;
-            width: 300px;
+            right: -300px;
+            width: 280px;
             height: 100%;
-            background: linear-gradient(180deg, rgba(20, 25, 50, 0.95), rgba(30, 40, 70, 0.95));
-            backdrop-filter: blur(20px);
-            padding: 30px;
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            background: linear-gradient(to bottom, #34495e, #2c3e50);
+            box-shadow: -8px 0 20px rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            box-sizing: border-box;
+            transition: right 0.3s ease-out;
+            z-index: 2501;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            align-items: flex-start;
-            z-index: 2001;
-            color: white;
+            gap: 15px;
         }
 
         .menu-sidebar.show {
@@ -373,156 +468,216 @@
         }
 
         .menu-sidebar h3 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-            color: white;
-            width: 100%;
-            text-align: center;
-        }
-
-        .menu-sidebar .sidebar-button {
-            display: block;
-            width: 100%;
-            padding: 14px 22px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1em;
-            text-decoration: none;
-            text-align: center;
-            letter-spacing: 0.3px;
-            transition: all 0.4s ease-in-out;
-            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.4);
-            color: white;
-            border: none;
-        }
-
-        .menu-sidebar .sidebar-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .menu-sidebar .info-button {
-            background: linear-gradient(45deg, #ff4081, #e91e63);
-        }
-        .menu-sidebar .info-button:hover {
-            background: linear-gradient(45deg, #e91e63, #c2185b);
-        }
-
-        .menu-sidebar .workers-button {
-            background: linear-gradient(45deg, #3498db, #2980b9);
-        }
-        .menu-sidebar .workers-button:hover {
-            background: linear-gradient(45deg, #2980b9, #2c3e50);
-        }
-
-        .menu-sidebar .creator-button {
-            background: linear-gradient(45deg, #7b1fa2, #6a1b9a);
-        }
-        .menu-sidebar .creator-button:hover {
-            background: linear-gradient(45deg, #6a1b9a, #4a148c);
-        }
-
-        .close-button {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            background: linear-gradient(45deg, #ff1744, #d50000);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 24px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            z-index: 2002;
-        }
-
-        .close-button:hover {
-            background: linear-gradient(45deg, #d50000, #b71c1c);
-            transform: scale(1.15);
-            box-shadow: 0 0 20px rgba(255, 23, 68, 0.7);
-        }
-
-        .modal-content h3 {
-            color: #2c3e50;
+            color: var(--header-color);
             margin-bottom: 25px;
-            font-size: 1.8em;
+            font-size: 1.6em;
             text-align: center;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
-        .modal-content h4 {
-            color: #34495e;
-            margin-top: 25px;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-            text-align: left;
+
+        .sidebar-button {
+            display: block;
+            background-color: rgba(255, 255, 255, 0.08);
+            color: var(--text-color);
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
-        .modal-content p {
-            line-height: 1.7;
-            margin-bottom: 18px;
-            text-align: left;
-            font-size: 0.95em;
-            color: #444;
+
+        .sidebar-button:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
         }
-        .modal-content strong {
-            color: #2c3e50;
+
+        .sidebar-button.info-button:hover {
+            background-color: rgba(52, 152, 219, 0.2);
         }
-        .zones-section, .roles-section, .tokens-section, .workers-section {
+        .sidebar-button.roles-list-button:hover {
+            background-color: rgba(155, 89, 182, 0.2);
+        }
+
+
+        /* Content specific styles inside modal */
+        .zones-section {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
+            border-left: 5px solid #3498db;
             margin: 25px 0;
             padding: 20px;
-            background: rgba(52, 152, 219, 0.08);
             border-radius: 15px;
-            border-left: 5px solid #3498db;
-            box-shadow: inset 0 0 10px rgba(52, 152, 219, 0.1);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
         }
-        .zone-item, .role-item, .worker-item {
-            margin: 12px 0;
-            padding: 10px 0;
-            border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+        .roles-section {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(155, 89, 182, 0.05));
+            border-left: 5px solid #9b59b6;
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
         }
-        .zone-item:last-child, .role-item:last-child, .worker-item:last-child {
+        .tokens-section {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(46, 204, 113, 0.05));
+            border-left: 5px solid #2ecc71;
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+
+        .zone-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .zone-item:last-child {
             border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
-        .allowed {
-            color: #27ae60;
-            font-weight: bold;
+
+        .zone-item strong {
+            color: #ffffff;
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 5px;
         }
+
         .forbidden {
             color: #e74c3c;
-            font-weight: bold;
+            font-weight: 500;
+            font-size: 0.95em;
         }
-        .worker-item p {
-            margin-bottom: 5px;
+
+        .allowed {
+            color: #2ecc71;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .roles-section .role-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .roles-section .role-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .roles-section .role-item strong {
+            color: #ffffff;
             font-size: 1.1em;
-            font-weight: bold;
-            color: #2c3e50;
+            display: block;
+            margin-bottom: 5px;
         }
-        .worker-item a {
-            display: inline-block;
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            color: white;
-            padding: 10px 20px;
+
+        .tokens-section h4 {
+            color: #ffffff;
+        }
+        .tokens-section p {
+            font-size: 0.95em;
+        }
+
+        /* Styles for the beautiful roles display section (kept as is) */
+        .roles-display-section {
+            background: rgba(155, 89, 182, 0.08);
+            border-left: 5px solid #9b59b6;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .roles-display-section h3 {
+            font-size: 1.8em;
+            color: #4a2d59;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .role-category {
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            text-decoration: none;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(155, 89, 182, 0.2);
+        }
+
+        .role-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .role-category h4 {
+            font-size: 1.3em;
+            color: #543164;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .role-level {
+            font-size: 0.9em;
+            background-color: #9b59b6;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 5px;
+            margin-right: 10px;
             font-weight: bold;
-            margin-top: 8px;
-            transition: all 0.4s ease-in-out;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            min-width: 30px;
+            text-align: center;
         }
-        .worker-item a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, #2980b9, #3498db);
+
+        .role-members-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
+
+        .role-member-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 7px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(155, 89, 182, 0.1);
+            transition: background-color 0.2s ease;
+        }
+
+        .role-member-item:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .role-member-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .role-member-item .member-name {
+            font-weight: bold;
+            color: #543164;
+            font-size: 1em;
+        }
+
+        .role-member-item .no-members-found {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 0.95em;
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-radius: 5px;
+        }
+
 
         /* Tooltip styles */
         .tooltip-container {
@@ -614,6 +769,7 @@
             .beta-container {
                 padding: 30px 20px;
                 width: 98%;
+                max-width: 380px;
                 margin: 0 auto;
                 margin-bottom: 20px;
                 border-radius: 20px;
@@ -682,17 +838,6 @@
                 margin-bottom: 20px;
             }
 
-            .modal-content h4 {
-                font-size: 1.2em;
-                margin-top: 20px;
-                margin-bottom: 10px;
-            }
-
-            .modal-content p {
-                font-size: 0.9em;
-                margin-bottom: 15px;
-            }
-
             .close-button {
                 width: 35px;
                 height: 35px;
@@ -701,12 +846,32 @@
                 right: 15px;
             }
 
-            .zones-section, .roles-section, .tokens-section, .workers-section {
+            .zones-section, .roles-section, .tokens-section, .roles-display-section {
                 padding: 15px;
                 margin: 20px 0;
                 border-radius: 10px;
-                border-left: 4px solid #3498db;
             }
+            .roles-display-section h3 {
+                font-size: 1.6em;
+                margin-bottom: 20px;
+            }
+            .role-category {
+                padding: 10px 15px;
+                margin-bottom: 15px;
+            }
+            .role-category h4 {
+                font-size: 1.1em;
+                margin-bottom: 10px;
+            }
+            .role-level {
+                padding: 3px 6px;
+                min-width: 25px;
+            }
+            .role-member-item {
+                padding: 6px 10px;
+                font-size: 0.9em;
+            }
+
 
             .menu-sidebar {
                 width: 250px;
@@ -722,6 +887,7 @@
 
             .beta-container {
                 padding: 20px 10px;
+                max-width: 280px;
             }
 
             .registration-button {
@@ -733,25 +899,36 @@
                 padding: 8px 10px;
                 font-size: 0.8em;
             }
+            .roles-display-section h3 {
+                font-size: 1.4em;
+            }
+            .role-category h4 {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="site-closed-overlay">
+        <h1>CVNZ Сайт Закрыт На Время</h1>
+        <p>Мы Реставрируем Ошибки И Обновим Сайт Позже.</p>
+        <p class="small-text">Спасибо за ваше понимание.</p>
+    </div>
+
     <button type="button" class="main-menu-button" onclick="openMenu()">Меню</button>
 
     <div class="menu-sidebar-overlay" id="mainMenuOverlay" onclick="closeMenu(event)">
         <div class="menu-sidebar" id="menuSidebar" onclick="event.stopPropagation()">
-            <button type="button" class="close-button" onclick="closeMenu(null)">✖</button>
+            <button type="button" class="close-button" onclick="closeMenu()">✖</button>
             <h3>Навигация</h3>
             <a href="#" class="sidebar-button info-button" onclick="openModal('info'); closeMenu()">О Нашей Группе</a>
-            <a href="#" class="sidebar-button workers-button" onclick="openModal('workers'); closeMenu()">Работники</a>
-            <a href="https://www.youtube.com/@YourCreatorChannel" target="_blank" class="sidebar-button creator-button" onclick="closeMenu()">Создатель</a>
+            <a href="#" class="sidebar-button roles-list-button" onclick="openModal('rolesList'); closeMenu()">Список Ролей</a>
         </div>
     </div>
 
     <div class="modal-overlay" id="infoModalOverlay" onclick="closeModal(event, 'info')">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button type="button" class="close-button" onclick="closeModal(null, 'info')">✖</button>
+            <button type="button" class="close-button" onclick="closeModal('info')">✖</button>
             <h3>О Нашей Группе</h3>
 
             <p><strong>Cevenz</strong> — это пространство для русскоязычных участников комьюнити Gummibär. Мы здесь, чтобы находить своих, поддерживать друг друга и развивать общее сообщество. Cevenz — не просто чат, а единое ядро, где ценится уважение, порядок и участие.</p>
@@ -845,32 +1022,88 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="workersModalOverlay" onclick="closeModal(event, 'workers')">
+    <div class="modal-overlay" id="rolesListModalOverlay" onclick="closeModal(event, 'rolesList')">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button type="button" class="close-button" onclick="closeModal(null, 'workers')">✖</button>
-            <h3>Работники Cevenz</h3>
-
-            <div class="workers-section">
-                <h4><strong>Админы:</strong></h4>
-                <div class="worker-item">
-                    <p>Vladimir Gummy</p>
-                    <a href="www.youtube.com/@V.G.2.0.2.5" target="_blank">Профиль</a>
+            <button type="button" class="close-button" onclick="closeModal('rolesList')">✖</button>
+            
+            <div class="roles-display-section">
+                <h3>Список Ролей</h3> 
+                
+                <div class="role-category">
+                    <h4><span class="role-level">0.</span> Новички (Не в теме)</h4>
+                    <ul class="role-members-list">
+                        <li class="role-member-item no-members-found">
+                            <p>(Нету)</p>
+                        </li>
+                    </ul>
                 </div>
-                <div class="worker-item">
-                    <p>Gummy Crazy</p>
-                    <a href="www.youtube.com/@realgummycrazy" target="_blank">Профиль</a>
-                </div>
-            </div>
 
-            <div class="workers-section">
-                <h4><strong>Модераторы:</strong></h4>
-                <div class="worker-item">
-                    <p>Gummy Lion</p>
-                    <a href="www.youtube.com/@GummyLion" target="_blank">Профиль</a>
+                <div class="role-category">
+                    <h4><span class="role-level">1.</span> Участники</h4>
+                    <ul class="role-members-list">
+                        <li class="role-member-item">
+                            <span class="member-name">Blued65</span>
+                        </li>
+                        <li class="role-member-item">
+                            <span class="member-name">Distracted Gummibär</span>
+                        </li>
+                        <li class="role-member-item">
+                            <span class="member-name">GummiYar</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="role-category">
+                    <h4><span class="role-level">2.</span> Активные Участники</h4>
+                    <ul class="role-members-list">
+                        <li class="role-member-item">
+                            <span class="member-name">NotGummyBear</span>
+                        </li>
+                        <li class="role-member-item">
+                            <span class="member-name">FunnyGummy</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="role-category">
+                    <h4><span class="role-level">3.</span> Модераторы</h4>
+                    <ul class="role-members-list">
+                        <li class="role-member-item">
+                            <span class="member-name">GummyLion</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="role-category">
+                    <h4><span class="role-level">4.</span> Админы</h4>
+                    <ul class="role-members-list">
+                        <li class="role-member-item">
+                            <span class="member-name">GummyCrazy</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="role-category">
+                    <h4><span class="role-level">5.</span> Вице-Админы</h4>
+                    <ul class="role-members-list">
+                        <li class="role-member-item">
+                            <span class="member-name">VladimirGummy</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="role-category">
+                    <h4><span class="role-level">6.</span> Создатели</h4>
+                    <ul class="role-members-list">
+                        <li class="role-member-item">
+                            <span class="member-name">GummyZen</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+
 
     <a href="https://t.me/+NUjElngulFhiYTM0" target="_blank" class="registration-button">
         CVNZ Регистрация
@@ -887,7 +1120,7 @@
                 </span>
             </label>
             <input type="text" id="betaCodeInput" placeholder="Введите пароль здесь" maxlength="10">
-            <button type="button" onclick="checkBetaCode()">Подтвердить</button>
+            <button type="button" onclick="checkAccessCode('betaCodeInput', BETA_ACCESS_CODE, 'betaErrorMessage', 'betaSuccessMessage', 'betaTelegramLink')">Подтвердить</button>
 
             <div class="error" id="betaErrorMessage">Неверный пароль! Попробуйте снова.</div>
             <div class="success" id="betaSuccessMessage">Пароль принят! Добро пожаловать в бета-тест!</div>
@@ -910,7 +1143,7 @@
                 </span>
             </label>
             <input type="text" id="nightvisionCodeInput" placeholder="Введите пароль здесь" maxlength="10">
-            <button type="button" onclick="checkNightvisionCode()">Подтвердить</button>
+            <button type="button" onclick="checkAccessCode('nightvisionCodeInput', NIGHTVISION_ACCESS_CODE, 'nightvisionErrorMessage', 'nightvisionSuccessMessage', 'nightvisionTelegramLink')">Подтвердить</button>
 
             <div class="error" id="nightvisionErrorMessage">Неверный пароль! Попробуйте снова.</div>
             <div class="success" id="nightvisionSuccessMessage">Пароль принят! Добро пожаловать в Nightvision!</div>
@@ -923,50 +1156,31 @@
     </div>
 
     <script>
-        const BETA_ACCESS_CODE = "BETA123"; // Пример пароля
-        const NIGHTVISION_ACCESS_CODE = "NIGHTMODE"; // Пример пароля
+        const BETA_ACCESS_CODE = "BETA123";
+        const NIGHTVISION_ACCESS_CODE = "NIGHTMODE";
 
         function isAnyOverlayOpen() {
             return document.getElementById('infoModalOverlay').classList.contains('show') ||
-                   document.getElementById('workersModalOverlay').classList.contains('show') ||
+                   document.getElementById('rolesListModalOverlay').classList.contains('show') ||
                    document.getElementById('mainMenuOverlay').classList.contains('show');
         }
 
-        function checkBetaCode() {
-            const input = document.getElementById('betaCodeInput');
+        function checkAccessCode(inputId, expectedCode, errorMessageId, successMessageId, telegramLinkId) {
+            const input = document.getElementById(inputId);
             const code = input.value.trim();
-            const errorMessage = document.getElementById('betaErrorMessage');
-            const successMessage = document.getElementById('betaSuccessMessage');
-            const telegramLink = document.getElementById('betaTelegramLink');
+            const errorMessage = document.getElementById(errorMessageId);
+            const successMessage = document.getElementById(successMessageId);
+            const telegramLink = document.getElementById(telegramLinkId);
+            const button = input.nextElementSibling;
 
-            if (code === BETA_ACCESS_CODE) {
+            if (code === expectedCode) {
                 successMessage.classList.add('show');
                 errorMessage.classList.remove('show');
                 telegramLink.classList.add('show');
                 input.disabled = true;
-                input.nextElementSibling.disabled = true; // Disable button
+                button.disabled = true;
             } else {
-                errorMessage.classList.add('show');
-                successMessage.classList.remove('show');
-                telegramLink.classList.remove('show');
-                // Не очищаем input.value здесь, чтобы пользователь видел, что ввел не так
-            }
-        }
-
-        function checkNightvisionCode() {
-            const input = document.getElementById('nightvisionCodeInput');
-            const code = input.value.trim();
-            const errorMessage = document.getElementById('nightvisionErrorMessage');
-            const successMessage = document.getElementById('nightvisionSuccessMessage');
-            const telegramLink = document.getElementById('nightvisionTelegramLink');
-
-            if (code === NIGHTVISION_ACCESS_CODE) {
-                successMessage.classList.add('show');
-                errorMessage.classList.remove('show');
-                telegramLink.classList.add('show');
-                input.disabled = true;
-                input.nextElementSibling.disabled = true; // Disable button
-            } else {
+                input.value = '';
                 errorMessage.classList.add('show');
                 successMessage.classList.remove('show');
                 telegramLink.classList.remove('show');
@@ -980,27 +1194,38 @@
         }
 
         function closeMenu(event) {
-            if (event && event.target !== document.getElementById('mainMenuOverlay') && event.target.closest('.menu-sidebar')) {
+            if (event && event.target.closest('.menu-sidebar')) {
                 return;
             }
             document.getElementById('menuSidebar').classList.remove('show');
             document.getElementById('mainMenuOverlay').classList.remove('show');
             if (!isAnyOverlayOpen()) {
-                 document.body.style.overflow = 'auto';
+                document.body.style.overflow = 'auto';
             }
         }
 
         function openModal(modalType) {
-            closeMenu(); 
+            closeMenu();
             const modalOverlay = document.getElementById(modalType + 'ModalOverlay');
             if (modalOverlay) {
                 modalOverlay.classList.add('show');
-                document.body.style.overflow = 'hidden'; 
+                document.body.style.overflow = 'hidden';
             }
         }
 
-        function closeModal(event, modalType) {
-             if (event && event.target !== document.getElementById(modalType + 'ModalOverlay') && event.target.closest('.modal-content')) {
+        function closeModal(eventOrType, typeIfEvent = null) {
+            let modalType;
+            let event;
+
+            if (typeof eventOrType === 'string') {
+                modalType = eventOrType;
+                event = null;
+            } else {
+                event = eventOrType;
+                modalType = typeIfEvent;
+            }
+
+            if (event && event.target.closest('.modal-content')) {
                 return;
             }
             const modalOverlay = document.getElementById(modalType + 'ModalOverlay');
@@ -1008,35 +1233,34 @@
                 modalOverlay.classList.remove('show');
             }
             if (!isAnyOverlayOpen()) {
-                 document.body.style.overflow = 'auto';
+                document.body.style.overflow = 'auto';
             }
         }
 
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 if (document.getElementById('menuSidebar').classList.contains('show')) {
-                    closeMenu(null);
-                }
-                if (document.getElementById('infoModalOverlay').classList.contains('show')) {
-                    closeModal(null, 'info');
-                }
-                if (document.getElementById('workersModalOverlay').classList.contains('show')) {
-                    closeModal(null, 'workers');
+                    closeMenu();
+                } else if (document.getElementById('infoModalOverlay').classList.contains('show')) {
+                    closeModal('info');
+                } else if (document.getElementById('rolesListModalOverlay').classList.contains('show')) {
+                    closeModal('rolesList');
                 }
             }
         });
 
-        // *** ИСПРАВЛЕНИЕ: Скрываем сообщения об ошибках при начальной загрузке ***
         document.addEventListener('DOMContentLoaded', function() {
-            const betaError = document.getElementById('betaErrorMessage');
-            const nightvisionError = document.getElementById('nightvisionErrorMessage');
-            
-            if (betaError) {
-                betaError.classList.remove('show');
-            }
-            if (nightvisionError) {
-                nightvisionError.classList.remove('show');
-            }
+            document.getElementById('betaErrorMessage').classList.remove('show');
+            document.getElementById('betaSuccessMessage').classList.remove('show');
+            document.getElementById('betaTelegramLink').classList.remove('show');
+
+            document.getElementById('nightvisionErrorMessage').classList.remove('show');
+            document.getElementById('nightvisionSuccessMessage').classList.remove('show');
+            document.getElementById('nightvisionTelegramLink').classList.remove('show');
+
+            // При загрузке страницы, убедитесь, что оверлей "Сайт закрыт" показан.
+            // Никаких других действий не требуется, так как он изначально установлен как `display: flex`.
+            // Если вы хотите сделать его скрываемым, понадобится дополнительная логика.
         });
     </script>
 </body>
