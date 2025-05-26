@@ -36,7 +36,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 radial-gradient(1.5px 1.5px at 20% 30%, rgba(255, 255, 255, 0.8), transparent),
                 radial-gradient(1.8px 1.8px at 40% 70%, rgba(255, 255, 255, 0.8), transparent),
                 radial-gradient(1px 1px at 90% 40%, rgba(255, 255, 255, 0.8), transparent),
@@ -256,12 +256,12 @@
             color: #ff1744;
             margin-top: 20px;
             font-weight: bold;
-            display: none;
+            display: none; /* Изначально скрыто */
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .error.show {
-            display: block;
+            display: block; /* Показывается только с классом .show */
             animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
         }
 
@@ -276,12 +276,12 @@
             color: #00e676;
             margin-top: 20px;
             font-weight: bold;
-            display: none;
+            display: none; /* Изначально скрыто */
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .success.show {
-            display: block;
+            display: block; /* Показывается только с классом .show */
             animation: fadeInScale 0.6s ease-out forwards;
         }
 
@@ -753,36 +753,36 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <button type="button" class="close-button" onclick="closeModal(null, 'info')">✖</button>
             <h3>О Нашей Группе</h3>
-            
+
             <p><strong>Cevenz</strong> — это пространство для русскоязычных участников комьюнити Gummibär. Мы здесь, чтобы находить своих, поддерживать друг друга и развивать общее сообщество. Cevenz — не просто чат, а единое ядро, где ценится уважение, порядок и участие.</p>
-            
+
             <div class="zones-section">
                 <h4><strong>Зоны общения:</strong></h4>
-                
+
                 <div class="zone-item">
                     <strong>Главный Центр</strong><br>
                     Только важные темы: изменения правил, предложения, новости.<br>
                     <span class="forbidden">✘ Запрещено: спам, оскорбления, несоблюдение правил.</span>
                 </div>
-                
+
                 <div class="zone-item">
                     <strong>Обычный Чат</strong><br>
                     Общение на любые темы.<br>
                     <span class="forbidden">✘ Будь вежлив, без мата, спама и грубости.</span>
                 </div>
-                
+
                 <div class="zone-item">
                     <strong>Зона Хаоса</strong><br>
                     Разрешён хаос: шутки, мемы, спам.<br>
                     <span class="forbidden">✘ Нельзя оскорблять и материться.</span>
                 </div>
-                
+
                 <div class="zone-item">
                     <strong>Зона Свободы</strong><br>
                     Свободные разговоры вне основных тем.<br>
                     <span class="forbidden">✘ Запрещено: спам, оскорбления, нарушение правил.</span>
                 </div>
-                
+
                 <div class="zone-item">
                     <strong>Зона Креатива</strong><br>
                     Место для творчества: арты, тексты, идеи, концепты.<br>
@@ -791,49 +791,49 @@
                     Создавай, делись, будь креативным.
                 </div>
             </div>
-            
+
             <div class="roles-section">
                 <h4><strong>Система Ролей и Токенов</strong></h4>
                 <p>В Cevenz используется система ролей, основанная на токенах (ткн) — это очки активности, доверия и вклада.</p>
-                
+
                 <h4><strong>Роли:</strong></h4>
-                
+
                 <div class="role-item">
                     <strong>Новички (Не в Теме)</strong> (0 ткн)<br>
                     Только вступили. Нет доступа к большинству функций.
                 </div>
-                
+
                 <div class="role-item">
                     <strong>Участники</strong> (0 ткн)<br>
                     Базовая роль. Доступ к общению, основным зонам.
                 </div>
-                
+
                 <div class="role-item">
                     <strong>Активные Участники</strong> (100 ткн)<br>
                     Показали себя в сообществе. Получают уважение и чуть больше возможностей.
                 </div>
-                
+
                 <div class="role-item">
                     <strong>Модераторы</strong> (500 ткн)<br>
                     Следят за порядком, помогают участникам, поддерживают структуру.
                 </div>
-                
+
                 <div class="role-item">
                     <strong>Админы</strong> (1000 ткн)<br>
                     Отвечают за управление, координацию, решения на уровне сообщества.
                 </div>
-                
+
                 <div class="role-item">
                     <strong>Вице-Админы</strong> (по разрешению Создателя)<br>
                     Правая рука Создателя. Доступ к важным решениям и управлению.
                 </div>
-                
+
                 <div class="role-item">
                     <strong>Создатели</strong> (по разрешению)<br>
                     Основатели и архитекторы Cevenz.
                 </div>
             </div>
-            
+
             <div class="tokens-section">
                 <h4><strong>Как работают токены (ткн):</strong></h4>
                 <p>• За активность, помощь и участие можно получать токены.<br>
@@ -849,16 +849,16 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <button type="button" class="close-button" onclick="closeModal(null, 'workers')">✖</button>
             <h3>Работники Cevenz</h3>
-            
+
             <div class="workers-section">
                 <h4><strong>Админы:</strong></h4>
                 <div class="worker-item">
                     <p>Vladimir Gummy</p>
-                    <a href="https://www.youtube.com/@VladimirGummyChannel" target="_blank">Профиль</a>
+                    <a href="www.youtube.com/@V.G.2.0.2.5" target="_blank">Профиль</a>
                 </div>
                 <div class="worker-item">
                     <p>Gummy Crazy</p>
-                    <a href="https://www.youtube.com/@GummyCrazyChannel" target="_blank">Профиль</a>
+                    <a href="www.youtube.com/@realgummycrazy" target="_blank">Профиль</a>
                 </div>
             </div>
 
@@ -866,7 +866,7 @@
                 <h4><strong>Модераторы:</strong></h4>
                 <div class="worker-item">
                     <p>Gummy Lion</p>
-                    <a href="https://www.youtube.com/@GummyLionChannel" target="_blank">Профиль</a>
+                    <a href="www.youtube.com/@GummyLion" target="_blank">Профиль</a>
                 </div>
             </div>
         </div>
@@ -878,7 +878,7 @@
 
     <div class="beta-container">
         <h2>Cevenz Series 4 Ultra</h2>
-        
+
         <div class="code-section">
             <label for="betaCodeInput">Введите Пароль:
                 <span class="tooltip-container">
@@ -888,7 +888,7 @@
             </label>
             <input type="text" id="betaCodeInput" placeholder="Введите пароль здесь" maxlength="10">
             <button type="button" onclick="checkBetaCode()">Подтвердить</button>
-            
+
             <div class="error" id="betaErrorMessage">Неверный пароль! Попробуйте снова.</div>
             <div class="success" id="betaSuccessMessage">Пароль принят! Добро пожаловать в бета-тест!</div>
         </div>
@@ -901,7 +901,7 @@
 
     <div class="beta-container">
         <h2>Cevenz Nightvision V2</h2>
-        
+
         <div class="code-section">
             <label for="nightvisionCodeInput">Введите Пароль:
                 <span class="tooltip-container">
@@ -911,7 +911,7 @@
             </label>
             <input type="text" id="nightvisionCodeInput" placeholder="Введите пароль здесь" maxlength="10">
             <button type="button" onclick="checkNightvisionCode()">Подтвердить</button>
-            
+
             <div class="error" id="nightvisionErrorMessage">Неверный пароль! Попробуйте снова.</div>
             <div class="success" id="nightvisionSuccessMessage">Пароль принят! Добро пожаловать в Nightvision!</div>
         </div>
@@ -923,6 +923,9 @@
     </div>
 
     <script>
+        const BETA_ACCESS_CODE = "BETA123"; // Пример пароля
+        const NIGHTVISION_ACCESS_CODE = "NIGHTMODE"; // Пример пароля
+
         function isAnyOverlayOpen() {
             return document.getElementById('infoModalOverlay').classList.contains('show') ||
                    document.getElementById('workersModalOverlay').classList.contains('show') ||
@@ -936,19 +939,17 @@
             const successMessage = document.getElementById('betaSuccessMessage');
             const telegramLink = document.getElementById('betaTelegramLink');
 
-            errorMessage.classList.remove('show');
-            successMessage.classList.remove('show');
-            input.style.borderColor = '';
-            telegramLink.classList.remove('show');
-
-            if (code === '0242') {
+            if (code === BETA_ACCESS_CODE) {
                 successMessage.classList.add('show');
+                errorMessage.classList.remove('show');
                 telegramLink.classList.add('show');
-                input.style.borderColor = '#87ceeb';
+                input.disabled = true;
+                input.nextElementSibling.disabled = true; // Disable button
             } else {
                 errorMessage.classList.add('show');
-                input.style.borderColor = '#ff6b6b';
-                input.value = '';
+                successMessage.classList.remove('show');
+                telegramLink.classList.remove('show');
+                // Не очищаем input.value здесь, чтобы пользователь видел, что ввел не так
             }
         }
 
@@ -959,104 +960,82 @@
             const successMessage = document.getElementById('nightvisionSuccessMessage');
             const telegramLink = document.getElementById('nightvisionTelegramLink');
 
-            errorMessage.classList.remove('show');
-            successMessage.classList.remove('show');
-            input.style.borderColor = '';
-            telegramLink.classList.remove('show');
-
-            if (code === '0242') {
+            if (code === NIGHTVISION_ACCESS_CODE) {
                 successMessage.classList.add('show');
+                errorMessage.classList.remove('show');
                 telegramLink.classList.add('show');
-                input.style.borderColor = '#87ceeb';
+                input.disabled = true;
+                input.nextElementSibling.disabled = true; // Disable button
             } else {
                 errorMessage.classList.add('show');
-                input.style.borderColor = '#ff6b6b';
-                input.value = '';
-            }
-        }
-
-        document.getElementById('betaCodeInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkBetaCode();
-            }
-        });
-
-        document.getElementById('nightvisionCodeInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkNightvisionCode();
-            }
-        });
-
-        document.getElementById('betaCodeInput').addEventListener('input', function() {
-            this.style.borderColor = '';
-            document.getElementById('betaErrorMessage').classList.remove('show');
-            document.getElementById('betaSuccessMessage').classList.remove('show');
-            document.getElementById('betaTelegramLink').classList.remove('show');
-        });
-
-        document.getElementById('nightvisionCodeInput').addEventListener('input', function() {
-            this.style.borderColor = '';
-            document.getElementById('nightvisionErrorMessage').classList.remove('show');
-            document.getElementById('nightvisionSuccessMessage').classList.remove('show');
-            document.getElementById('nightvisionTelegramLink').classList.remove('show');
-        });
-
-        function openModal(modalType) {
-            closeMenu(); 
-
-            if (modalType === 'info') {
-                document.getElementById('infoModalOverlay').classList.add('show');
-                document.getElementById('workersModalOverlay').classList.remove('show');
-            } else if (modalType === 'workers') {
-                document.getElementById('workersModalOverlay').classList.add('show');
-                document.getElementById('infoModalOverlay').classList.remove('show');
-            }
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(event, modalType) {
-            if (event && event.target !== event.currentTarget && !event.target.classList.contains('close-button')) {
-                return;
-            }
-
-            if (modalType === 'info') {
-                document.getElementById('infoModalOverlay').classList.remove('show');
-            } else if (modalType === 'workers') {
-                document.getElementById('workersModalOverlay').classList.remove('show');
-            }
-            
-            if (!isAnyOverlayOpen()) {
-                document.body.style.overflow = 'auto';
+                successMessage.classList.remove('show');
+                telegramLink.classList.remove('show');
             }
         }
 
         function openMenu() {
-            closeModal(null, 'info');
-            closeModal(null, 'workers');
-
-            document.getElementById('mainMenuOverlay').classList.add('show');
             document.getElementById('menuSidebar').classList.add('show');
+            document.getElementById('mainMenuOverlay').classList.add('show');
             document.body.style.overflow = 'hidden';
         }
 
         function closeMenu(event) {
-            if (event && event.target !== event.currentTarget && !event.target.classList.contains('close-button')) {
+            if (event && event.target !== document.getElementById('mainMenuOverlay') && event.target.closest('.menu-sidebar')) {
                 return;
             }
-
-            document.getElementById('mainMenuOverlay').classList.remove('show');
             document.getElementById('menuSidebar').classList.remove('show');
-
+            document.getElementById('mainMenuOverlay').classList.remove('show');
             if (!isAnyOverlayOpen()) {
-                document.body.style.overflow = 'auto';
+                 document.body.style.overflow = 'auto';
             }
         }
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal(null, 'info');
-                closeModal(null, 'workers');
-                closeMenu();
+        function openModal(modalType) {
+            closeMenu(); 
+            const modalOverlay = document.getElementById(modalType + 'ModalOverlay');
+            if (modalOverlay) {
+                modalOverlay.classList.add('show');
+                document.body.style.overflow = 'hidden'; 
+            }
+        }
+
+        function closeModal(event, modalType) {
+             if (event && event.target !== document.getElementById(modalType + 'ModalOverlay') && event.target.closest('.modal-content')) {
+                return;
+            }
+            const modalOverlay = document.getElementById(modalType + 'ModalOverlay');
+            if (modalOverlay) {
+                modalOverlay.classList.remove('show');
+            }
+            if (!isAnyOverlayOpen()) {
+                 document.body.style.overflow = 'auto';
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                if (document.getElementById('menuSidebar').classList.contains('show')) {
+                    closeMenu(null);
+                }
+                if (document.getElementById('infoModalOverlay').classList.contains('show')) {
+                    closeModal(null, 'info');
+                }
+                if (document.getElementById('workersModalOverlay').classList.contains('show')) {
+                    closeModal(null, 'workers');
+                }
+            }
+        });
+
+        // *** ИСПРАВЛЕНИЕ: Скрываем сообщения об ошибках при начальной загрузке ***
+        document.addEventListener('DOMContentLoaded', function() {
+            const betaError = document.getElementById('betaErrorMessage');
+            const nightvisionError = document.getElementById('nightvisionErrorMessage');
+            
+            if (betaError) {
+                betaError.classList.remove('show');
+            }
+            if (nightvisionError) {
+                nightvisionError.classList.remove('show');
             }
         });
     </script>
