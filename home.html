@@ -235,7 +235,7 @@
             z-index: 1000;
         }
 
-        .info-button {
+        .info-button, .workers-button {
             background: linear-gradient(45deg, #ff6b6b, #ee5a24);
             color: white;
             border: none;
@@ -251,7 +251,7 @@
             text-align: center;
         }
 
-        .info-button:hover {
+        .info-button:hover, .workers-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
@@ -353,7 +353,7 @@
             color: #2c3e50;
         }
 
-        .zones-section, .roles-section, .tokens-section {
+        .zones-section, .roles-section, .tokens-section, .workers-section {
             margin: 20px 0;
             padding: 15px;
             background: rgba(52, 152, 219, 0.1);
@@ -361,7 +361,7 @@
             border-left: 4px solid #3498db;
         }
 
-        .zone-item, .role-item {
+        .zone-item, .role-item, .worker-item {
             margin: 10px 0;
             padding: 8px 0;
         }
@@ -372,6 +372,24 @@
 
         .forbidden {
             color: #e74c3c;
+        }
+
+        .worker-item a {
+            display: inline-block;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .worker-item a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg, #2980b9, #3498db);
         }
 
         /* Мобильная адаптация */
@@ -433,7 +451,7 @@
                 right: 15px;
             }
 
-            .info-button, .creator-button {
+            .info-button, .workers-button, .creator-button {
                 padding: 10px 15px;
                 font-size: 0.8em;
             }
@@ -465,16 +483,15 @@
     </style>
 </head>
 <body>
-    <!-- Кнопки внизу справа -->
     <div class="bottom-buttons">
-        <button class="info-button" onclick="openModal()">О Нашей Группе</button>
+        <button class="info-button" onclick="openModal('info')">О Нашей Группе</button>
+        <button class="workers-button" onclick="openModal('workers')">Работники</button>
         <a href="https://www.youtube.com/@GummyZen" target="_blank" class="creator-button">Создатель</a>
     </div>
 
-    <!-- Модальное окно -->
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal-overlay" id="infoModalOverlay" onclick="closeModal(event, 'info')">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-button" onclick="closeModal()">×</button>
+            <button class="close-button" onclick="closeModal(null, 'info')">×</button>
             <h3>О Нашей Группе</h3>
             
             <p><strong>Cevenz</strong> — это пространство для русскоязычных участников комьюнити Gummibär. Мы здесь, чтобы находить своих, поддерживать друг друга и развивать общее сообщество. Cevenz — не просто чат, а единое ядро, где ценится уважение, порядок и участие.</p>
@@ -568,12 +585,37 @@
         </div>
     </div>
 
-    <!-- Кнопка регистрации -->
+    <div class="modal-overlay" id="workersModalOverlay" onclick="closeModal(event, 'workers')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-button" onclick="closeModal(null, 'workers')">×</button>
+            <h3>Работники Cevenz</h3>
+            
+            <div class="workers-section">
+                <h4><strong>Админы:</strong></h4>
+                <div class="worker-item">
+                    <p>Vladimir Gummy</p>
+                    <a href="https://youtube.com/@v.g.2.0.2.5?si=vlVsQYdiARrxlSGS" target="_blank">Профиль</a>
+                </div>
+                <div class="worker-item">
+                    <p>Gummy Crazy</p>
+                    <a href="https://youtube.com/@realgummycrazy?si=0705fKtF6DtJLCCN" target="_blank">Профиль</a>
+                </div>
+            </div>
+
+            <div class="workers-section">
+                <h4><strong>Модераторы:</strong></h4>
+                <div class="worker-item">
+                    <p>Gummy Lion</p>
+                    <a href="https://youtube.com/@gummylion?si=tVyWza4zex8-gDil" target="_blank">Профиль</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <a href="https://t.me/+NUjElngulFhiYTM0" target="_blank" class="registration-button">
         CVNZ Регистрация
     </a>
 
-    <!-- Первая плашка -->
     <div class="beta-container">
         <h2>Cevenz Series 4 Ultra</h2>
         
@@ -592,7 +634,6 @@
         </div>
     </div>
 
-    <!-- Вторая плашка -->
     <div class="beta-container">
         <h2>Cevenz Nightvision V2</h2>
         
@@ -688,22 +729,33 @@
             document.getElementById('nightvisionSuccessMessage').classList.remove('show');
         });
 
-        // Функции для модального окна
-        function openModal() {
-            document.getElementById('modalOverlay').classList.add('show');
+        // Функции для модальных окон
+        function openModal(modalType) {
+            if (modalType === 'info') {
+                document.getElementById('infoModalOverlay').classList.add('show');
+                document.getElementById('workersModalOverlay').classList.remove('show'); // Ensure other modal is closed
+            } else if (modalType === 'workers') {
+                document.getElementById('workersModalOverlay').classList.add('show');
+                document.getElementById('infoModalOverlay').classList.remove('show'); // Ensure other modal is closed
+            }
             document.body.style.overflow = 'hidden'; // Блокируем прокрутку фона
         }
 
-        function closeModal(event) {
+        function closeModal(event, modalType) {
             if (event && event.target !== event.currentTarget) return; // Закрываем только при клике на оверлей или кнопку
-            document.getElementById('modalOverlay').classList.remove('show');
+            if (modalType === 'info') {
+                document.getElementById('infoModalOverlay').classList.remove('show');
+            } else if (modalType === 'workers') {
+                document.getElementById('workersModalOverlay').classList.remove('show');
+            }
             document.body.style.overflow = 'auto'; // Возвращаем прокрутку
         }
 
-        // Закрытие модального окна при нажатии Escape
+        // Закрытие модальных окон при нажатии Escape
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                closeModal();
+                closeModal(null, 'info'); // Try to close info modal
+                closeModal(null, 'workers'); // Try to close workers modal
             }
         });
     </script>
