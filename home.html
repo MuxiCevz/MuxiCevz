@@ -3,1265 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CVNZ - Сайт Закрыт</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Cevenz - Russian GBC Union</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
+        /* Общие стили и сброс */
         :root {
-            --main-bg-start: #2c3e50;
-            --main-bg-end: #34495e;
-            --primary-button-bg: linear-gradient(135deg, #8e44ad, #9b59b6);
-            --primary-button-shadow: 0 8px 15px rgba(155, 89, 182, 0.4);
-            --secondary-button-bg: linear-gradient(135deg, #2ecc71, #27ae60);
-            --secondary-button-shadow: 0 8px 15px rgba(46, 204, 113, 0.4);
-            --container-bg: rgba(255, 255, 255, 0.1);
-            --container-border: 1px solid rgba(255, 255, 255, 0.2);
-            --text-color: #ecf0f1;
-            --header-color: #ffffff;
-            --input-bg: rgba(255, 255, 255, 0.15);
-            --input-border: 1px solid rgba(255, 255, 255, 0.3);
-            --error-color: #e74c3c;
-            --success-color: #27ae60;
-            --link-color: #3498db;
+            --dark-gray: #2c2c2c; /* Основной фон: очень тёмно-серый */
+            --medium-gray: #444444; /* Для верхней линии и футера */
+            --light-gray: #555555; /* Для панелей и секций правил */
+            --card-bg: #6a6a6a; /* Фон карточек (квадратов) */
+            --text-color-light: #f0f0f0;
+            --text-color-dark: #333;
+            --accent-blue: #3498db;
+            --accent-blue-hover: #2980b9;
+            --error-red: #e74c3c;
+            --success-green: #27ae60;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #8e44ad 0%, #3498db 25%, #f39c12 50%, #e74c3c 75%, #9b59b6 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
             min-height: 100vh;
-            background: linear-gradient(to bottom right, var(--main-bg-start), var(--main-bg-end));
-            color: var(--text-color);
-            line-height: 1.6;
+            color: var(--text-color-light);
+            transition: background-color 0.5s ease; /* Плавный переход фона */
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Верхняя линия и заголовок */
+        .top-bar {
+            background-color: var(--medium-gray);
+            color: var(--text-color-light);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: relative;
-            box-sizing: border-box;
-            gap: 30px;
-            overflow: hidden; /* Скрываем прокрутку основного контента */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            z-index: 1000;
         }
 
-        h1, h2, h3, h4 {
-            color: var(--header-color);
-            margin-top: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        p {
-            margin-bottom: 15px;
-        }
-
-        a {
-            color: var(--link-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #5dade2;
-        }
-
-        /* --- OVERLAY С СООБЩЕНИЕМ О ЗАКРЫТИИ САЙТА --- */
-        .site-closed-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95); /* Почти черный, полупрозрачный фон */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 3000; /* Самый высокий z-index */
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .site-closed-overlay h1 {
-            font-size: 3em;
-            color: #e74c3c; /* Яркий красный для внимания */
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(231, 76, 60, 0.7);
-            animation: pulse 1.5s infinite alternate; /* Анимация для заголовка */
-        }
-
-        .site-closed-overlay p {
-            font-size: 1.5em;
-            color: #ecf0f1;
-            max-width: 600px;
-            line-height: 1.4;
-            margin-bottom: 30px;
-        }
-
-        .site-closed-overlay .small-text {
-            font-size: 1.1em;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.05); opacity: 0.9; }
-        }
-
-        @media (max-width: 768px) {
-            .site-closed-overlay h1 {
-                font-size: 2.2em;
-            }
-            .site-closed-overlay p {
-                font-size: 1.2em;
-            }
-            .site-closed-overlay .small-text {
-                font-size: 0.9em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .site-closed-overlay h1 {
-                font-size: 1.8em;
-            }
-            .site-closed-overlay p {
-                font-size: 1em;
-            }
-        }
-        /* --- КОНЕЦ OVERLAY --- */
-
-
-        .main-menu-button {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: var(--primary-button-bg);
-            color: white;
+        .registration-btn {
+            background: linear-gradient(135deg, #00d4aa, #00a8cc);
             border: none;
-            padding: 18px 30px;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: var(--primary-button-shadow);
-            transition: all 0.3s ease;
-            z-index: 2000;
-        }
-
-        .main-menu-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(155, 89, 182, 0.6);
-        }
-
-        .registration-button {
-            display: inline-block;
-            background: var(--secondary-button-bg);
+            padding: 10px 20px;
+            border-radius: 20px;
             color: white;
-            padding: 18px 35px;
-            border-radius: 50px;
-            font-size: 1.2em;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            box-shadow: var(--secondary-button-shadow);
+            font-size: 14px;
+            cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 212, 170, 0.3);
+        }
+
+        .registration-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.4);
+        }
+
+        .top-bar-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            transition: color 0.3s ease;
             text-align: center;
+            flex-grow: 1;
         }
 
-        .registration-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(46, 204, 113, 0.6);
+        /* Основной контент */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            gap: 50px;
         }
 
-        .beta-container {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            border: var(--container-border);
-            border-radius: 25px;
+        .group-cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .group-card {
+            background-color: var(--card-bg); /* Просто серые квадраты */
+            border-radius: 20px; /* Более скругленные углы */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
             padding: 40px;
-            width: 90%;
-            max-width: 450px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            width: 340px; /* Чуть больше */
+            max-width: 90%;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
         }
 
-        .beta-container h2 {
-            font-size: 1.8em;
+        .group-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+            background-color: #777777; /* Небольшое осветление при наведении */
+        }
+
+        .group-card h3 {
+            font-size: 32px;
+            color: var(--text-color-light);
             margin-bottom: 30px;
-            color: var(--header-color);
-        }
-
-        .code-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .code-section label {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            color: var(--text-color);
-            font-weight: 500;
+            letter-spacing: 1px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
+            line-height: 1.2;
         }
 
-        input[type="text"] {
-            width: calc(100% - 40px);
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            border: var(--input-border);
-            border-radius: 12px;
-            background: var(--input-bg);
-            color: var(--text-color);
-            font-size: 1.1em;
+        .key-input-field {
+            margin-top: 25px;
+            margin-bottom: 20px;
+        }
+
+        .key-input-field label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text-color-light);
+        }
+
+        .key-input-field input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #777;
+            border-radius: 10px;
+            font-size: 20px;
+            text-align: center;
+            letter-spacing: 3px;
+            background-color: #555; /* Темнее для поля ввода */
+            color: var(--text-color-light);
             outline: none;
-            box-sizing: border-box;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        input[type="text"]::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+        .key-input-field input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
         }
 
-        input[type="text"]:focus {
-            border-color: var(--link-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
+        .key-status {
+            font-size: 17px;
+            margin-top: 15px;
+            font-weight: bold;
+            color: var(--error-red);
+            min-height: 25px;
+            transition: color 0.3s ease;
         }
 
-        .beta-container button {
-            background: var(--primary-button-bg);
-            color: white;
+        .key-status.success {
+            color: var(--success-green);
+        }
+
+        .group-card .enter-group-btn {
+            background-color: var(--accent-blue);
+            color: var(--text-color-light);
             border: none;
             padding: 15px 30px;
-            border-radius: 12px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: var(--primary-button-shadow);
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 250px;
-        }
-
-        .beta-container button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 18px rgba(155, 89, 182, 0.5);
-        }
-
-        .beta-container button:disabled {
-            background: #7f8c8d;
-            box-shadow: none;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .error, .success {
-            margin-top: 15px;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-weight: 500;
-            opacity: 0;
-            height: 0;
-            overflow: hidden;
-            transition: opacity 0.3s ease, height 0.3s ease, padding 0.3s ease, margin-top 0.3s ease;
-        }
-
-        .error.show, .success.show {
-            opacity: 1;
-            height: auto;
-            padding: 10px 15px;
-            margin-top: 15px;
-        }
-
-        .error {
-            background-color: rgba(231, 76, 60, 0.2);
-            color: var(--error-color);
-            border: 1px solid var(--error-color);
-        }
-
-        .success {
-            background-color: rgba(46, 204, 113, 0.2);
-            color: var(--success-color);
-            border: 1px solid var(--success-color);
-        }
-
-        .beta-telegram-link {
-            width: 100%;
-            margin-top: 30px;
-            padding: 25px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 18px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0;
-            height: 0;
-            overflow: hidden;
-            transition: opacity 0.4s ease, height 0.4s ease, padding 0.4s ease, margin-top 0.4s ease;
-        }
-
-        .beta-telegram-link.show {
-            opacity: 1;
-            height: auto;
-            padding: 25px;
-            margin-top: 30px;
-        }
-
-        .beta-telegram-link p {
-            font-size: 1.1em;
-            margin-bottom: 20px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .beta-telegram-link a {
-            display: inline-block;
-            background: linear-gradient(45deg, #0088cc, #00aaff);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 1.3em;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 6px 12px rgba(0, 136, 204, 0.4);
-        }
-
-        .beta-telegram-link a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 136, 204, 0.6);
-        }
-
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            overflow-y: auto;
-            padding: 20px 0;
-            box-sizing: border-box;
-        }
-
-        .modal-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background: linear-gradient(145deg, #34495e, #2c3e50);
-            border-radius: 20px;
-            padding: 35px;
-            position: relative;
-            width: 90%;
-            max-width: 700px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            color: var(--text-color);
-            max-height: 85vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .modal-overlay.show .modal-content {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .modal-content h3 {
-            font-size: 1.8em;
-            margin-bottom: 25px;
-            color: var(--header-color);
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .modal-content h4 {
-            font-size: 1.4em;
-            color: #ecf0f1;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 24px;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 2001;
-        }
-
-        .close-button:hover {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: rotate(90deg);
-        }
-
-        /* Sidebar Menu Styles */
-        .menu-sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 2500;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .menu-sidebar-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .menu-sidebar {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 280px;
-            height: 100%;
-            background: linear-gradient(to bottom, #34495e, #2c3e50);
-            box-shadow: -8px 0 20px rgba(0, 0, 0, 0.5);
-            padding: 25px;
-            box-sizing: border-box;
-            transition: right 0.3s ease-out;
-            z-index: 2501;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .menu-sidebar.show {
-            right: 0;
-        }
-
-        .menu-sidebar h3 {
-            color: var(--header-color);
-            margin-bottom: 25px;
-            font-size: 1.6em;
-            text-align: center;
-        }
-
-        .sidebar-button {
-            display: block;
-            background-color: rgba(255, 255, 255, 0.08);
-            color: var(--text-color);
-            padding: 15px 20px;
             border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            margin-top: 25px;
+            display: none;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .group-card .enter-group-btn:hover {
+            background-color: var(--accent-blue-hover);
+            transform: translateY(-3px);
+        }
+
+        /* Футер */
+        .footer {
+            background-color: var(--medium-gray);
+            color: var(--text-color-light);
             text-align: center;
-            font-size: 1.1em;
-            font-weight: 500;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 18px;
+            font-size: 15px;
+            margin-top: auto;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.3);
         }
 
-        .sidebar-button:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-            transform: translateX(5px);
-        }
-
-        .sidebar-button.info-button:hover {
-            background-color: rgba(52, 152, 219, 0.2);
-        }
-        .sidebar-button.roles-list-button:hover {
-            background-color: rgba(155, 89, 182, 0.2);
-        }
-
-
-        /* Content specific styles inside modal */
-        .zones-section {
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
-            border-left: 5px solid #3498db;
-            margin: 25px 0;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-        }
-        .roles-section {
-            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(155, 89, 182, 0.05));
-            border-left: 5px solid #9b59b6;
-            margin: 25px 0;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-        }
-        .tokens-section {
-            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(46, 204, 113, 0.05));
-            border-left: 5px solid #2ecc71;
-            margin: 25px 0;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-        }
-
-
-        .zone-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-        }
-
-        .zone-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .zone-item strong {
-            color: #ffffff;
-            font-size: 1.1em;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .forbidden {
-            color: #e74c3c;
-            font-weight: 500;
-            font-size: 0.95em;
-        }
-
-        .allowed {
-            color: #2ecc71;
-            font-weight: 500;
-            font-size: 0.95em;
-        }
-
-        .roles-section .role-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-        }
-
-        .roles-section .role-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .roles-section .role-item strong {
-            color: #ffffff;
-            font-size: 1.1em;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .tokens-section h4 {
-            color: #ffffff;
-        }
-        .tokens-section p {
-            font-size: 0.95em;
-        }
-
-        /* Styles for the beautiful roles display section (kept as is) */
-        .roles-display-section {
-            background: rgba(155, 89, 182, 0.08);
-            border-left: 5px solid #9b59b6;
-            padding: 25px;
-            border-radius: 15px;
-            margin-top: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .roles-display-section h3 {
-            font-size: 1.8em;
-            color: #4a2d59;
-            margin-bottom: 30px;
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-        }
-
-        .role-category {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(155, 89, 182, 0.2);
-        }
-
-        .role-category:last-child {
-            margin-bottom: 0;
-        }
-
-        .role-category h4 {
-            font-size: 1.3em;
-            color: #543164;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            font-weight: 600;
-        }
-
-        .role-level {
-            font-size: 0.9em;
-            background-color: #9b59b6;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 5px;
-            margin-right: 10px;
-            font-weight: bold;
-            min-width: 30px;
-            text-align: center;
-        }
-
-        .role-members-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .role-member-item {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 8px 12px;
-            border-radius: 7px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid rgba(155, 89, 182, 0.1);
-            transition: background-color 0.2s ease;
-        }
-
-        .role-member-item:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .role-member-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .role-member-item .member-name {
-            font-weight: bold;
-            color: #543164;
-            font-size: 1em;
-        }
-
-        .role-member-item .no-members-found {
-            font-style: italic;
-            color: #7f8c8d;
-            font-size: 0.95em;
-            text-align: center;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.03);
-            border-radius: 5px;
-        }
-
-
-        /* Tooltip styles */
-        .tooltip-container {
-            position: relative;
-            display: inline-block;
-            margin-left: 10px;
-            cursor: help;
-            flex-shrink: 0;
-            user-select: none;
-        }
-
-        .info-icon {
-            font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            width: 1.2em;
-            height: 1.2em;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            transition: color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .tooltip-container:hover .info-icon {
-            color: white;
-            border-color: white;
-        }
-
-        .tooltip-text {
-            visibility: hidden;
-            opacity: 0;
-            width: 250px;
-            background-color: rgba(0, 0, 0, 0.85);
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 10px 15px;
-            position: absolute;
-            z-index: 3000;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-            font-size: 0.9em;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            white-space: normal;
-            text-shadow: none;
-            line-height: 1.4;
-        }
-
-        .tooltip-text::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
-        }
-
-        .tooltip-container:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        /* Mobile Adaptation */
-        @media (max-width: 480px) {
-            body {
-                gap: 20px;
-                padding: 15px 10px;
-            }
-
-            .main-menu-button {
-                padding: 15px 25px;
-                font-size: 1.1em;
-                bottom: 15px;
-                right: 15px;
-            }
-
-            .registration-button {
-                padding: 15px 30px;
-                font-size: 1.1em;
-                margin-bottom: 20px;
-            }
-
-            .beta-container {
-                padding: 30px 20px;
-                width: 98%;
-                max-width: 380px;
-                margin: 0 auto;
-                margin-bottom: 20px;
-                border-radius: 20px;
-            }
-
-            .beta-container h2 {
-                font-size: 1.5em;
-                margin-bottom: 25px;
-            }
-
-            .code-section label {
-                font-size: 1.1em;
-                margin-bottom: 15px;
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .top-bar {
                 flex-direction: column;
-                align-items: center;
-                text-align: center;
+                gap: 10px;
             }
-
-            .code-section label .tooltip-container {
-                margin-left: 0;
-                margin-top: 5px;
+            
+            .top-bar-title {
+                font-size: 24px;
             }
-
-            input[type="text"] {
-                padding: 12px 15px;
-                font-size: 1em;
-                border-radius: 10px;
+            .group-card {
+                width: 95%;
+                padding: 30px;
             }
-
-            .beta-container button {
-                padding: 12px 25px;
-                font-size: 1em;
-                margin-top: 15px;
-                width: 100%;
-                border-radius: 10px;
+            .group-card h3 {
+                font-size: 26px;
             }
-
-            .beta-telegram-link {
-                margin-top: 25px;
-                padding: 20px;
-                border-radius: 15px;
+            .key-input-field input {
+                font-size: 18px;
             }
-
-            .beta-telegram-link p {
-                font-size: 1em;
-                margin-bottom: 15px;
-            }
-
-            .beta-telegram-link a {
-                font-size: 1.2em;
-                padding: 10px 20px;
-                display: block;
-                margin-top: 10px;
-                border-radius: 10px;
-            }
-
-            .modal-content {
-                padding: 25px;
-                margin: 10px;
-                border-radius: 15px;
-                max-height: 95vh;
-            }
-
-            .modal-content h3 {
-                font-size: 1.5em;
-                margin-bottom: 20px;
-            }
-
-            .close-button {
-                width: 35px;
-                height: 35px;
-                font-size: 20px;
-                top: 15px;
-                right: 15px;
-            }
-
-            .zones-section, .roles-section, .tokens-section, .roles-display-section {
-                padding: 15px;
-                margin: 20px 0;
-                border-radius: 10px;
-            }
-            .roles-display-section h3 {
-                font-size: 1.6em;
-                margin-bottom: 20px;
-            }
-            .role-category {
-                padding: 10px 15px;
-                margin-bottom: 15px;
-            }
-            .role-category h4 {
-                font-size: 1.1em;
-                margin-bottom: 10px;
-            }
-            .role-level {
-                padding: 3px 6px;
-                min-width: 25px;
-            }
-            .role-member-item {
-                padding: 6px 10px;
-                font-size: 0.9em;
-            }
-
-
-            .menu-sidebar {
-                width: 250px;
-                padding: 20px;
-                right: -270px;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .beta-container h2 {
-                font-size: 1.3em;
-            }
-
-            .beta-container {
-                padding: 20px 10px;
-                max-width: 280px;
-            }
-
-            .registration-button {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-            .tooltip-text {
-                width: 200px;
-                padding: 8px 10px;
-                font-size: 0.8em;
-            }
-            .roles-display-section h3 {
-                font-size: 1.4em;
-            }
-            .role-category h4 {
-                font-size: 1em;
+            .group-card .enter-group-btn {
+                font-size: 18px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="site-closed-overlay">
-        <h1>CVNZ Сайт Закрыт На Время</h1>
-        <p>Мы Реставрируем Ошибки И Обновим Сайт Позже.</p>
-        <p class="small-text">Спасибо за ваше понимание.</p>
+    <div class="top-bar">
+        <button class="registration-btn" onclick="window.open('https://t.me/+NUjElngulFhiYTM0', '_blank')">
+            CVNZ Регистрация
+        </button>
+        <div class="top-bar-title">Cevenz - Russian GBC Union</div>
+        <div style="width: 120px;"></div> <!-- Spacer для центрирования заголовка -->
     </div>
 
-    <button type="button" class="main-menu-button" onclick="openMenu()">Меню</button>
-
-    <div class="menu-sidebar-overlay" id="mainMenuOverlay" onclick="closeMenu(event)">
-        <div class="menu-sidebar" id="menuSidebar" onclick="event.stopPropagation()">
-            <button type="button" class="close-button" onclick="closeMenu()">✖</button>
-            <h3>Навигация</h3>
-            <a href="#" class="sidebar-button info-button" onclick="openModal('info'); closeMenu()">О Нашей Группе</a>
-            <a href="#" class="sidebar-button roles-list-button" onclick="openModal('rolesList'); closeMenu()">Список Ролей</a>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="infoModalOverlay" onclick="closeModal(event, 'info')">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button type="button" class="close-button" onclick="closeModal('info')">✖</button>
-            <h3>О Нашей Группе</h3>
-
-            <p><strong>Cevenz</strong> — это пространство для русскоязычных участников комьюнити Gummibär. Мы здесь, чтобы находить своих, поддерживать друг друга и развивать общее сообщество. Cevenz — не просто чат, а единое ядро, где ценится уважение, порядок и участие.</p>
-
-            <div class="zones-section">
-                <h4><strong>Зоны общения:</strong></h4>
-
-                <div class="zone-item">
-                    <strong>Главный Центр</strong><br>
-                    Только важные темы: изменения правил, предложения, новости.<br>
-                    <span class="forbidden">✘ Запрещено: спам, оскорбления, несоблюдение правил.</span>
+    <div class="main-content">
+        <div class="group-cards-container">
+            <div class="group-card">
+                <h3>Cevenz Ultra 4</h3>
+                <div class="key-input-field">
+                    <label for="keyInputUltra">Введите Ключ</label>
+                    <input type="text" id="keyInputUltra" placeholder="XXXX">
                 </div>
-
-                <div class="zone-item">
-                    <strong>Обычный Чат</strong><br>
-                    Общение на любые темы.<br>
-                    <span class="forbidden">✘ Будь вежлив, без мата, спама и грубости.</span>
-                </div>
-
-                <div class="zone-item">
-                    <strong>Зона Хаоса</strong><br>
-                    Разрешён хаос: шутки, мемы, спам.<br>
-                    <span class="forbidden">✘ Нельзя оскорблять и материться.</span>
-                </div>
-
-                <div class="zone-item">
-                    <strong>Зона Свободы</strong><br>
-                    Свободные разговоры вне основных тем.<br>
-                    <span class="forbidden">✘ Запрещено: спам, оскорбления, нарушение правил.</span>
-                </div>
-
-                <div class="zone-item">
-                    <strong>Зона Креатива</strong><br>
-                    Место для творчества: арты, тексты, идеи, концепты.<br>
-                    <span class="allowed">✓ Делись своими работами, вдохновляй других.</span><br>
-                    <span class="forbidden">✘ Спам, мат, оскорбления, кража чужих работ — запрещены.</span><br>
-                    Создавай, делись, будь креативным.
-                </div>
+                <div class="key-status" id="keyStatusUltra"></div>
+                <button class="enter-group-btn" id="enterGroupUltra">Вход В Группу</button>
             </div>
 
-            <div class="roles-section">
-                <h4><strong>Система Ролей и Токенов</strong></h4>
-                <p>В Cevenz используется система ролей, основанная на токенах (ткн) — это очки активности, доверия и вклада.</p>
-
-                <h4><strong>Роли:</strong></h4>
-
-                <div class="role-item">
-                    <strong>Новички (Не в Теме)</strong> (0 ткн)<br>
-                    Только вступили. Нет доступа к большинству функций.
+            <div class="group-card">
+                <h3>Cevenz Nightvision 2</h3>
+                <div class="key-input-field">
+                    <label for="keyInputNightvision">Введите Ключ</label>
+                    <input type="text" id="keyInputNightvision" placeholder="XXXX">
                 </div>
-
-                <div class="role-item">
-                    <strong>Участники</strong> (0 ткн)<br>
-                    Базовая роль. Доступ к общению, основным зонам.
-                </div>
-
-                <div class="role-item">
-                    <strong>Активные Участники</strong> (100 ткн)<br>
-                    Показали себя в сообществе. Получают уважение и чуть больше возможностей.
-                </div>
-
-                <div class="role-item">
-                    <strong>Модераторы</strong> (500 ткн)<br>
-                    Следят за порядком, помогают участникам, поддерживают структуру.
-                </div>
-
-                <div class="role-item">
-                    <strong>Админы</strong> (1000 ткн)<br>
-                    Отвечают за управление, координацию, решения на уровне сообщества.
-                </div>
-
-                <div class="role-item">
-                    <strong>Вице-Админы</strong> (по разрешению Создателя)<br>
-                    Правая рука Создателя. Доступ к важным решениям и управлению.
-                </div>
-
-                <div class="role-item">
-                    <strong>Создатели</strong> (по разрешению)<br>
-                    Основатели и архитекторы Cevenz.
-                </div>
-            </div>
-
-            <div class="tokens-section">
-                <h4><strong>Как работают токены (ткн):</strong></h4>
-                <p>• За активность, помощь и участие можно получать токены.<br>
-                • За нарушения — терять.<br>
-                • При достижении нужного количества токенов — повышение роли.<br>
-                • При снижении токенов ниже порога — понижение.<br>
-                <strong>Токены — это доверие. Роль — это ответственность.</strong></p>
+                <div class="key-status" id="keyStatusNightvision"></div>
+                <button class="enter-group-btn" id="enterGroupNightvision">Вход В Группу</button>
             </div>
         </div>
     </div>
 
-    <div class="modal-overlay" id="rolesListModalOverlay" onclick="closeModal(event, 'rolesList')">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button type="button" class="close-button" onclick="closeModal('rolesList')">✖</button>
-            
-            <div class="roles-display-section">
-                <h3>Список Ролей</h3> 
-                
-                <div class="role-category">
-                    <h4><span class="role-level">0.</span> Новички (Не в теме)</h4>
-                    <ul class="role-members-list">
-                        <li class="role-member-item no-members-found">
-                            <p>(Нету)</p>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="role-category">
-                    <h4><span class="role-level">1.</span> Участники</h4>
-                    <ul class="role-members-list">
-                        <li class="role-member-item">
-                            <span class="member-name">Blued65</span>
-                        </li>
-                        <li class="role-member-item">
-                            <span class="member-name">Distracted Gummibär</span>
-                        </li>
-                        <li class="role-member-item">
-                            <span class="member-name">GummiYar</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="role-category">
-                    <h4><span class="role-level">2.</span> Активные Участники</h4>
-                    <ul class="role-members-list">
-                        <li class="role-member-item">
-                            <span class="member-name">NotGummyBear</span>
-                        </li>
-                        <li class="role-member-item">
-                            <span class="member-name">FunnyGummy</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="role-category">
-                    <h4><span class="role-level">3.</span> Модераторы</h4>
-                    <ul class="role-members-list">
-                        <li class="role-member-item">
-                            <span class="member-name">GummyLion</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="role-category">
-                    <h4><span class="role-level">4.</span> Админы</h4>
-                    <ul class="role-members-list">
-                        <li class="role-member-item">
-                            <span class="member-name">GummyCrazy</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="role-category">
-                    <h4><span class="role-level">5.</span> Вице-Админы</h4>
-                    <ul class="role-members-list">
-                        <li class="role-member-item">
-                            <span class="member-name">VladimirGummy</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="role-category">
-                    <h4><span class="role-level">6.</span> Создатели</h4>
-                    <ul class="role-members-list">
-                        <li class="role-member-item">
-                            <span class="member-name">GummyZen</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <a href="https://t.me/+NUjElngulFhiYTM0" target="_blank" class="registration-button">
-        CVNZ Регистрация
-    </a>
-
-    <div class="beta-container">
-        <h2>Cevenz Series 4 Ultra</h2>
-
-        <div class="code-section">
-            <label for="betaCodeInput">Введите Пароль:
-                <span class="tooltip-container">
-                    <span class="info-icon">ⓘ</span>
-                    <span class="tooltip-text">Этот пароль открывает доступ к эксклюзивной бета-группе Cevenz Series 4 Ultra!</span>
-                </span>
-            </label>
-            <input type="text" id="betaCodeInput" placeholder="Введите пароль здесь" maxlength="10">
-            <button type="button" onclick="checkAccessCode('betaCodeInput', BETA_ACCESS_CODE, 'betaErrorMessage', 'betaSuccessMessage', 'betaTelegramLink')">Подтвердить</button>
-
-            <div class="error" id="betaErrorMessage">Неверный пароль! Попробуйте снова.</div>
-            <div class="success" id="betaSuccessMessage">Пароль принят! Добро пожаловать в бета-тест!</div>
-        </div>
-
-        <div class="beta-telegram-link" id="betaTelegramLink">
-            <p>Присоединяйтесь к бета-тестированию:</p>
-            <a href="https://t.me/+1hciPJFZZ0xmYTZk" target="_blank">Перейти в Telegram группу</a>
-        </div>
-    </div>
-
-    <div class="beta-container">
-        <h2>Cevenz Nightvision V2</h2>
-
-        <div class="code-section">
-            <label for="nightvisionCodeInput">Введите Пароль:
-                <span class="tooltip-container">
-                    <span class="info-icon">ⓘ</span>
-                    <span class="tooltip-text">Введите пароль для активации Nightvision режима и получения доступа!</span>
-                </span>
-            </label>
-            <input type="text" id="nightvisionCodeInput" placeholder="Введите пароль здесь" maxlength="10">
-            <button type="button" onclick="checkAccessCode('nightvisionCodeInput', NIGHTVISION_ACCESS_CODE, 'nightvisionErrorMessage', 'nightvisionSuccessMessage', 'nightvisionTelegramLink')">Подтвердить</button>
-
-            <div class="error" id="nightvisionErrorMessage">Неверный пароль! Попробуйте снова.</div>
-            <div class="success" id="nightvisionSuccessMessage">Пароль принят! Добро пожаловать в Nightvision!</div>
-        </div>
-
-        <div class="beta-telegram-link" id="nightvisionTelegramLink">
-            <p>Присоединяйтесь к Nightvision:</p>
-            <a href="https://t.me/+MNVVamdQGI5mOGM8" target="_blank">Перейти в Telegram группу</a>
-        </div>
+    <div class="footer">
+        Version 2.7
     </div>
 
     <script>
-        const BETA_ACCESS_CODE = "BETA123";
-        const NIGHTVISION_ACCESS_CODE = "NIGHTMODE";
+        // Элементы DOM
+        const keyInputUltra = document.getElementById('keyInputUltra');
+        const keyStatusUltra = document.getElementById('keyStatusUltra');
+        const enterGroupUltra = document.getElementById('enterGroupUltra');
 
-        function isAnyOverlayOpen() {
-            return document.getElementById('infoModalOverlay').classList.contains('show') ||
-                   document.getElementById('rolesListModalOverlay').classList.contains('show') ||
-                   document.getElementById('mainMenuOverlay').classList.contains('show');
-        }
+        const keyInputNightvision = document.getElementById('keyInputNightvision');
+        const keyStatusNightvision = document.getElementById('keyStatusNightvision');
+        const enterGroupNightvision = document.getElementById('enterGroupNightvision');
 
-        function checkAccessCode(inputId, expectedCode, errorMessageId, successMessageId, telegramLinkId) {
-            const input = document.getElementById(inputId);
-            const code = input.value.trim();
-            const errorMessage = document.getElementById(errorMessageId);
-            const successMessage = document.getElementById(successMessageId);
-            const telegramLink = document.getElementById(telegramLinkId);
-            const button = input.nextElementSibling;
+        // Секретный ключ
+        const CORRECT_KEY = '0242'; 
 
-            if (code === expectedCode) {
-                successMessage.classList.add('show');
-                errorMessage.classList.remove('show');
-                telegramLink.classList.add('show');
-                input.disabled = true;
-                button.disabled = true;
-            } else {
-                input.value = '';
-                errorMessage.classList.add('show');
-                successMessage.classList.remove('show');
-                telegramLink.classList.remove('show');
-            }
-        }
-
-        function openMenu() {
-            document.getElementById('menuSidebar').classList.add('show');
-            document.getElementById('mainMenuOverlay').classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMenu(event) {
-            if (event && event.target.closest('.menu-sidebar')) {
-                return;
-            }
-            document.getElementById('menuSidebar').classList.remove('show');
-            document.getElementById('mainMenuOverlay').classList.remove('show');
-            if (!isAnyOverlayOpen()) {
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        function openModal(modalType) {
-            closeMenu();
-            const modalOverlay = document.getElementById(modalType + 'ModalOverlay');
-            if (modalOverlay) {
-                modalOverlay.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeModal(eventOrType, typeIfEvent = null) {
-            let modalType;
-            let event;
-
-            if (typeof eventOrType === 'string') {
-                modalType = eventOrType;
-                event = null;
-            } else {
-                event = eventOrType;
-                modalType = typeIfEvent;
-            }
-
-            if (event && event.target.closest('.modal-content')) {
-                return;
-            }
-            const modalOverlay = document.getElementById(modalType + 'ModalOverlay');
-            if (modalOverlay) {
-                modalOverlay.classList.remove('show');
-            }
-            if (!isAnyOverlayOpen()) {
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                if (document.getElementById('menuSidebar').classList.contains('show')) {
-                    closeMenu();
-                } else if (document.getElementById('infoModalOverlay').classList.contains('show')) {
-                    closeModal('info');
-                } else if (document.getElementById('rolesListModalOverlay').classList.contains('show')) {
-                    closeModal('rolesList');
+        // Функция для обработки ввода ключа
+        function handleKeyInput(inputElement, statusElement, buttonElement, link) {
+            inputElement.addEventListener('input', () => {
+                const enteredKey = inputElement.value.trim();
+                if (enteredKey === CORRECT_KEY) {
+                    statusElement.textContent = 'Ключ Подтверждён!';
+                    statusElement.classList.add('success');
+                    statusElement.classList.remove('error');
+                    buttonElement.style.display = 'block';
+                } else {
+                    statusElement.textContent = 'Неверный ключ';
+                    statusElement.classList.remove('success');
+                    statusElement.classList.add('error');
+                    buttonElement.style.display = 'none';
                 }
-            }
-        });
+            });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('betaErrorMessage').classList.remove('show');
-            document.getElementById('betaSuccessMessage').classList.remove('show');
-            document.getElementById('betaTelegramLink').classList.remove('show');
+            buttonElement.addEventListener('click', () => {
+                window.open(link, '_blank');
+            });
+        }
 
-            document.getElementById('nightvisionErrorMessage').classList.remove('show');
-            document.getElementById('nightvisionSuccessMessage').classList.remove('show');
-            document.getElementById('nightvisionTelegramLink').classList.remove('show');
-
-            // При загрузке страницы, убедитесь, что оверлей "Сайт закрыт" показан.
-            // Никаких других действий не требуется, так как он изначально установлен как `display: flex`.
-            // Если вы хотите сделать его скрываемым, понадобится дополнительная логика.
-        });
+        // Применяем функцию к каждой карточке
+        handleKeyInput(keyInputUltra, keyStatusUltra, enterGroupUltra, 'https://t.me/+1hciPJFZZ0xmYTZk');
+        handleKeyInput(keyInputNightvision, keyStatusNightvision, enterGroupNightvision, 'https://t.me/+MNVVamdQGI5mOGM8');
     </script>
 </body>
 </html>
