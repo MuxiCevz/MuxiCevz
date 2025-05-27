@@ -20,6 +20,8 @@
             --accent-blue-hover: #2980b9;
             --error-red: #e74c3c;
             --success-green: #27ae60;
+            --menu-bg: #333; /* Фон для меню */
+            --popup-bg: #4a4a4a; /* Фон для всплывающего окна */
         }
 
         * {
@@ -87,6 +89,104 @@
             flex-grow: 1;
         }
 
+        /* Кнопка меню */
+        .menu-button {
+            background: none;
+            border: none;
+            color: var(--text-color-light);
+            font-size: 28px;
+            cursor: pointer;
+            padding: 5px;
+            position: relative;
+            z-index: 1001;
+            transition: transform 0.2s ease;
+        }
+
+        .menu-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Меню навигации */
+        .navigation-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            max-width: 90vw;
+            background-color: var(--menu-bg);
+            box-shadow: -8px 0 16px rgba(0,0,0,0.4);
+            height: 100%;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease-in-out;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            z-index: 999;
+            border-bottom-left-radius: 15px;
+            box-sizing: border-box;
+        }
+
+        .navigation-menu.show {
+            transform: translateY(0);
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--light-gray);
+            padding-bottom: 15px;
+        }
+
+        .menu-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            color: var(--text-color-light);
+            margin: 0;
+        }
+
+        .close-menu-btn {
+            background: none;
+            border: none;
+            font-size: 30px;
+            color: var(--text-color-light);
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
+            line-height: 1;
+        }
+
+        .close-menu-btn:hover {
+            transform: rotate(90deg);
+            color: var(--error-red);
+        }
+
+        .menu-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Отступ между кнопками меню */
+        }
+
+        .menu-button-item {
+            background-color: var(--accent-blue);
+            color: var(--text-color-light);
+            border: none;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none; /* Убрать подчеркивание для ссылок, если используются */
+            display: block; /* Занять всю доступную ширину */
+        }
+
+        .menu-button-item:hover {
+            background-color: var(--accent-blue-hover);
+            transform: translateY(-2px);
+        }
+
         /* Основной контент */
         .main-content {
             flex-grow: 1;
@@ -106,12 +206,12 @@
         }
 
         .group-card {
-            background-color: var(--card-bg); /* Просто серые квадраты */
-            border-radius: 20px; /* Более скругленные углы */
+            background-color: var(--card-bg);
+            border-radius: 20px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
             padding: 40px;
             text-align: center;
-            width: 340px; /* Чуть больше */
+            width: 340px;
             max-width: 90%;
             transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
         }
@@ -119,7 +219,7 @@
         .group-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 25px rgba(0,0,0,0.4);
-            background-color: #777777; /* Небольшое осветление при наведении */
+            background-color: #777777;
         }
 
         .group-card h3 {
@@ -154,7 +254,7 @@
             font-size: 20px;
             text-align: center;
             letter-spacing: 3px;
-            background-color: #555; /* Темнее для поля ввода */
+            background-color: #555;
             color: var(--text-color-light);
             outline: none;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -208,16 +308,122 @@
             box-shadow: 0 -2px 8px rgba(0,0,0,0.3);
         }
 
+        /* Стили для всплывающего окна (popup) */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000; /* Выше всего остального */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .popup-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background-color: var(--popup-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            text-align: left; /* Выравнивание текста слева для лучшей читаемости */
+            max-width: 500px; /* Увеличил максимальную ширину */
+            width: 95%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+            max-height: 80vh; /* Ограничиваем высоту попапа */
+            overflow-y: auto; /* Добавляем прокрутку, если содержимое не помещается */
+        }
+
+        .popup-overlay.show .popup-content {
+            transform: scale(1);
+        }
+
+        .popup-content h3 {
+            color: var(--text-color-light);
+            font-size: 26px;
+            margin-bottom: 20px;
+            text-align: center; /* Заголовок по центру */
+        }
+
+        .popup-content p {
+            color: var(--text-color-light);
+            font-size: 18px;
+            line-height: 1.6; /* Увеличил межстрочный интервал */
+            margin-bottom: 20px;
+            white-space: pre-wrap; /* Сохраняет переносы строк */
+        }
+
+        .popup-close-btn {
+            background-color: var(--accent-blue);
+            color: var(--text-color-light);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: block; /* Чтобы кнопка занимала всю ширину контейнера */
+            margin: 20px auto 0; /* Отступ сверху и центрирование */
+            text-align: center;
+        }
+
+        .popup-close-btn:hover {
+            background-color: var(--accent-blue-hover);
+            transform: translateY(-2px);
+        }
+
+        .popup-close-icon { /* Стили для нового крестика */
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            color: var(--text-color-light);
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
+            line-height: 1;
+        }
+
+        .popup-close-icon:hover {
+            transform: rotate(90deg);
+            color: var(--error-red);
+        }
+
+
         /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
             .top-bar {
-                flex-direction: column;
-                gap: 10px;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 0;
             }
-            
+
             .top-bar-title {
                 font-size: 24px;
+                flex-grow: 0;
+                margin: 0 auto;
+                text-align: center;
             }
+
+            .registration-btn {
+                order: 1;
+                margin-right: 15px;
+            }
+
+            .menu-button {
+                order: 3;
+            }
+
             .group-card {
                 width: 95%;
                 padding: 30px;
@@ -231,6 +437,23 @@
             .group-card .enter-group-btn {
                 font-size: 18px;
             }
+
+            .navigation-menu {
+                width: 250px;
+            }
+
+            .menu-button-item {
+                font-size: 16px; /* Чуть меньше на мобильных */
+                padding: 12px 15px;
+            }
+
+            .popup-content h3 {
+                font-size: 22px;
+            }
+
+            .popup-content p {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -240,7 +463,23 @@
             CVNZ Регистрация
         </button>
         <div class="top-bar-title">Cevenz - Russian GBC Union</div>
-        <div style="width: 120px;"></div> <!-- Spacer для центрирования заголовка -->
+        <button class="menu-button" id="menuButton">&#9776;</button>
+    </div>
+
+    <div class="navigation-menu" id="navigationMenu">
+        <div class="menu-header">
+            <h2>Меню Навигации</h2>
+            <button class="close-menu-btn" id="closeMenuButton">&times;</button>
+        </div>
+        <div class="menu-content">
+            <button class="menu-button-item" id="helpButton">Помощь</button>
+            <button class="menu-button-item" id="workersButton">Работники</button>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content" id="popupContent">
+            </div>
     </div>
 
     <div class="main-content">
@@ -264,7 +503,7 @@
     </div>
 
     <div class="footer">
-        Version 2.7
+        Version 4.3
     </div>
 
     <script>
@@ -276,41 +515,84 @@
         const keyStatusNightvision = document.getElementById('keyStatusNightvision');
         const enterGroupNightvision = document.getElementById('enterGroupNightvision');
 
+        const menuButton = document.getElementById('menuButton');
+        const navigationMenu = document.getElementById('navigationMenu');
+        const closeMenuButton = document.getElementById('closeMenuButton');
+
+        const helpButton = document.getElementById('helpButton');
+        const workersButton = document.getElementById('workersButton');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popupContent = document.getElementById('popupContent'); // Добавлено для изменения содержимого попапа
+
         // Секретный ключ
-        const CORRECT_KEY = '0242'; 
+        const CORRECT_KEY = '0242';
+
+        // Содержимое для попапов
+        const helpContent = `
+            <h3>Руководство по регистрации</h3>
+            <span class="popup-close-icon" id="popupCloseIconHelp">&times;</span>
+            <p>Для получения доступа к CVNZ, пожалуйста, выполните следующие шаги:</p>
+            <ol>
+                <li>Нажмите кнопку <b>"CVNZ Регистрация"</b>, расположенную в верхней части страницы.</li>
+                <li>Ваш канал будет отправлен на рассмотрение администраторам и модераторам.</li>
+                <li>Пожалуйста, ожидайте. Администраторы и модераторы тщательно проверят ваш канал на соответствие правилам сообщества.</li>
+                <li>В случае успешной проверки, вы получите персональный код для завершения регистрации.</li>
+                <li>Используйте полученный код в соответствующем разделе для получения полного доступа к CVNZ.</li>
+            </ol>
+            <button class="popup-close-btn">Закрыть</button>
+        `;
+
+        const workersContent = `
+            <h3>Работники</h3>
+            <span class="popup-close-icon" id="popupCloseIconWorkers">&times;</span>
+            <p>
+            <b>0. Новички (Не в теме)</b><br><br>
+            <b>1. Участники</b><br>
+            • Blued65 <br><br>
+            <b>2. Активные Участники</b><br>
+            • Негуммибер <br>
+            • FunnyGummy<br>
+            • Distracted Gummibär<br>
+            • GummiYar<br><br>
+            <b>3. Модераторы</b><br>
+            • GummyLion <br><br>
+            <b>4. Админы</b><br>
+            • GummyCrazy <br><br>
+            <b>5. Вице-Админы</b><br>
+            • VladimirGummy<br><br>
+            <b>6. Создатели</b><br>
+            • GummyZen
+            </p>
+            <button class="popup-close-btn">Закрыть</button>
+        `;
 
         // Функция для обработки ввода ключа Ultra 4
         keyInputUltra.addEventListener('input', () => {
             const enteredKey = keyInputUltra.value.trim();
             if (enteredKey === CORRECT_KEY) {
-                // Активируем Ultra 4
                 keyStatusUltra.textContent = 'Ключ Подтверждён!';
                 keyStatusUltra.classList.add('success');
                 keyStatusUltra.classList.remove('error');
                 enterGroupUltra.style.display = 'block';
-                
-                // Активируем Nightvision 2
+
                 keyStatusNightvision.textContent = 'Доступ разрешён!';
                 keyStatusNightvision.classList.add('success');
                 keyStatusNightvision.classList.remove('error');
                 enterGroupNightvision.style.display = 'block';
             } else if (enteredKey.length > 0) {
-                // Показываем ошибку только если что-то введено
                 keyStatusUltra.textContent = 'Неверный ключ';
                 keyStatusUltra.classList.remove('success');
                 keyStatusUltra.classList.add('error');
                 enterGroupUltra.style.display = 'none';
-                
-                // Скрываем доступ к Nightvision 2
+
                 keyStatusNightvision.textContent = '';
                 keyStatusNightvision.classList.remove('success', 'error');
                 enterGroupNightvision.style.display = 'none';
             } else {
-                // Очищаем все статусы если поле пустое
                 keyStatusUltra.textContent = '';
                 keyStatusUltra.classList.remove('success', 'error');
                 enterGroupUltra.style.display = 'none';
-                
+
                 keyStatusNightvision.textContent = '';
                 keyStatusNightvision.classList.remove('success', 'error');
                 enterGroupNightvision.style.display = 'none';
@@ -324,6 +606,53 @@
 
         enterGroupNightvision.addEventListener('click', () => {
             window.open('https://t.me/+MNVVamdQGI5mOGM8', '_blank');
+        });
+
+        // Обработчики для кнопки меню и кнопки закрытия
+        menuButton.addEventListener('click', () => {
+            navigationMenu.classList.toggle('show');
+        });
+
+        closeMenuButton.addEventListener('click', () => {
+            navigationMenu.classList.remove('show');
+        });
+
+        // Закрытие меню при клике вне его
+        document.addEventListener('click', (event) => {
+            if (navigationMenu.classList.contains('show') &&
+                !navigationMenu.contains(event.target) &&
+                !menuButton.contains(event.target)) {
+                navigationMenu.classList.remove('show');
+            }
+        });
+
+        // Функции для показа и скрытия всплывающего окна
+        function showPopup(content) {
+            popupContent.innerHTML = content; // Просто присваиваем контент
+            popupOverlay.classList.add('show');
+            navigationMenu.classList.remove('show'); // Закрываем меню при открытии попапа
+
+            // Добавляем обработчики кнопок закрытия и крестиков
+            const closeBtns = popupContent.querySelectorAll('.popup-close-btn');
+            closeBtns.forEach(btn => btn.addEventListener('click', hidePopup));
+
+            const closeIcons = popupContent.querySelectorAll('.popup-close-icon');
+            closeIcons.forEach(icon => icon.addEventListener('click', hidePopup));
+        }
+
+        function hidePopup() {
+            popupOverlay.classList.remove('show');
+        }
+
+        // Обработчики для новых кнопок меню
+        helpButton.addEventListener('click', () => showPopup(helpContent));
+        workersButton.addEventListener('click', () => showPopup(workersContent));
+
+        // Закрытие попапа по клику на фон (опционально)
+        popupOverlay.addEventListener('click', (event) => {
+            if (event.target === popupOverlay) {
+                hidePopup();
+            }
         });
     </script>
 </body>
