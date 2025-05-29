@@ -3,656 +3,557 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cevenz - Russian GBC Union</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <title>Cevenz Official Registration</title>
     <style>
-        /* Общие стили и сброс */
-        :root {
-            --dark-gray: #2c2c2c; /* Основной фон: очень тёмно-серый */
-            --medium-gray: #444444; /* Для верхней линии и футера */
-            --light-gray: #555555; /* Для панелей и секций правил */
-            --card-bg: #6a6a6a; /* Фон карточек (квадратов) */
-            --text-color-light: #f0f0f0;
-            --text-color-dark: #333;
-            --accent-blue: #3498db;
-            --accent-blue-hover: #2980b9;
-            --error-red: #e74c3c;
-            --success-green: #27ae60;
-            --menu-bg: #333; /* Фон для меню */
-            --popup-bg: #4a4a4a; /* Фон для всплывающего окна */
-        }
-
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #8e44ad 0%, #3498db 25%, #f39c12 50%, #e74c3c 75%, #9b59b6 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
-            color: var(--text-color-light);
-            transition: background-color 0.5s ease; /* Плавный переход фона */
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Верхняя линия и заголовок */
-        .top-bar {
-            background-color: var(--medium-gray);
-            color: var(--text-color-light);
-            padding: 15px 25px;
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             position: relative;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            z-index: 1000;
+            overflow-x: hidden;
+            transition: background 0.6s ease;
         }
 
-        .registration-btn {
-            background: linear-gradient(135deg, #00d4aa, #00a8cc);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 212, 170, 0.3);
-        }
-
-        .registration-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.4);
-        }
-
-        .top-bar-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            transition: color 0.3s ease;
-            text-align: center;
-            flex-grow: 1;
-        }
-
-        /* Кнопка меню */
-        .menu-button {
-            background: none;
-            border: none;
-            color: var(--text-color-light);
-            font-size: 28px;
-            cursor: pointer;
-            padding: 5px;
-            position: relative;
-            z-index: 1001;
-            transition: transform 0.2s ease;
-        }
-
-        .menu-button:hover {
-            transform: scale(1.1);
-        }
-
-        /* Меню навигации */
-        .navigation-menu {
-            position: fixed;
+        /* Анимированный фон */
+        body::before {
+            content: '';
+            position: absolute;
             top: 0;
+            left: 0;
             right: 0;
-            width: 300px;
-            max-width: 90vw;
-            background-color: var(--menu-bg);
-            box-shadow: -8px 0 16px rgba(0,0,0,0.4);
-            height: 100%;
-            transform: translateY(-100%);
-            transition: transform 0.4s ease-in-out;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            z-index: 999;
-            border-bottom-left-radius: 15px;
-            box-sizing: border-box;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+            animation: shimmer 3s ease-in-out infinite;
+            pointer-events: none;
         }
 
-        .navigation-menu.show {
-            transform: translateY(0);
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
 
-        .menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--light-gray);
-            padding-bottom: 15px;
-        }
-
-        .menu-header h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 24px;
-            color: var(--text-color-light);
-            margin: 0;
-        }
-
-        .close-menu-btn {
-            background: none;
-            border: none;
-            font-size: 30px;
-            color: var(--text-color-light);
-            cursor: pointer;
-            transition: transform 0.2s ease, color 0.2s ease;
-            line-height: 1;
-        }
-
-        .close-menu-btn:hover {
-            transform: rotate(90deg);
-            color: var(--error-red);
-        }
-
-        .menu-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 15px; /* Отступ между кнопками меню */
-        }
-
-        .menu-button-item {
-            background-color: var(--accent-blue);
-            color: var(--text-color-light);
-            border: none;
-            padding: 15px 20px;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            text-decoration: none; /* Убрать подчеркивание для ссылок, если используются */
-            display: block; /* Занять всю доступную ширину */
-        }
-
-        .menu-button-item:hover {
-            background-color: var(--accent-blue-hover);
-            transform: translateY(-2px);
-        }
-
-        /* Основной контент */
-        .main-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-            gap: 50px;
-        }
-
-        .group-cards-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 60px;
-        }
-
-        .group-card {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-            padding: 40px;
-            text-align: center;
-            width: 340px;
-            max-width: 90%;
-            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
-        }
-
-        .group-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.4);
-            background-color: #777777;
-        }
-
-        .group-card h3 {
-            font-size: 32px;
-            color: var(--text-color-light);
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1.2;
-        }
-
-        .key-input-field {
-            margin-top: 25px;
-            margin-bottom: 20px;
-        }
-
-        .key-input-field label {
-            display: block;
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: var(--text-color-light);
-        }
-
-        .key-input-field input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #777;
-            border-radius: 10px;
-            font-size: 20px;
-            text-align: center;
-            letter-spacing: 3px;
-            background-color: #555;
-            color: var(--text-color-light);
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .key-input-field input:focus {
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
-        }
-
-        .key-status {
-            font-size: 17px;
-            margin-top: 15px;
-            font-weight: bold;
-            color: var(--error-red);
-            min-height: 25px;
-            transition: color 0.3s ease;
-        }
-
-        .key-status.success {
-            color: var(--success-green);
-        }
-
-        .group-card .enter-group-btn {
-            background-color: var(--accent-blue);
-            color: var(--text-color-light);
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 20px;
-            margin-top: 25px;
-            display: none;
-            width: 100%;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .group-card .enter-group-btn:hover {
-            background-color: var(--accent-blue-hover);
-            transform: translateY(-3px);
-        }
-
-        /* Футер */
-        .footer {
-            background-color: var(--medium-gray);
-            color: var(--text-color-light);
-            text-align: center;
-            padding: 18px;
-            font-size: 15px;
-            margin-top: auto;
-            box-shadow: 0 -2px 8px rgba(0,0,0,0.3);
-        }
-
-        /* Стили для всплывающего окна (popup) */
-        .popup-overlay {
+        /* Верхняя полоска */
+        .header-strip {
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .header-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .register-btn {
+            background: linear-gradient(45deg, #00c851, #00ff41);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(0, 200, 81, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .register-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .register-btn:hover::before {
+            left: 100%;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0, 255, 65, 0.5);
+            background: linear-gradient(45deg, #00ff41, #00c851);
+        }
+
+        /* Переключатель режимов */
+        .mode-switcher {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+        }
+
+        .mode-switcher:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .mode-icon {
+            width: 30px;
+            height: 30px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            z-index: 2000; /* Выше всего остального */
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .popup-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .popup-content {
-            background-color: var(--popup-bg);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            text-align: left; /* Выравнивание текста слева для лучшей читаемости */
-            max-width: 500px; /* Увеличил максимальную ширину */
-            width: 95%;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            position: relative;
-            max-height: 80vh; /* Ограничиваем высоту попапа */
-            overflow-y: auto; /* Добавляем прокрутку, если содержимое не помещается */
-        }
-
-        .popup-overlay.show .popup-content {
-            transform: scale(1);
-        }
-
-        .popup-content h3 {
-            color: var(--text-color-light);
-            font-size: 26px;
-            margin-bottom: 20px;
-            text-align: center; /* Заголовок по центру */
-        }
-
-        .popup-content p {
-            color: var(--text-color-light);
+            justify-content: center;
             font-size: 18px;
-            line-height: 1.6; /* Увеличил межстрочный интервал */
-            margin-bottom: 20px;
-            white-space: pre-wrap; /* Сохраняет переносы строк */
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        .popup-close-btn {
-            background-color: var(--accent-blue);
-            color: var(--text-color-light);
-            border: none;
-            padding: 10px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            display: block; /* Чтобы кнопка занимала всю ширину контейнера */
-            margin: 20px auto 0; /* Отступ сверху и центрирование */
+        /* Убираем синий стиль для ночного режима переключателя */
+        .mode-switcher.night-mode {
+            background: rgba(128, 128, 128, 0.2);
+            border-color: rgba(160, 160, 160, 0.3);
+        }
+
+        /* Версия */
+        .version {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            z-index: 1002;
+        }
+
+        /* Основной контейнер */
+        .main-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
             text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 120px;
+            animation: fadeInUp 0.8s ease-out;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            min-height: 400px;
+            width: 100%;
+            max-width: 500px;
         }
 
-        .popup-close-btn:hover {
-            background-color: var(--accent-blue-hover);
-            transform: translateY(-2px);
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .popup-close-icon { /* Стили для нового крестика */
+        /* Состояние ночного режима - теперь серое как обычное */
+        .main-container.night-mode {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Секции контента */
+        .content-section {
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 1;
+            transform: translateY(0);
+            position: relative;
+        }
+
+        .content-section.hidden {
+            opacity: 0;
+            transform: translateY(-30px);
+            pointer-events: none;
             position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 30px;
-            color: var(--text-color-light);
+            left: 0;
+            right: 0;
+            top: 0;
+        }
+
+        /* Квадратик с названием */
+        .title-box {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.6s ease;
+        }
+
+        /* Убираем синий стиль для ночного режима заголовка */
+        .title-box.night-mode {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* Поле ввода */
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-label {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: color 0.6s ease;
+        }
+
+        .key-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .key-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .key-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Убираем синий стиль для ночного режима поля ввода */
+        .key-input.night-mode {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .key-input.night-mode::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .key-input.night-mode:focus {
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Кнопка перехода */
+        .go-button {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s ease, color 0.2s ease;
-            line-height: 1;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            position: relative;
+            overflow: hidden;
         }
 
-        .popup-close-icon:hover {
-            transform: rotate(90deg);
-            color: var(--error-red);
+        .go-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
         }
 
+        .go-button:hover::before {
+            left: 100%;
+        }
 
-        /* Адаптивность для мобильных устройств */
+        .go-button.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .go-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.6);
+        }
+
+        /* Убираем фиолетовый стиль для ночного режима кнопки */
+        .go-button.night-mode {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+        }
+
+        .go-button.night-mode:hover {
+            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.6);
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(20px);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Респонсивность */
         @media (max-width: 768px) {
-            .top-bar {
-                flex-direction: row;
-                justify-content: space-between;
-                gap: 0;
+            .header-strip {
+                padding: 10px 20px;
+                flex-direction: column;
+                gap: 10px;
             }
 
-            .top-bar-title {
-                font-size: 24px;
-                flex-grow: 0;
-                margin: 0 auto;
-                text-align: center;
+            .header-title {
+                font-size: 16px;
             }
 
-            .registration-btn {
-                order: 1;
-                margin-right: 15px;
+            .main-container {
+                margin: 20px;
+                padding: 30px 20px;
+                margin-top: 140px;
             }
 
-            .menu-button {
-                order: 3;
+            .title-box {
+                font-size: 20px;
+                padding: 15px 20px;
             }
 
-            .group-card {
-                width: 95%;
-                padding: 30px;
-            }
-            .group-card h3 {
-                font-size: 26px;
-            }
-            .key-input-field input {
-                font-size: 18px;
-            }
-            .group-card .enter-group-btn {
-                font-size: 18px;
+            .version {
+                top: 10px;
+                right: 20px;
+                font-size: 12px;
             }
 
-            .navigation-menu {
-                width: 250px;
+            .mode-switcher {
+                bottom: 20px;
+                right: 20px;
+                padding: 8px;
             }
 
-            .menu-button-item {
-                font-size: 16px; /* Чуть меньше на мобильных */
-                padding: 12px 15px;
-            }
-
-            .popup-content h3 {
-                font-size: 22px;
-            }
-
-            .popup-content p {
+            .mode-icon {
+                width: 25px;
+                height: 25px;
                 font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <button class="registration-btn" onclick="window.open('https://t.me/+NUjElngulFhiYTM0', '_blank')">
-            CVNZ Регистрация
-        </button>
-        <div class="top-bar-title">Cevenz - Russian GBC Union</div>
-        <button class="menu-button" id="menuButton">&#9776;</button>
+    <!-- Верхняя полоска -->
+    <div class="header-strip">
+        <div class="header-title">Cevenz Official Registration Group</div>
+        <a href="https://t.me/+NUjElngulFhiYTM0" class="register-btn" target="_blank">Регистрация</a>
     </div>
 
-    <div class="navigation-menu" id="navigationMenu">
-        <div class="menu-header">
-            <h2>Меню Навигации</h2>
-            <button class="close-menu-btn" id="closeMenuButton">&times;</button>
-        </div>
-        <div class="menu-content">
-            <button class="menu-button-item" id="helpButton">Помощь</button>
-            <button class="menu-button-item" id="workersButton">Работники</button>
-        </div>
+    <!-- Переключатель режимов -->
+    <div class="mode-switcher" id="modeSwitcher" onclick="toggleMode()">
+        <div class="mode-icon" id="modeIcon">🌙</div>
     </div>
 
-    <div class="popup-overlay" id="popupOverlay">
-        <div class="popup-content" id="popupContent">
-            </div>
-    </div>
+    <!-- Версия -->
+    <div class="version">v5.3</div>
 
-    <div class="main-content">
-        <div class="group-cards-container">
-            <div class="group-card">
-                <h3>Cevenz Ultra 4</h3>
-                <div class="key-input-field">
-                    <label for="keyInputUltra">Введите Ключ</label>
-                    <input type="text" id="keyInputUltra" placeholder="XXXX">
-                </div>
-                <div class="key-status" id="keyStatusUltra"></div>
-                <button class="enter-group-btn" id="enterGroupUltra">Вход В Группу</button>
+    <!-- Основной контейнер -->
+    <div class="main-container" id="mainContainer">
+        <!-- Секция Ultra 4 -->
+        <div class="content-section" id="ultraSection">
+            <div class="title-box" id="ultraTitle">
+                Cevenz Ultra 4
             </div>
 
-            <div class="group-card">
-                <h3>Cevenz Nightvision 2</h3>
-                <div class="key-status" id="keyStatusNightvision"></div>
-                <button class="enter-group-btn" id="enterGroupNightvision">Вход В Группу</button>
+            <div class="input-section">
+                <label class="input-label">Введите Ключ</label>
+                <input type="text" class="key-input" id="keyInput" placeholder="Введите ключ...">
             </div>
-        </div>
-    </div>
 
-    <div class="footer">
-        Version 4.3
+            <button class="go-button" id="goButton" onclick="goToGroup()">
+                Перейти В Группу
+            </button>
+        </div>
+
+        <!-- Секция Nightvision 2 -->
+        <div class="content-section hidden" id="nightSection">
+            <div class="title-box night-mode" id="nightTitle">
+                Cevenz Nightvision 2
+            </div>
+
+            <div class="input-section">
+                <label class="input-label">Введите Ключ</label>
+                <input type="text" class="key-input night-mode" id="keyInput2" placeholder="Введите ключ...">
+            </div>
+
+            <button class="go-button night-mode" id="goButton2" onclick="goToGroup2()">
+                Перейти В Группу
+            </button>
+        </div>
     </div>
 
     <script>
-        // Элементы DOM
-        const keyInputUltra = document.getElementById('keyInputUltra');
-        const keyStatusUltra = document.getElementById('keyStatusUltra');
-        const enterGroupUltra = document.getElementById('enterGroupUltra');
+        let isNightMode = false;
 
-        const keyStatusNightvision = document.getElementById('keyStatusNightvision');
-        const enterGroupNightvision = document.getElementById('enterGroupNightvision');
+        // Получаем все элементы
+        const keyInput = document.getElementById('keyInput');
+        const goButton = document.getElementById('goButton');
+        const keyInput2 = document.getElementById('keyInput2');
+        const goButton2 = document.getElementById('goButton2');
+        const modeSwitcher = document.getElementById('modeSwitcher');
+        const modeIcon = document.getElementById('modeIcon');
+        const mainContainer = document.getElementById('mainContainer');
+        const ultraSection = document.getElementById('ultraSection');
+        const nightSection = document.getElementById('nightSection');
 
-        const menuButton = document.getElementById('menuButton');
-        const navigationMenu = document.getElementById('navigationMenu');
-        const closeMenuButton = document.getElementById('closeMenuButton');
-
-        const helpButton = document.getElementById('helpButton');
-        const workersButton = document.getElementById('workersButton');
-        const popupOverlay = document.getElementById('popupOverlay');
-        const popupContent = document.getElementById('popupContent'); // Добавлено для изменения содержимого попапа
-
-        // Секретный ключ
-        const CORRECT_KEY = '0242';
-
-        // Содержимое для попапов
-        const helpContent = `
-            <h3>Руководство по регистрации</h3>
-            <span class="popup-close-icon" id="popupCloseIconHelp">&times;</span>
-            <p>Для получения доступа к CVNZ, пожалуйста, выполните следующие шаги:</p>
-            <ol>
-                <li>Нажмите кнопку <b>"CVNZ Регистрация"</b>, расположенную в верхней части страницы.</li>
-                <li>Ваш канал будет отправлен на рассмотрение администраторам и модераторам.</li>
-                <li>Пожалуйста, ожидайте. Администраторы и модераторы тщательно проверят ваш канал на соответствие правилам сообщества.</li>
-                <li>В случае успешной проверки, вы получите персональный код для завершения регистрации.</li>
-                <li>Используйте полученный код в соответствующем разделе для получения полного доступа к CVNZ.</li>
-            </ol>
-            <button class="popup-close-btn">Закрыть</button>
-        `;
-
-        const workersContent = `
-            <h3>Работники</h3>
-            <span class="popup-close-icon" id="popupCloseIconWorkers">&times;</span>
-            <p>
-            <b>0. Новички (Не в теме)</b><br><br>
-            <b>1. Участники</b><br>
-            • Blued65 <br><br>
-            <b>2. Активные Участники</b><br>
-            • Негуммибер <br>
-            • FunnyGummy<br>
-            • Distracted Gummibär<br>
-            • GummiYar<br><br>
-            <b>3. Модераторы</b><br>
-            • GummyLion <br><br>
-            <b>4. Админы</b><br>
-            • GummyCrazy <br><br>
-            <b>5. Вице-Админы</b><br>
-            • VladimirGummy<br><br>
-            <b>6. Создатели</b><br>
-            • GummyZen
-            </p>
-            <button class="popup-close-btn">Закрыть</button>
-        `;
-
-        // Функция для обработки ввода ключа Ultra 4
-        keyInputUltra.addEventListener('input', () => {
-            const enteredKey = keyInputUltra.value.trim();
-            if (enteredKey === CORRECT_KEY) {
-                keyStatusUltra.textContent = 'Ключ Подтверждён!';
-                keyStatusUltra.classList.add('success');
-                keyStatusUltra.classList.remove('error');
-                enterGroupUltra.style.display = 'block';
-
-                keyStatusNightvision.textContent = 'Доступ разрешён!';
-                keyStatusNightvision.classList.add('success');
-                keyStatusNightvision.classList.remove('error');
-                enterGroupNightvision.style.display = 'block';
-            } else if (enteredKey.length > 0) {
-                keyStatusUltra.textContent = 'Неверный ключ';
-                keyStatusUltra.classList.remove('success');
-                keyStatusUltra.classList.add('error');
-                enterGroupUltra.style.display = 'none';
-
-                keyStatusNightvision.textContent = '';
-                keyStatusNightvision.classList.remove('success', 'error');
-                enterGroupNightvision.style.display = 'none';
+        // Обработка первого поля ввода (Ultra 4)
+        keyInput.addEventListener('input', function() {
+            if (this.value === '0242') {
+                goButton.classList.add('show');
             } else {
-                keyStatusUltra.textContent = '';
-                keyStatusUltra.classList.remove('success', 'error');
-                enterGroupUltra.style.display = 'none';
-
-                keyStatusNightvision.textContent = '';
-                keyStatusNightvision.classList.remove('success', 'error');
-                enterGroupNightvision.style.display = 'none';
+                goButton.classList.remove('show');
             }
         });
 
-        // Обработчики кнопок входа
-        enterGroupUltra.addEventListener('click', () => {
-            window.open('https://t.me/+1hciPJFZZ0xmYTZk', '_blank');
-        });
-
-        enterGroupNightvision.addEventListener('click', () => {
-            window.open('https://t.me/+MNVVamdQGI5mOGM8', '_blank');
-        });
-
-        // Обработчики для кнопки меню и кнопки закрытия
-        menuButton.addEventListener('click', () => {
-            navigationMenu.classList.toggle('show');
-        });
-
-        closeMenuButton.addEventListener('click', () => {
-            navigationMenu.classList.remove('show');
-        });
-
-        // Закрытие меню при клике вне его
-        document.addEventListener('click', (event) => {
-            if (navigationMenu.classList.contains('show') &&
-                !navigationMenu.contains(event.target) &&
-                !menuButton.contains(event.target)) {
-                navigationMenu.classList.remove('show');
+        // Обработка второго поля ввода (Nightvision 2)
+        keyInput2.addEventListener('input', function() {
+            if (this.value === '0242') {
+                goButton2.classList.add('show');
+            } else {
+                goButton2.classList.remove('show');
             }
         });
 
-        // Функции для показа и скрытия всплывающего окна
-        function showPopup(content) {
-            popupContent.innerHTML = content; // Просто присваиваем контент
-            popupOverlay.classList.add('show');
-            navigationMenu.classList.remove('show'); // Закрываем меню при открытии попапа
-
-            // Добавляем обработчики кнопок закрытия и крестиков
-            const closeBtns = popupContent.querySelectorAll('.popup-close-btn');
-            closeBtns.forEach(btn => btn.addEventListener('click', hidePopup));
-
-            const closeIcons = popupContent.querySelectorAll('.popup-close-icon');
-            closeIcons.forEach(icon => icon.addEventListener('click', hidePopup));
+        // Функции перехода в группу
+        function goToGroup() {
+            if (keyInput.value === '0242') {
+                window.open('https://t.me/+1hciPJFZZ0xmYTZk', '_blank');
+            }
         }
 
-        function hidePopup() {
-            popupOverlay.classList.remove('show');
+        function goToGroup2() {
+            if (keyInput2.value === '0242') {
+                window.open('https://t.me/+1hciPJFZZ0xmYTZk', '_blank');
+            }
         }
 
-        // Обработчики для новых кнопок меню
-        helpButton.addEventListener('click', () => showPopup(helpContent));
-        workersButton.addEventListener('click', () => showPopup(workersContent));
+        // Переключение режимов
+        function toggleMode() {
+            isNightMode = !isNightMode;
 
-        // Закрытие попапа по клику на фон (опционально)
-        popupOverlay.addEventListener('click', (event) => {
-            if (event.target === popupOverlay) {
-                hidePopup();
-            }
+            // Анимация иконки
+            modeIcon.style.transform = 'rotate(360deg) scale(0.8)';
+            
+            setTimeout(() => {
+                if (isNightMode) {
+                    // Переключение в ночной режим
+                    modeIcon.textContent = '☀️';
+                    modeSwitcher.classList.add('night-mode');
+                    mainContainer.classList.add('night-mode');
+                    
+                    // Скрываем Ultra секцию и показываем Night секцию
+                    ultraSection.classList.add('hidden');
+                    setTimeout(() => {
+                        nightSection.classList.remove('hidden');
+                    }, 300);
+                    
+                } else {
+                    // Переключение в дневной режим
+                    modeIcon.textContent = '🌙';
+                    modeSwitcher.classList.remove('night-mode');
+                    mainContainer.classList.remove('night-mode');
+                    
+                    // Скрываем Night секцию и показываем Ultra секцию
+                    nightSection.classList.add('hidden');
+                    setTimeout(() => {
+                        ultraSection.classList.remove('hidden');
+                    }, 300);
+                }
+                
+                // Возвращаем иконку в нормальное состояние
+                modeIcon.style.transform = 'rotate(0deg) scale(1)';
+            }, 300);
+
+            // Сбрасываем состояние кнопок при переключении
+            setTimeout(() => {
+                goButton.classList.remove('show');
+                goButton2.classList.remove('show');
+                keyInput.value = '';
+                keyInput2.value = '';
+            }, 600);
+        }
+
+        // Инициализация при загрузке
+        window.addEventListener('load', function() {
+            // Устанавливаем начальное состояние
+            ultraSection.classList.remove('hidden');
+            nightSection.classList.add('hidden');
+            
+            // Анимация появления
+            setTimeout(() => {
+                mainContainer.style.opacity = '1';
+                mainContainer.style.transform = 'translateY(0)';
+            }, 100);
         });
     </script>
 </body>
